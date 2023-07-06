@@ -6,7 +6,7 @@
 #    By: mnegro <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/12 23:11:39 by mnegro            #+#    #+#              #
-#    Updated: 2023/07/06 21:50:54 by mnegro           ###   ########.fr        #
+#    Updated: 2023/07/06 21:54:44 by mnegro           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ AR = ar
 ARFLAGS = -c -r -s
 
 #### TARGETS ####
-SRC_FILES = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
+FL_SRCS = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
 			ft_isascii.c ft_isdigit.c ft_isprint.c ft_itoa.c \
 			ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c \
 			ft_lstdelone.c ft_lstiter.c ft_lstlast.c ft_lstmap.c \
@@ -40,11 +40,11 @@ SRC_FILES = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
 			ft_strncmp.c ft_strnstr.c ft_strrchr.c ft_strtrim.c \
 			ft_substr.c ft_tolower.c ft_toupper.c
 DIRSRCS = src/
-SRCS = ${addprefix ${DIRSRCS},${SRC_FILES}}
+SRCS = ${addprefix ${DIRSRCS},${FL_SRCS}}
 
-OBJ_FILES = ${SRC_FILES:.c=.o}
+FL_OBJS = ${FL_SRCS:.c=.o}
 DIROBJS = obj/
-OBJS = ${addprefix ${DIROBJS},${OBJ_FILES}}
+OBJS = ${addprefix ${DIROBJS},${FL_OBJS}}
 
 ### (EXPLICIT) RULES ###
 ${DIROBJS}%.o: ${DIRSRCS}%.c
