@@ -6,7 +6,7 @@
 #    By: mnegro <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/06 14:56:20 by mnegro            #+#    #+#              #
-#    Updated: 2023/07/06 15:00:35 by mnegro           ###   ########.fr        #
+#    Updated: 2023/07/06 15:58:06 by mnegro           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ CFLAGS = -Wall -Wextra -Werror -g
 RM = rm -f
 
 #### TARGETS ####
-MSRCS = 
+MSRCS = main.c
 
 MOBJS = ${MSRCS:.c=.o}
 DIROBJS = obj/

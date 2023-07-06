@@ -6,16 +6,13 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:51:17 by mnegro            #+#    #+#             */
-/*   Updated: 2023/07/06 15:52:24 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/07/06 15:57:55 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
-
 int	main(int argc, char **argv)
 {
-
 	return (0);
 }
