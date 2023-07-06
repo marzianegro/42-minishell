@@ -6,7 +6,7 @@
 #    By: mnegro <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/06 14:56:20 by mnegro            #+#    #+#              #
-#    Updated: 2023/07/06 16:47:45 by mnegro           ###   ########.fr        #
+#    Updated: 2023/07/06 21:58:23 by mnegro           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,11 +24,13 @@ CFLAGS = -Wall -Wextra -Werror -g
 RM = rm -f
 
 #### TARGETS ####
-MSRCS = main.c
+FL_SRCS = main.c
+DIRSRCS = src/
+SRCS = ${addprefix ${DIRSRCS},${FL_SRCS}}
 
-MOBJS = ${MSRCS:.c=.o}
+FL_OBJS = ${FL_SRCS:.c=.o}
 DIROBJS = obj/
-OBJS = ${addprefix ${DIROBJS},${MOBJS}}
+OBJS = ${addprefix ${DIROBJS},${FL_OBJS}}
 
 INCLUDE = ./minishell.h
 
@@ -36,7 +38,7 @@ DIRARC = arc/
 ARC = ${addprefix ${DIRARC},${NAME_ARC}}
 
 ### (EXPLICIT) RULES ###
-${DIROBJS}%.o: %.c
+${DIROBJS}%.o: ${DIRSRCS}%.c
 	@echo "${YELLOW}Compiling:${WHITE} $< ${DEF_COLOR}"
 	${CC} ${CFLAGS} -c $< -o $@
 
