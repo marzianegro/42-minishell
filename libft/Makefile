@@ -6,7 +6,7 @@
 #    By: mnegro <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/12 23:11:39 by mnegro            #+#    #+#              #
-#    Updated: 2023/07/06 16:45:51 by mnegro           ###   ########.fr        #
+#    Updated: 2023/07/06 19:41:58 by mnegro           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,10 +39,13 @@ MB_SRCS = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
 		ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strmapi.c \
 		ft_strncmp.c ft_strnstr.c ft_strrchr.c ft_strtrim.c \
 		ft_substr.c ft_tolower.c ft_toupper.c
+DIRSRCS = src/
+SRCS = ${addprefix ${DIRSRCS},${MB_SRCS}}
 
-MB_OBJS = ${MB_SRCS:.c=.o}
+MB_OBJS = ${SRCS:.c=.o}
 DIROBJS = obj/
-OBJS = ${addprefix ${DIROBJS},${MB_OBJS}}
+OBJS = $(subst ${DIROBJS},${DIRSRCS},${MB_OBJS})
+# OBJS = ${addprefix ${DIROBJS},${NEW_OBJS}}
 
 ### (EXPLICIT) RULES ###
 ${DIROBJS}%.o: %.c
