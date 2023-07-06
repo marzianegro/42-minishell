@@ -1,18 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/06 15:51:17 by mnegro            #+#    #+#             */
-/*   Updated: 2023/07/06 16:18:04 by mnegro           ###   ########.fr       */
+/*   Created: 2022/10/20 07:51:37 by mnegro            #+#    #+#             */
+/*   Updated: 2023/07/06 16:27:02 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+/*
+	DESCRIPTION
+	Adds the node ’new’ at the beginning of the list.
+	
+	RETURN VALUE
+	None.
+*/
 
-int	main(int argc, char **argv)
+#include "libft.h"
+
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	return (0);
+	if (lst)
+	{
+		new->next = *lst;
+		*lst = new;
+	}
 }

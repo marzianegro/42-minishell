@@ -1,18 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/06 15:51:17 by mnegro            #+#    #+#             */
-/*   Updated: 2023/07/06 16:18:04 by mnegro           ###   ########.fr       */
+/*   Created: 2022/11/07 08:28:27 by mnegro            #+#    #+#             */
+/*   Updated: 2023/07/06 16:26:58 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+/*
+	DESCRIPTION
+	Adds the node ’new’ at the end of the list.
+	
+	RETURN VALUE
+	None.
+*/
 
-int	main(int argc, char **argv)
+#include "libft.h"
+
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	return (0);
+	t_list	*newnode;
+
+	if (!*lst)
+	{
+		*lst = new;
+		return ;
+	}
+	newnode = ft_lstlast(*lst);
+	newnode->next = new;
 }

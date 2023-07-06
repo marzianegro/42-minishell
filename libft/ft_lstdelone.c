@@ -1,18 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/06 15:51:17 by mnegro            #+#    #+#             */
-/*   Updated: 2023/07/06 16:18:04 by mnegro           ###   ########.fr       */
+/*   Created: 2022/11/07 08:27:49 by mnegro            #+#    #+#             */
+/*   Updated: 2022/11/07 08:28:01 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+/*
+	DESCRIPTION
+	Takes as a parameter a node and frees the memory of the node’s content 
+	using the function ’del’ given as a parameter and free the node. The 
+	memory of ’next’ must not be freed.
+	
+	RETURN VALUE
+	None.
+*/
 
-int	main(int argc, char **argv)
+#include "libft.h"
+
+void	ft_lstdelone(t_list *lst, void (*del)(void*))
 {
-	return (0);
+	del(lst->content);
+	free(lst);
 }

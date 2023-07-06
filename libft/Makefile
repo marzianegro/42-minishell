@@ -6,7 +6,7 @@
 #    By: mnegro <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/12 23:11:39 by mnegro            #+#    #+#              #
-#    Updated: 2022/10/12 23:11:43 by mnegro           ###   ########.fr        #
+#    Updated: 2023/07/06 16:45:51 by mnegro           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,29 +28,51 @@ AR = ar
 ARFLAGS = -c -r -s
 
 #### TARGETS ####
-SRCS = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
+MB_SRCS = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
 		ft_isascii.c ft_isdigit.c ft_isprint.c ft_itoa.c \
-		ft_memchr.c ft_memcmp.c ft_memcpy.c ft_memmove.c ft_memset.c \
-		ft_putchar_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c \
-		ft_split.c ft_strchr.c ft_strdup.c ft_striteri.c ft_strjoin.c \
-		ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strmapi.c ft_strncmp.c \
-		ft_strnstr.c ft_strrchr.c ft_strtrim.c ft_substr.c ft_tolower.c \
-		ft_toupper.c
+		ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c \
+		ft_lstdelone.c ft_lstiter.c ft_lstlast.c ft_lstmap.c \
+		ft_lstnew.c ft_lstsize.c ft_memchr.c ft_memcmp.c \
+		ft_memcpy.c ft_memmove.c ft_memset.c ft_putchar_fd.c \
+		ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c ft_split.c \
+		ft_strchr.c ft_strdup.c ft_striteri.c ft_strjoin.c \
+		ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strmapi.c \
+		ft_strncmp.c ft_strnstr.c ft_strrchr.c ft_strtrim.c \
+		ft_substr.c ft_tolower.c ft_toupper.c
 
-OBJS = ${SRCS:.c=.o}
+MB_OBJS = ${MB_SRCS:.c=.o}
+DIROBJS = obj/
+OBJS = ${addprefix ${DIROBJS},${MB_OBJS}}
 
 ### (EXPLICIT) RULES ###
+${DIROBJS}%.o: %.c
+	${CC} ${CFLAGS} -c $< -o $@
+	
 ${NAME}: ${OBJS}
-	${CC} ${CFLAGS} ${SRCS}
 	${AR} ${ARFLAGS} ${NAME_ARC} ${OBJS}
-	@echo "Rule 'all' for ${NAME} executed successfully!"
+	@echo "Rule '${GREEN}all${DEF_COLOR}' for mandatory & bonus ${NAME} executed successfully!"
 
 all:	${NAME}
 
 clean:	
 	${RM} ${OBJS}
+	@echo "Rule '${GREEN}clean${DEF_COLOR}' for ${NAME} executed successfully!"
 
-fclean: clean
-	${RM} ${NAME_ARC}
+fclean:
+	${RM} ${OBJS} ${NAME} ${NAME_ARC}
+	@echo "Rule '${GREEN}fclean${DEF_COLOR}' for ${NAME} executed successfully!"
 
 re:	fclean all
+	@echo "Rule '${GREEN}re${DEF_COLOR}' for ${NAME} executed successfully!"
+
+### (BRIGHT) COLORS ###
+
+DEF_COLOR = \033[0;39m
+BLACK = \033[1;90m
+RED = \033[1;91m
+GREEN = \033[1;92m
+YELLOW = \033[1;93m
+BLUE = \033[1;94m
+MAGENTA = \033[1;95m
+CYAN = \033[1;96m
+WHITE = \033[0;97m
