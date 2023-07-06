@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 08:26:22 by mnegro            #+#    #+#             */
-/*   Updated: 2022/11/07 08:26:55 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/07/06 16:52:00 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,9 @@
 
 t_list	*ft_lstlast(t_list *lst)
 {
-	while (lst)
-	{
-		if (!lst->next)
-			return (lst);
+	if (!lst)
+		return (lst);
+	while (lst->next)
 		lst = lst->next;
-	}
 	return (lst);
 }

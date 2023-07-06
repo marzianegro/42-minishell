@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 08:28:27 by mnegro            #+#    #+#             */
-/*   Updated: 2023/07/06 16:26:58 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/07/06 16:52:03 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@
 
 void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	t_list	*newnode;
+	t_list	*lastnode;
 
 	if (!*lst)
 	{
 		*lst = new;
 		return ;
 	}
-	newnode = ft_lstlast(*lst);
-	newnode->next = new;
+	lastnode = ft_lstlast(*lst);
+	lastnode->next = new;
 }
