@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parseUtils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/06 15:51:17 by mnegro            #+#    #+#             */
-/*   Updated: 2023/07/15 16:48:03 by mnegro           ###   ########.fr       */
+/*   Created: 2023/07/15 16:45:37 by mnegro            #+#    #+#             */
+/*   Updated: 2023/07/15 17:43:54 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	main(int argc, char **argv)
+int	ft_get_wc(char *str, char c)
 {
-	t_mini	shell;
+	int	i;
+	int	count;
 
-	(void)argc;
-	(void)argv;
-	while (1)
+	if (!str)
+		return (1);
+	i = 0;
+	count = 0;
+	while (str && str[i])
 	{
-		shell.input = readline("minishell-$ ");
-		if (shell.input)
-		{
-			add_history(shell.input);
-			ft_parse_input(shell.input);
-		}
-		free(shell.input);
+		while (str[i] == 32)
+			i++;
 	}
-	return (0);
 }

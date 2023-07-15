@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parseInput.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/06 15:51:17 by mnegro            #+#    #+#             */
-/*   Updated: 2023/07/15 16:48:03 by mnegro           ###   ########.fr       */
+/*   Created: 2023/07/15 16:10:03 by mnegro            #+#    #+#             */
+/*   Updated: 2023/07/15 17:44:00 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	main(int argc, char **argv)
+void	ft_parse_input(char *input)
 {
-	t_mini	shell;
+	
+}
 
-	(void)argc;
-	(void)argv;
-	while (1)
-	{
-		shell.input = readline("minishell-$ ");
-		if (shell.input)
-		{
-			add_history(shell.input);
-			ft_parse_input(shell.input);
-		}
-		free(shell.input);
-	}
-	return (0);
+void	**ft_split(char *input, char c)
+{
+	
+}
+
+void	**ft_split_red(char *input, char c)
+{
+	
 }
