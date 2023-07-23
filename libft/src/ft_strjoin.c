@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 08:54:48 by mnegro            #+#    #+#             */
-/*   Updated: 2023/07/06 17:22:27 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/07/23 16:56:30 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ char	*ft_strjoin(const char *s1, const char *s2)
 		str[i] = s1[i];
 		i++;
 	}
-	if (s1)
-		free((void *)s1);
 	while (s2 && s2[j])
 	{
 		str[i + j] = s2[j];
