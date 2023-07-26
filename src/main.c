@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:51:17 by mnegro            #+#    #+#             */
-/*   Updated: 2023/07/23 16:59:26 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/07/26 16:25:10 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int	main(int argc, char **argv)
 	while (1)
 	{
 		shell.input = readline("minishell-$ ");
-		ft_init_history(&shell);
 		add_history(shell.input);
+		ft_word_count(shell.input);
 		free(shell.input);
 	}
 	return (0);

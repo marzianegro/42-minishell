@@ -6,7 +6,7 @@
 #    By: mnegro <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/06 14:56:20 by mnegro            #+#    #+#              #
-#    Updated: 2023/07/23 16:54:31 by mnegro           ###   ########.fr        #
+#    Updated: 2023/07/26 16:02:55 by mnegro           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ RLFLAGS = -lreadline
 RM = rm -f
 
 #### TARGETS ####
-FL_SRCS = history.c main.c utils.c
+FL_SRCS = main.c utils.c
 DIRSRCS = src/
 SRCS = ${addprefix ${DIRSRCS},${FL_SRCS}}
 

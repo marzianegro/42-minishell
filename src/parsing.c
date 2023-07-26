@@ -1,34 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   split_all.c                                        :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 16:10:03 by mnegro            #+#    #+#             */
-/*   Updated: 2023/07/23 14:59:22 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/07/26 16:00:41 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char	**ft_split(char *str)
+void	ft_parse_line(char *line)
 {
-	char	**mtx;
 	int		i;
-	int		j;
+	t_rt	rt;
+	t_mtx	mtx;
 
-	mtx = (char **)ft_calloc(ft_word_count(str), sizeof(char *));
-	if (!mtx)
-		return (NULL);
 	i = 0;
-	while (str && str[i])
+	while (line && line[i] && line[i] != 124)
 	{
-		mtx[j] = ft_substr(str, i, ft_word_length(str)); 
-		j++;
-		i += ft_word_length(str);
+		ft_split_toby(line);
+		ft_split_red(line);
 	}
-	mtx[j] = NULL;
-	free((char *)str);
-	return (mtx);
+	ft_lstadd_front(rt, mtx);
 }
