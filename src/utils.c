@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 16:14:13 by mnegro            #+#    #+#             */
-/*   Updated: 2023/07/27 21:54:24 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/07/28 00:03:01 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ void	ft_check_redirects(char *str, int *i)
 			*i += 1;
 		while (!ft_is_stop(str[*i], 1))
 		{
-			if (str[*i] == 32)
-				ft_check_quotes(str, 32, i);
+			if (str[*i] == 34)
+				ft_check_quotes(str, 34, i);
 			else if (str[*i] == 39)
 				ft_check_quotes(str, 39, i);
 			else
