@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:51:10 by mnegro            #+#    #+#             */
-/*   Updated: 2023/07/27 12:21:26 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/07/27 18:50:34 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,15 +59,12 @@ void	ft_parse_line(char *line);
 /* split_red.c */
 char	**ft_split_red(char *line);
 /* split_toby.c */
-int		ft_handle_redirects(char *line, t_split *data);
-void	ft_handle_quotes(char *line, t_split *data);
-int		ft_word_count(char *line);
-int		ft_word_length(char *line);
 char	**ft_split_toby(char *line);
 /* utils.c */
 void	ft_check_quotes(char *str, char c, int *len);
 void	ft_check_redirects(char *str, int *i);
-int		ft_is_stop(int c, int n);
+int		ft_is_stop(char c, int n);
 void	ft_print_mtx(char **mtx);
+int		ft_whether_quotes(t_split *data);
 
 #endif

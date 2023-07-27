@@ -6,17 +6,16 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 14:57:46 by mnegro            #+#    #+#             */
-/*   Updated: 2023/07/27 12:23:52 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/07/27 21:54:26 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	ft_handle_redirects(char *line, t_split *data)
+static int	ft_handle_redirects(char *line, t_split *data)
 {
 	if ((line[data->i] == 60 || line[data->i] == 62)
-		&& (data->sq == 0 || data->sq % 2 == 0)
-		&& (data->dq == 0 || data->dq % 2 == 0))
+		&& ft_whether_quotes(data))
 	{
 		if (data->i != 0 && line[data->i - 1] != 32)
 			data->words++;
@@ -33,6 +32,8 @@ int	ft_handle_redirects(char *line, t_split *data)
 			if (line[data->i] == 39 && (data->dq == 0 || data->dq % 2 == 0))
 				data->sq++;
 			data->i++;
+			while (line[data->i] == 124 && !ft_whether_quotes(data))
+				data->i++;
 		}
 		data->words--;
 		return (1);
@@ -40,7 +41,7 @@ int	ft_handle_redirects(char *line, t_split *data)
 	return (0);
 }
 
-void	ft_handle_quotes(char *line, t_split *data)
+static void	ft_handle_quotes(char *line, t_split *data)
 {
 	if (line[data->i] == 34 && (data->sq == 0 || data->sq % 2 == 0))
 		data->dq++;
@@ -49,12 +50,11 @@ void	ft_handle_quotes(char *line, t_split *data)
 	if (!ft_handle_redirects(line, data))
 		data->i++;
 	if (ft_is_stop(line[data->i], 2)
-		&& (data->dq == 0 || data->dq % 2 == 0)
-		&& (data->sq == 0 || data->sq % 2 == 0))
+		&& ft_whether_quotes(data))
 		data->words++;
 }
 
-int	ft_word_count(char *line)
+static int	ft_toby_count(char *line)
 {
 	t_split	data;
 
@@ -69,14 +69,14 @@ int	ft_word_count(char *line)
 		else
 			ft_handle_quotes(line, &data);
 	}
-	if (data.dq % 2 || data.sq % 2)
-		while (1)
-			readline("> ");
-	// printf("Word count: %d\n", data.words);
+	// if (data.dq % 2 || data.sq % 2)
+	// 	while (1)
+	// 		readline("> ");
+	printf("Toby count: %d\n", data.words);
 	return (data.words);
 }
 
-int	ft_word_length(char *line)
+static int	ft_toby_length(char *line)
 {
 	int	len;
 
@@ -90,7 +90,7 @@ int	ft_word_length(char *line)
 		else
 			len++;
 	}
-	// printf("Word length: %d\n", len);
+	printf("Toby length: %d\n", len);
 	return (len);
 }
 
@@ -100,7 +100,7 @@ char	**ft_split_toby(char *line)
 	int		i;
 	int		j;
 
-	toby = (char **)ft_calloc(ft_word_count(line) + 1, sizeof(char *));
+	toby = (char **)ft_calloc(ft_toby_count(line) + 1, sizeof(char *));
 	if (!toby)
 		return (NULL);
 	i = 0;
@@ -113,11 +113,9 @@ char	**ft_split_toby(char *line)
 			ft_check_redirects(line, &i);
 		else
 		{
-			toby[j] = ft_substr(line, i, ft_word_length(&line[i])); 
-			j++;
-			i += ft_word_length(&line[i]);
+			toby[j++] = ft_substr(line, i, ft_toby_length(&line[i])); 
+			i += ft_toby_length(&line[i]);
 		}
 	}
-	toby[j] = NULL;
 	return (toby);
 }
