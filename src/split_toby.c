@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 14:57:46 by mnegro            #+#    #+#             */
-/*   Updated: 2023/07/26 16:25:12 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/07/27 12:23:52 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,26 @@ int	ft_word_count(char *line)
 	if (data.dq % 2 || data.sq % 2)
 		while (1)
 			readline("> ");
-	printf("Word count: %d\n", data.words);
+	// printf("Word count: %d\n", data.words);
 	return (data.words);
 }
 
 int	ft_word_length(char *line)
 {
+	int	len;
+
+	len = 0;
+	while (line && !ft_is_stop(line[len], 1))
+	{
+		if (line[len] == 34)
+			ft_check_quotes(line, 34, &len);
+		else if (line[len] == 39)
+			ft_check_quotes(line, 39, &len);
+		else
+			len++;
+	}
+	// printf("Word length: %d\n", len);
+	return (len);
 }
 
 char	**ft_split_toby(char *line)
@@ -86,18 +100,24 @@ char	**ft_split_toby(char *line)
 	int		i;
 	int		j;
 
-	toby = (char **)ft_calloc(ft_word_count(line), sizeof(char *));
+	toby = (char **)ft_calloc(ft_word_count(line) + 1, sizeof(char *));
 	if (!toby)
 		return (NULL);
 	i = 0;
 	j = 0;
-	while (line && line[i])
+	while (line && !ft_is_stop(line[i], 3))
 	{
-		line[j] = ft_substr(line, i, ft_word_length(line)); 
-		j++;
-		i += ft_word_length(line);
+		if (line[i] == 32)
+			i++;
+		else if (line[i] == 60 || line[i] == 62)
+			ft_check_redirects(line, &i);
+		else
+		{
+			toby[j] = ft_substr(line, i, ft_word_length(&line[i])); 
+			j++;
+			i += ft_word_length(&line[i]);
+		}
 	}
-	line[j] = NULL;
-	free((char *)line);
+	toby[j] = NULL;
 	return (toby);
 }

@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:51:17 by mnegro            #+#    #+#             */
-/*   Updated: 2023/07/26 16:25:10 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/07/27 11:09:15 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ int	main(int argc, char **argv)
 	}
 	while (1)
 	{
-		shell.input = readline("minishell-$ ");
-		add_history(shell.input);
-		ft_word_count(shell.input);
-		free(shell.input);
+		shell.line = readline("minishell-$ ");
+		add_history(shell.line);
+		ft_parse_line(shell.line);
+		free(shell.line);
 	}
 	return (0);
 }
