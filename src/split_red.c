@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 15:02:11 by mnegro            #+#    #+#             */
-/*   Updated: 2023/07/28 00:02:55 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/07/28 12:56:04 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static void	ft_count_quotes(char *line, t_split *data)
 {
-	if (line[data->i] == 34)
+	if (line[data->i] == 34 && (data->sq == 0 || data->sq % 2 == 0))
 		data->dq++;
-	if (line[data->i] == 39)
+	if (line[data->i] == 39 && (data->dq == 0 || data->dq % 2 == 0))
 		data->sq++;
 }
 
@@ -35,7 +35,7 @@ static void	ft_handle_redirects(char *line, t_split *data)
 		{
 			ft_count_quotes(line, data);
 			data->i++;
-			while (line[data->i] == 124
+			while ((line[data->i] == 124 || line[data->i] == 32)
 				&& !ft_whether_quotes(data))
 				data->i++;
 		}

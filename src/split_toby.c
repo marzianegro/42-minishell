@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 14:57:46 by mnegro            #+#    #+#             */
-/*   Updated: 2023/07/28 00:02:58 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/07/28 12:56:08 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 static int	ft_handle_redirects(char *line, t_split *data)
 {
-	if ((line[data->i] == 60 || line[data->i] == 62)
-		&& ft_whether_quotes(data))
+	if ((line[data->i] == 60 || line[data->i] == 62) && ft_whether_quotes(data))
 	{
 		if (data->i != 0 && line[data->i - 1] != 32)
 			data->words++;
@@ -32,7 +31,8 @@ static int	ft_handle_redirects(char *line, t_split *data)
 			if (line[data->i] == 39 && (data->dq == 0 || data->dq % 2 == 0))
 				data->sq++;
 			data->i++;
-			while (line[data->i] == 124 && !ft_whether_quotes(data))
+			while ((line[data->i] == 124 || line[data->i] == 32)
+				&& !ft_whether_quotes(data))
 				data->i++;
 		}
 		data->words--;
@@ -48,6 +48,8 @@ static void	ft_handle_quotes(char *line, t_split *data)
 	if (line[data->i] == 39 && (data->dq == 0 || data->dq % 2 == 0))
 		data->sq++;
 	if (!ft_handle_redirects(line, data))
+		data->i++;
+	while (line[data->i] == 124 && !ft_whether_quotes(data))
 		data->i++;
 	if (ft_is_stop(line[data->i], 2)
 		&& ft_whether_quotes(data))
@@ -69,9 +71,9 @@ static int	ft_toby_count(char *line)
 		else
 			ft_handle_quotes(line, &data);
 	}
-	// if (data.dq % 2 || data.sq % 2)
-	// 	while (1)
-	// 		readline("> ");
+	if (data.dq % 2 || data.sq % 2)
+		while (1)
+			readline("> ");
 	printf("Toby count: %d\n", data.words);
 	return (data.words);
 }
