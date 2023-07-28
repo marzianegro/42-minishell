@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 16:21:29 by mnegro            #+#    #+#             */
-/*   Updated: 2023/07/06 16:55:43 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/07/28 16:08:16 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,19 @@
 # define LIBFT_H
 
 /* HEADER FILES */
+# include <fcntl.h>
 # include <limits.h>
 # include <stddef.h>
 # include <stdint.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdarg.h>
+
+/* MACROS */
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
 
 /* STRUCTURES */
 typedef struct s_list
@@ -29,6 +36,7 @@ typedef struct s_list
 }				t_list;
 
 /* PROTOTYPES */
+/* LIBFT (bonus) */
 int		ft_atoi(const char *nptr);
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t nmemb, size_t size);
@@ -72,5 +80,36 @@ char	*ft_strtrim(const char *s1, const char *set);
 char	*ft_substr(const char *s, unsigned int start, size_t len);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
+
+/* FT_PRINTF (mandatory)*/
+/* ft_chars.c */
+int		ft_print_c(int c);
+int		ft_print_str(char *str);
+int		ft_print_percent(void);
+/* ft_hex.c */
+int		ft_get_hex_len(unsigned int n);
+int		ft_print_hex(unsigned int n, const char format);
+/* ft_nbrs.c */
+char	*ft_unsigned_itoa(unsigned int n);
+int		ft_print_nbr(int n);
+int		ft_print_unsigned_nbr(unsigned int n);
+/* ft_printf.c */
+int		ft_formats(va_list args, const char format);
+int		ft_printf(const char *str, ...);
+/* ft_voidptr.c */
+int		ft_get_voidptr_len(unsigned long n);
+int		ft_print_voidptr(unsigned long n);
+
+/* GET_NEXT_LINE (bonus) */
+/* get_next_line_bonus.c */
+char	*ft_copy_to_new(char **buftomem);
+void	ft_read_from_fd(int fd, char **buftomem);
+char	*ft_strjoin_gnl(char *s1, char *s2);
+char	*get_next_line(int fd);
+/* get_next_line_utils_bonus */
+void	*ft_calloc(size_t nmemb, size_t size);
+char	*ft_clean_buftomem(char *buftomem, int i);
+int		ft_find_newline(char *buftomem);
+char	*ft_free(char **buf);
 
 #endif

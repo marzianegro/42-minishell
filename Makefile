@@ -6,7 +6,7 @@
 #    By: mnegro <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/06 14:56:20 by mnegro            #+#    #+#              #
-#    Updated: 2023/07/27 18:23:26 by mnegro           ###   ########.fr        #
+#    Updated: 2023/07/28 16:14:37 by mnegro           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@
 
 ### VARIABLES (DEFINITION) ###
 NAME = minishell
-NAME_ARC = libftminishell
+NAME_ARC = libftminishell.a
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
@@ -26,7 +26,8 @@ RLFLAGS = -lreadline
 RM = rm -f
 
 #### TARGETS ####
-FL_SRCS = main.c parsing.c split_toby.c split_red.c utils.c
+FL_SRCS = history.c init_shell.c main.c parsing.c rt_utils.c \
+			split_toby.c split_red.c utils.c
 DIRSRCS = src/
 SRCS = ${addprefix ${DIRSRCS},${FL_SRCS}}
 
@@ -45,7 +46,7 @@ ${DIROBJS}%.o: ${DIRSRCS}%.c
 	${CC} ${CFLAGS} -c $< -o $@
 
 ${NAME}: libft ${OBJS}
-	cp libft/libft.a ${ARC}
+	cp libft/arc/libft.a ${ARC}
 	${CC} ${CFLAGS} ${OBJS} -I {INCLUDE} -o ${NAME} ${ARC} ${RLFLAGS}
 	@echo "Rule '${GREEN}all${DEF_COLOR}' for mandatory ${NAME} executed successfully!"
 

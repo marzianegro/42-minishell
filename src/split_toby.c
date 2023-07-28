@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 14:57:46 by mnegro            #+#    #+#             */
-/*   Updated: 2023/07/28 12:56:08 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/07/28 14:46:51 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,11 @@ static void	ft_handle_quotes(char *line, t_split *data)
 		data->words++;
 }
 
-static int	ft_toby_count(char *line)
+static int	ft_toby_count(char *line, int i)
 {
 	t_split	data;
 
-	data.i = 0;
+	data.i = i;
 	data.dq = 0;
 	data.sq = 0;
 	data.words = 0;
@@ -74,7 +74,6 @@ static int	ft_toby_count(char *line)
 	if (data.dq % 2 || data.sq % 2)
 		while (1)
 			readline("> ");
-	printf("Toby count: %d\n", data.words);
 	return (data.words);
 }
 
@@ -92,20 +91,17 @@ static int	ft_toby_length(char *line)
 		else
 			len++;
 	}
-	printf("Toby length: %d\n", len);
 	return (len);
 }
 
-char	**ft_split_toby(char *line)
+char	**ft_split_toby(char *line, int i)
 {
 	char	**toby;
-	int		i;
 	int		j;
 
-	toby = (char **)ft_calloc(ft_toby_count(line) + 1, sizeof(char *));
+	toby = (char **)ft_calloc(ft_toby_count(line, i) + 1, sizeof(char *));
 	if (!toby)
 		return (NULL);
-	i = 0;
 	j = 0;
 	while (line && !ft_is_stop(line[i], 3))
 	{

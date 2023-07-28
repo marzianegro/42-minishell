@@ -1,34 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_chars.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/06 15:51:17 by mnegro            #+#    #+#             */
-/*   Updated: 2023/07/28 14:59:56 by mnegro           ###   ########.fr       */
+/*   Created: 2022/12/08 11:29:19 by mnegro            #+#    #+#             */
+/*   Updated: 2023/07/28 15:42:17 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../libft.h"
 
-int	main(int argc, char **argv)
+int	ft_print_c(int c)
 {
-	t_mini		shell;
+	write(1, &c, 1);
+	return (1);
+}
 
-	(void)argv;
-	if (argc != 1)
+int	ft_print_str(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (!str)
 	{
-		ft_putstr_fd("\033[1;91mError\033[0;39m: invalid input!\n", 2);
-		return (1);
+		write(1, "(null)", 6);
+		return (6);
 	}
-	ft_init_shell(&shell);
-	while (1)
+	while (str[i])
 	{
-		shell.line = readline("minishell-$ ");
-		add_history(shell.line);
-		ft_parse_line(&shell);
-		free(shell.line);
+		write(1, &str[i], 1);
+		i++;
 	}
-	return (0);
+	return (i);
+}
+
+int	ft_print_percent(void)
+{
+	write(1, "%", 1);
+	return (1);
 }

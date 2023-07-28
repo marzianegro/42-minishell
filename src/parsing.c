@@ -6,22 +6,26 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 16:10:03 by mnegro            #+#    #+#             */
-/*   Updated: 2023/07/28 12:57:28 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/07/28 14:52:34 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_parse_line(char *line)
+void	ft_parse_line(t_mini *shell)
 {
-	t_mtx	mtx;
+	int		i;
+	char	**toby;
+	char	**red;
 
-	mtx.toby = ft_split_toby(line);
-	printf("---------- TOBY ----------\n");
-	ft_print_mtx(mtx.toby);
-	printf("---------- END ----------\n");
-	printf("---------- RED ----------\n");
-	mtx.red = ft_split_red(line);
-	ft_print_mtx(mtx.red);
-	printf("---------- END ----------\n");
+	i = 0;
+	while (shell->line && shell->line[i])
+	{
+		if (shell->line[i] == 124)
+			i++;
+		toby = ft_split_toby(shell->line, i);
+		red = ft_split_red(shell->line, &i);
+		ft_addfront_new(&(shell->parsley), toby, red);
+	}
+	//ft_print_rt(shell->parsley);
 }

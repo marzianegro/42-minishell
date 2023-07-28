@@ -6,7 +6,7 @@
 #    By: mnegro <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/12 23:11:39 by mnegro            #+#    #+#              #
-#    Updated: 2023/07/06 21:57:02 by mnegro           ###   ########.fr        #
+#    Updated: 2023/07/28 16:08:33 by mnegro           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,9 @@ FL_SRCS = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
 			ft_strchr.c ft_strdup.c ft_striteri.c ft_strjoin.c \
 			ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strmapi.c \
 			ft_strncmp.c ft_strnstr.c ft_strrchr.c ft_strtrim.c \
-			ft_substr.c ft_tolower.c ft_toupper.c
+			ft_substr.c ft_tolower.c ft_toupper.c \
+			ft_chars.c ft_hex.c ft_nbrs.c ft_printf.c ft_voidptr.c \
+			get_next_line_bonus.c get_next_line_utils_bonus.c
 DIRSRCS = src/
 SRCS = ${addprefix ${DIRSRCS},${FL_SRCS}}
 
@@ -46,12 +48,15 @@ FL_OBJS = ${FL_SRCS:.c=.o}
 DIROBJS = obj/
 OBJS = ${addprefix ${DIROBJS},${FL_OBJS}}
 
+DIRARC = arc/
+ARC = ${addprefix ${DIRARC},${NAME_ARC}}
+
 ### (EXPLICIT) RULES ###
 ${DIROBJS}%.o: ${DIRSRCS}%.c
 	${CC} ${CFLAGS} -c $< -o $@
 	
 ${NAME}: ${OBJS}
-	${AR} ${ARFLAGS} ${NAME_ARC} ${OBJS}
+	${AR} ${ARFLAGS} ${ARC} ${OBJS}
 	@echo "Rule '${GREEN}all${DEF_COLOR}' for mandatory & bonus ${NAME} executed successfully!"
 
 all:	${NAME}
@@ -61,7 +66,7 @@ clean:
 	@echo "Rule '${GREEN}clean${DEF_COLOR}' for ${NAME} executed successfully!"
 
 fclean:
-	${RM} ${OBJS} ${NAME} ${NAME_ARC}
+	${RM} ${OBJS} ${NAME} ${ARC}
 	@echo "Rule '${GREEN}fclean${DEF_COLOR}' for ${NAME} executed successfully!"
 
 re:	fclean all

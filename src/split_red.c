@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 15:02:11 by mnegro            #+#    #+#             */
-/*   Updated: 2023/07/28 12:56:04 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/07/28 14:46:45 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ static void	ft_handle_redirects(char *line, t_split *data)
 		data->i++;
 }
 
-static int	ft_red_count(char *line)
+static int	ft_red_count(char *line, int i)
 {
 	t_split	data;
 
-	data.i = 0;
+	data.i = i;
 	data.dq = 0;
 	data.sq = 0;
 	data.words = 0;
@@ -58,7 +58,6 @@ static int	ft_red_count(char *line)
 		ft_count_quotes(line, &data);
 		ft_handle_redirects(line, &data);
 	}
-	printf("Red count: %d\n", data.words);
 	return (data.words);
 }
 
@@ -81,34 +80,31 @@ static int	ft_red_length(char *line)
 		else
 			len++;
 	}
-	printf("Red length: %d\n", len);
 	return (len);
 }
 
-char	**ft_split_red(char *line)
+char	**ft_split_red(char *line, int *i)
 {
 	char	**red;
-	int		i;
 	int		j;
 
-	red = (char **)ft_calloc(ft_red_count(line) + 1, sizeof(char *));
+	red = (char **)ft_calloc(ft_red_count(line, *i) + 1, sizeof(char *));
 	if (!red)
 		return (NULL);
-	i = 0;
 	j = 0;
-	while (line && !ft_is_stop(line[i], 3))
+	while (line && !ft_is_stop(line[*i], 3))
 	{
-		if (line[i] == 34)
-			ft_check_quotes(line, 34, &i);
-		else if (line[i] == 39)
-			ft_check_quotes(line, 39, &i);
-		else if (line[i] == 60 || line[i] == 62)
+		if (line[*i] == 34)
+			ft_check_quotes(line, 34, i);
+		else if (line[*i] == 39)
+			ft_check_quotes(line, 39, i);
+		else if (line[*i] == 60 || line[*i] == 62)
 		{
-			red[j++] = ft_substr(line, i, ft_red_length(&line[i]));
-			i += ft_red_length(&line[i]);
+			red[j++] = ft_substr(line, *i, ft_red_length(&line[*i]));
+			*i += ft_red_length(&line[*i]);
 		}
 		else
-			i++;
+			*i += 1;
 	}
 	return (red);
 }
