@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 15:59:36 by mnegro            #+#    #+#             */
-/*   Updated: 2023/07/28 15:06:35 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/07/28 17:48:58 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,20 @@
 
 void	ft_init_history(t_mini *shell)
 {
-	char		*history_file;
-	int			history_fd;
+	char	*line;
 
-	history_file = ft_strjoin(getenv("HOME"), "/.mini_history");
-	history_fd = open(history_file, O_RDWR | O_CREAT, 0644); // O_APPEND
-	get_
+	shell->history = ft_strjoin(getenv("HOME"), "/.mini_history");
+	shell->history_fd = open(shell->history, O_RDWR | O_EXCL | O_CREAT, 0644);
+	if (shell->history_fd < 0)
+	{
+		shell->history_fd = open(shell->history, O_RDWR | O_APPEND, 0644);
+		line = get_next_line(shell->history_fd);
+		while (line)
+		{
+			add_history(line);
+			free(line);
+			line = get_next_line(shell->history_fd);
+		}
+	}
+	else
 }

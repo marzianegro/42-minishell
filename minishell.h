@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:51:10 by mnegro            #+#    #+#             */
-/*   Updated: 2023/07/28 14:52:22 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/07/28 17:37:45 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_mini
 {
 	char	*line;
 	char	*history;
+	int		*history_fd;
 	t_rt	*parsley;
 }			t_mini;
 
