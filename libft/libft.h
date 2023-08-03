@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 16:21:29 by mnegro            #+#    #+#             */
-/*   Updated: 2023/07/28 16:08:16 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/03 15:10:25 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void	ft_read_from_fd(int fd, char **buftomem);
 char	*ft_strjoin_gnl(char *s1, char *s2);
 char	*get_next_line(int fd);
 /* get_next_line_utils_bonus */
-void	*ft_calloc(size_t nmemb, size_t size);
+void	*ft_calloc_gnl(size_t nmemb, size_t size);
 char	*ft_clean_buftomem(char *buftomem, int i);
 int		ft_find_newline(char *buftomem);
 char	*ft_free(char **buf);

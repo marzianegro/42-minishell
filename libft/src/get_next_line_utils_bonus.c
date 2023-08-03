@@ -6,13 +6,13 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 16:51:34 by mnegro            #+#    #+#             */
-/*   Updated: 2023/07/28 16:03:43 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/03 15:09:47 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-void	*ft_calloc(size_t nmemb, size_t size)
+void	*ft_calloc_gnl(size_t nmemb, size_t size)
 {
 	size_t		i;
 	char		*ret;
@@ -32,7 +32,7 @@ char	*ft_clean_buftomem(char *buftomem, int i)
 	char	*temp;
 
 	j = 0;
-	temp = ft_calloc(ft_strlen(&buftomem[i]) + 1, sizeof(char));
+	temp = ft_calloc_gnl(ft_strlen(&buftomem[i]) + 1, sizeof(char));
 	if (!temp)
 		return (NULL);
 	while (buftomem && buftomem[i])

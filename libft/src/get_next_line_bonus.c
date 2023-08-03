@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 16:50:32 by mnegro            #+#    #+#             */
-/*   Updated: 2023/07/28 16:59:48 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/03 16:01:37 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_copy_to_new(char **buftomem)
 	i = 0;
 	while ((*buftomem)[i] != '\n' && (*buftomem)[i] != '\0')
 		i++;
-	newline = (char *)ft_calloc(i + 2, sizeof(char));
+	newline = (char *)ft_calloc_gnl(i + 2, sizeof(char));
 	if (!newline)
 		return (NULL);
 	i = -1;
@@ -49,7 +49,7 @@ void	ft_read_from_fd(int fd, char **buftomem)
 	byteread = 1;
 	while (byteread > 0 && ft_find_newline(*buftomem))
 	{
-		buf = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+		buf = ft_calloc_gnl(BUFFER_SIZE + 1, sizeof(char));
 		if (!buf)
 			return ;
 		byteread = read(fd, buf, BUFFER_SIZE);
@@ -72,7 +72,7 @@ char	*ft_strjoin_gnl(char *s1, char *s2)
 
 	i = 0;
 	j = 0;
-	str = (char *)ft_calloc(ft_strlen(s1) + (ft_strlen(s2) + 1), sizeof(char));
+	str = (char *)ft_calloc_gnl(ft_strlen(s1) + (ft_strlen(s2) + 1), sizeof(char));
 	if (!str)
 		return (NULL);
 	while (s1 && s1[i])

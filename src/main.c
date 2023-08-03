@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:51:17 by mnegro            #+#    #+#             */
-/*   Updated: 2023/07/28 17:49:00 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/03 17:33:10 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,12 @@ int	main(int argc, char **argv)
 	while (1)
 	{
 		shell.line = readline("minishell-$ ");
-		add_history(shell.line);
-		ft_parse_line(&shell);
+		if (shell.line[0] != '\0')
+		{
+			ft_putstr_fd_ms(shell.line, shell.history_fd);
+			add_history(shell.line);
+			ft_parse_line(&shell);
+		}
 		free(shell.line);
 	}
 	return (0);

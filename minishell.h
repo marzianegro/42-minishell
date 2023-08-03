@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:51:10 by mnegro            #+#    #+#             */
-/*   Updated: 2023/07/28 17:37:45 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/03 16:24:50 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ typedef struct s_rt
 
 typedef struct s_mini
 {
-	char	*line;
-	char	*history;
-	int		*history_fd;
-	t_rt	*parsley;
+	char		*line;
+	const char	*history;
+	int			history_fd;
+	t_rt		*parsley;
 }			t_mini;
 
 /* PROTOTYPES */
@@ -72,5 +72,6 @@ void	ft_check_quotes(char *str, char c, int *len);
 void	ft_check_redirects(char *str, int *i);
 int		ft_is_stop(char c, int n);
 int		ft_whether_quotes(t_split *data);
+void	ft_putstr_fd_ms(char *s, int fd);
 
 #endif

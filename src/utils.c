@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 16:14:13 by mnegro            #+#    #+#             */
-/*   Updated: 2023/07/28 14:45:47 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/03 16:52:56 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,19 @@ void	ft_check_redirects(char *str, int *i)
 				*i += 1;
 		}
 	}
+}
+
+void	ft_putstr_fd_ms(char *s, int fd)
+{
+	int	i;
+
+	i = 0;
+	if (fd < 0 || s[i] == '\n')
+		return ;
+	while (s[i] != '\0')
+	{
+		write(fd, &s[i], 1);
+		i++;
+	}
+	write(fd, "\n", 1);
 }
