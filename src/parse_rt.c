@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   parse_rt.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 16:10:03 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/07 14:13:51 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/07 14:22:29 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_parse_line(t_mini *shell)
+void	ft_parse_rt(t_rt **rt)
 {
-	int		i;
-	char	**toby;
-	char	**red;
+	ft_iter(rt, ft_spaces(rt));
+	ft_iter(rt, ft_quotes(rt));
+	ft_iter(rt, ft_variables(rt));
+}
 
-	i = 0;
-	while (shell->line && shell->line[i])
-	{
-		if (shell->line[i] == 124)
-			i++;
-		toby = ft_split_toby(shell->line, i);
-		red = ft_split_red(shell->line, &i);
-		ft_addfront_new(&(shell->parsley), toby, red);
-	}
-	//ft_print_rt(shell->parsley);
+void	**ft_spaces(t_rt **rt)
+{
+
+}
+
+void	**ft_quotes(t_rt **rt)
+{
+
+}
+
+void	**ft_variables(t_rt **rt)
+{
+	
 }
