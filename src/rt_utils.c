@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 14:15:34 by mnegro            #+#    #+#             */
-/*   Updated: 2023/07/28 14:45:56 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/07 14:11:45 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,6 @@ void	ft_addfront_new(t_rt **rt, char **toby, char **red)
 	}
 }
 
-void	ft_freematrix(char **matrix)
-{
-	int	i;
-
-	i = 0;
-	if (matrix)
-	{
-		while (matrix[i])
-		{
-			free(matrix[i]);
-			i++;
-		}
-		free(matrix);
-	}
-}
-
 void	ft_clear(t_rt **rt)
 {
 	t_rt	*ptr;
@@ -60,6 +44,22 @@ void	ft_clear(t_rt **rt)
 		*rt = ptr;
 	}
 	*rt = NULL;
+}
+
+void	ft_freematrix(char **matrix)
+{
+	int	i;
+
+	i = 0;
+	if (matrix)
+	{
+		while (matrix[i])
+		{
+			free(matrix[i]);
+			i++;
+		}
+		free(matrix);
+	}
 }
 
 void	ft_print_mtx(char **mtx)

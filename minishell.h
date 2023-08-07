@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:51:10 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/03 16:24:50 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/07 14:12:40 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,28 +50,28 @@ typedef struct s_mini
 }			t_mini;
 
 /* PROTOTYPES */
-/* history.c */
-void	ft_init_history(t_mini *shell);
 /* init_shell.c */
+void	ft_init_history(t_mini *shell);
 void	ft_init_shell(t_mini *shell);
 /* main.c */
 /* parsing.c */
 void	ft_parse_line(t_mini *shell);
 /* rt_utils.c */
 void	ft_addfront_new(t_rt **rt, char **toby, char **red);
-void	ft_freematrix(char **matrix);
 void	ft_clear(t_rt **rt);
+void	ft_freematrix(char **matrix);
 void	ft_print_mtx(char **mtx);
 void	ft_print_rt(t_rt *rt);
 /* split_red.c */
 char	**ft_split_red(char *line, int *i);
 /* split_toby.c */
 char	**ft_split_toby(char *line, int i);
-/* utils.c */
+/* split_utils.c */
 void	ft_check_quotes(char *str, char c, int *len);
 void	ft_check_redirects(char *str, int *i);
 int		ft_is_stop(char c, int n);
 int		ft_whether_quotes(t_split *data);
+/* utils.c */
 void	ft_putstr_fd_ms(char *s, int fd);
 
 #endif
