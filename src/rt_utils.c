@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 14:15:34 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/07 14:21:38 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/07 16:16:58 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,26 +46,26 @@ void	ft_clear(t_rt **rt)
 	*rt = NULL;
 }
 
-void	ft_iter(t_rt *rt, void (*f)(void **))
+void	ft_iter(t_rt *rt, void (*f)(char **))
 {
-	while (rt)
+	t_rt	*tmp;
+
+	tmp = rt;
+	while (tmp)
 	{
-		(*f)(rt->red);
 		(*f)(rt->toby);
-		rt = rt->next;
+		(*f)(rt->red);
+		tmp = tmp->next;
 	}
+	free(tmp);
 }
 
 void	ft_print_rt(t_rt *rt)
 {
-	while (rt)
-	{
-		printf(" ----- NEW NODE -----\n");
-		printf(" --- toby ---\n");
-		ft_print_mtx(rt->toby);
-		printf(" --- red ---\n");
-		ft_print_mtx(rt->red);
-		printf("\n");
-		rt = rt->next;
-	}
+	printf(" ----- NEW NODE -----\n");
+	printf(" --- toby ---\n");
+	ft_print_mtx(rt->toby);
+	printf(" --- red ---\n");
+	ft_print_mtx(rt->red);
+	printf("\n");
 }

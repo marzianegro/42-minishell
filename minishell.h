@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:51:10 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/07 14:22:27 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/07 15:32:15 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,13 @@ void	ft_init_shell(t_mini *shell);
 void	ft_parse_line(t_mini *shell);
 /* parse_rt.c */
 void	ft_parse_rt(t_rt **rt);
-void	**ft_spaces(t_rt **rt);
-void	**ft_quotes(t_rt **rt);
-void	**ft_variables(t_rt **rt);
+void	ft_spaces(char **mtx);
+void	ft_quotes(char **mtx);
+void	ft_variables(char **mtx);
 /* rt_utils.c */
 void	ft_addfront_new(t_rt **rt, char **toby, char **red);
 void	ft_clear(t_rt **rt);
-void	ft_iter(t_rt *rt, void (*f)(void *));
+void	ft_iter(t_rt *rt, void (*f)(char **));
 void	ft_print_rt(t_rt *rt);
 /* split_red.c */
 char	**ft_split_red(char *line, int *i);
