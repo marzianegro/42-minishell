@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 16:10:03 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/07 16:16:56 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/10 14:14:09 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,47 +14,55 @@
 
 void	ft_parse_rt(t_rt **rt)
 {
-	ft_iter(*rt, ft_spaces);
+	ft_iter(*rt, ft_quotes);
 }
 
-void	ft_spaces(char **mtx)
+// void	ft_spaces(char **mtx)
+// {
+// 	int	x;
+// 	int	y;
+// 	int	i;
+// 	int	space;
+
+// 	x = 0;
+// 	y = 0;
+// 	i = 0;
+// 	space = 0;
+// 	while (mtx[y])
+// 	{
+// 		while (mtx[y][x])
+// 		{
+// 		}
+// 	}
+// }
+
+void	ft_quotes(char **mtx)
 {
-	int	x;
-	int	y;
-	int	i;
-	int	space;
+	int		x;
+	int		y;
+	t_parse	prs;
 
 	x = 0;
 	y = 0;
-	i = 0;
-	space = 0;
-	while (mtx[y])
+	prs.len = 0;
+	while (mtx[y][x])
 	{
-		while (mtx[y][x])
+		ft_count_quotes(mtx[x], &prs);
+		if (prs.sq != 0 || prs.dq != 0)
 		{
-			if (mtx[y][x] == 32 && space == 0)
-				space = 1;
-			else if (mtx[y][x] == 32 && space != 0)
+			while (ft_is_quotes(mtx[x], x))
+				x++;
+			while (!ft_is_quotes(mtx[x], x))
 			{
-				i = x;
-				while (mtx[y][i])
-				{
-					mtx[y][i] = mtx[y][i + 1];
-					i++;
-				}
-				mtx[y][i] = '\0';
-				space = 0;
+				x++;
+				prs.len++;
 			}
-			x++;
+			ft_new_str(mtx[x], x - prs.len - 1, prs.len);
+			prs.len = 0;
 		}
 		y++;
-		x = 0;
 	}
 }
-
-// void	ft_quotes(char **mtx)
-// {
-// }
 
 // void	ft_variables(char **mtx)
 // {

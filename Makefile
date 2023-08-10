@@ -6,7 +6,7 @@
 #    By: mnegro <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/06 14:56:20 by mnegro            #+#    #+#              #
-#    Updated: 2023/08/07 14:22:39 by mnegro           ###   ########.fr        #
+#    Updated: 2023/08/10 10:45:56 by mnegro           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,9 +26,8 @@ RLFLAGS = -lreadline
 RM = rm -f
 
 #### TARGETS ####
-FL_SRCS = init_shell.c main.c parse_rt.c rt_utils.c \
-			split_toby.c split_red.c split_utils.c \
-			utils.c
+FL_SRCS = init_shell.c main.c parse_rt.c parse_utils.c rt_utils.c \
+			split_toby.c split_red.c split_utils.c utils.c
 DIRSRCS = src/
 SRCS = ${addprefix ${DIRSRCS},${FL_SRCS}}
 

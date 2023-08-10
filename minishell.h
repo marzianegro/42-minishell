@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:51:10 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/07 15:32:15 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/10 14:14:11 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,13 @@ typedef struct s_split
 	int	words;
 }			t_split;
 
+typedef struct s_parse
+{
+	int	sq;
+	int	dq;
+	int	len;
+}			t_parse;
+
 typedef struct s_rt
 {
 	char		**toby;
@@ -57,9 +64,13 @@ void	ft_init_shell(t_mini *shell);
 void	ft_parse_line(t_mini *shell);
 /* parse_rt.c */
 void	ft_parse_rt(t_rt **rt);
-void	ft_spaces(char **mtx);
+// void	ft_spaces(char **mtx);
 void	ft_quotes(char **mtx);
-void	ft_variables(char **mtx);
+// void	ft_variables(char **mtx);
+/* parse_utils.c */
+void	ft_count_quotes(char *str, t_parse *prs);
+int		ft_is_quotes(char *str, int i);
+char	*ft_new_str(char *str, int start, int len);
 /* rt_utils.c */
 void	ft_addfront_new(t_rt **rt, char **toby, char **red);
 void	ft_clear(t_rt **rt);
