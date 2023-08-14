@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 16:10:03 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/10 14:14:09 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/14 12:17:49 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,43 @@
 
 void	ft_parse_rt(t_rt **rt)
 {
+	ft_iter(*rt, ft_spaces);
 	ft_iter(*rt, ft_quotes);
 }
 
-// void	ft_spaces(char **mtx)
-// {
-// 	int	x;
-// 	int	y;
-// 	int	i;
-// 	int	space;
+void	ft_spaces(char **mtx)
+{
+	int		x;
+	int		y;
+	t_parse	prs;
 
-// 	x = 0;
-// 	y = 0;
-// 	i = 0;
-// 	space = 0;
-// 	while (mtx[y])
-// 	{
-// 		while (mtx[y][x])
-// 		{
-// 		}
-// 	}
-// }
+	y = 0;
+	prs.len = 0;
+	while (mtx[y])
+	{
+		x = 0;
+		prs.new = NULL;
+		while (mtx[y][x])
+		{
+			ft_count_qs(mtx[y], &prs);
+			if (prs.sq == 0 || prs.dq == 0)
+			{
+				while (mtx[y][x] && ft_is_space(mtx[y], x))
+					x++;
+				while (mtx[y][x] && !ft_is_space(mtx[y], x))
+				{
+					x++;
+					prs.len++;
+				}
+				ft_new_str(mtx[y], &prs.new, x - prs.len, prs.len);
+				prs.len = 0;
+			}
+		}
+		if (prs.new)
+			mtx[y] = prs.new;
+		y++;
+	}
+}
 
 void	ft_quotes(char **mtx)
 {
@@ -42,24 +58,30 @@ void	ft_quotes(char **mtx)
 	int		y;
 	t_parse	prs;
 
-	x = 0;
 	y = 0;
 	prs.len = 0;
-	while (mtx[y][x])
+	while (mtx[y])
 	{
-		ft_count_quotes(mtx[x], &prs);
-		if (prs.sq != 0 || prs.dq != 0)
+		x = 0;
+		prs.new = NULL;
+		while (mtx[y][x])
 		{
-			while (ft_is_quotes(mtx[x], x))
-				x++;
-			while (!ft_is_quotes(mtx[x], x))
+			ft_count_qs(mtx[y], &prs);
+			if (prs.sq != 0 || prs.dq != 0)
 			{
-				x++;
-				prs.len++;
+				while (mtx[y][x] && ft_is_quotes(mtx[y], x))
+					x++;
+				while (mtx[y][x] && !ft_is_quotes(mtx[y], x))
+				{
+					x++;
+					prs.len++;
+				}
+				ft_new_str(mtx[y], &prs.new, x - prs.len, prs.len);
+				prs.len = 0;
 			}
-			ft_new_str(mtx[x], x - prs.len - 1, prs.len);
-			prs.len = 0;
 		}
+		if (prs.new)
+			mtx[y] = prs.new;
 		y++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 16:14:13 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/10 11:10:30 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/14 12:17:44 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	ft_check_redirects(char *str, int *i)
 		if ((str[*i - 1] == 60 && str[*i] == 60)
 			|| (str[*i - 1] == 62 && str[*i] == 62))
 			*i += 1;
-		if (str[*i] == 32)
+		while (str[*i] == 32)
 			*i += 1;
 		while (!ft_is_stop(str[*i], 1))
 		{

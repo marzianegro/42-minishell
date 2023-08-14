@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 14:15:34 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/07 16:16:58 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/14 12:17:46 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ void	ft_iter(t_rt *rt, void (*f)(char **))
 	tmp = rt;
 	while (tmp)
 	{
-		(*f)(rt->toby);
 		(*f)(rt->red);
+		(*f)(rt->toby);
 		tmp = tmp->next;
 	}
 	free(tmp);

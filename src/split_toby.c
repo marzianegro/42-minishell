@@ -6,75 +6,75 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 14:57:46 by mnegro            #+#    #+#             */
-/*   Updated: 2023/07/28 14:46:51 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/14 12:15:52 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static int	ft_handle_redirects(char *line, t_split *data)
+static int	ft_handle_redirects(char *line, t_split *spl)
 {
-	if ((line[data->i] == 60 || line[data->i] == 62) && ft_whether_quotes(data))
+	if ((line[spl->i] == 60 || line[spl->i] == 62) && ft_whether_quotes(spl))
 	{
-		if (data->i != 0 && line[data->i - 1] != 32)
-			data->words++;
-		data->i++;
-		if ((line[data->i - 1] == 60 && line[data->i] == 60)
-			|| (line[data->i - 1] == 62 && line[data->i] == 62))
-			data->i++;
-		while (line[data->i] == 32)
-			data->i++;
-		while (!ft_is_stop(line[data->i], 1))
+		if (spl->i != 0 && line[spl->i - 1] != 32)
+			spl->words++;
+		spl->i++;
+		if ((line[spl->i - 1] == 60 && line[spl->i] == 60)
+			|| (line[spl->i - 1] == 62 && line[spl->i] == 62))
+			spl->i++;
+		while (line[spl->i] == 32)
+			spl->i++;
+		while (!ft_is_stop(line[spl->i], 1))
 		{
-			if (line[data->i] == 34 && (data->sq == 0 || data->sq % 2 == 0))
-				data->dq++;
-			if (line[data->i] == 39 && (data->dq == 0 || data->dq % 2 == 0))
-				data->sq++;
-			data->i++;
-			while ((line[data->i] == 124 || line[data->i] == 32)
-				&& !ft_whether_quotes(data))
-				data->i++;
+			if (line[spl->i] == 34 && (spl->sq == 0 || spl->sq % 2 == 0))
+				spl->dq++;
+			if (line[spl->i] == 39 && (spl->dq == 0 || spl->dq % 2 == 0))
+				spl->sq++;
+			spl->i++;
+			while ((line[spl->i] == 124 || line[spl->i] == 32)
+				&& !ft_whether_quotes(spl))
+				spl->i++;
 		}
-		data->words--;
+		spl->words--;
 		return (1);
 	}
 	return (0);
 }
 
-static void	ft_handle_quotes(char *line, t_split *data)
+static void	ft_handle_quotes(char *line, t_split *spl)
 {
-	if (line[data->i] == 34 && (data->sq == 0 || data->sq % 2 == 0))
-		data->dq++;
-	if (line[data->i] == 39 && (data->dq == 0 || data->dq % 2 == 0))
-		data->sq++;
-	if (!ft_handle_redirects(line, data))
-		data->i++;
-	while (line[data->i] == 124 && !ft_whether_quotes(data))
-		data->i++;
-	if (ft_is_stop(line[data->i], 2)
-		&& ft_whether_quotes(data))
-		data->words++;
+	if (line[spl->i] == 34 && (spl->sq == 0 || spl->sq % 2 == 0))
+		spl->dq++;
+	if (line[spl->i] == 39 && (spl->dq == 0 || spl->dq % 2 == 0))
+		spl->sq++;
+	if (!ft_handle_redirects(line, spl))
+		spl->i++;
+	while (line[spl->i] == 124 && !ft_whether_quotes(spl))
+		spl->i++;
+	if (ft_is_stop(line[spl->i], 2)
+		&& ft_whether_quotes(spl))
+		spl->words++;
 }
 
 static int	ft_toby_count(char *line, int i)
 {
-	t_split	data;
+	t_split	spl;
 
-	data.i = i;
-	data.dq = 0;
-	data.sq = 0;
-	data.words = 0;
-	while (line && !ft_is_stop(line[data.i], 3))
+	spl.i = i;
+	spl.dq = 0;
+	spl.sq = 0;
+	spl.words = 0;
+	while (line && !ft_is_stop(line[spl.i], 3))
 	{
-		if (line[data.i] == 32)
-			data.i++;
+		if (line[spl.i] == 32)
+			spl.i++;
 		else
-			ft_handle_quotes(line, &data);
+			ft_handle_quotes(line, &spl);
 	}
-	if (data.dq % 2 || data.sq % 2)
+	if (spl.dq % 2 || spl.sq % 2)
 		while (1)
 			readline("> ");
-	return (data.words);
+	return (spl.words);
 }
 
 static int	ft_toby_length(char *line)

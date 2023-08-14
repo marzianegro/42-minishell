@@ -6,59 +6,59 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 15:02:11 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/10 11:10:36 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/14 12:17:38 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static void	ft_count_quotes(char *line, t_split *data)
+static void	ft_count_quotes(char *line, t_split *spl)
 {
-	if (line[data->i] == 34 && (data->sq == 0 || data->sq % 2 == 0))
-		data->dq++;
-	if (line[data->i] == 39 && (data->dq == 0 || data->dq % 2 == 0))
-		data->sq++;
+	if (line[spl->i] == 34 && (spl->sq == 0 || spl->sq % 2 == 0))
+		spl->dq++;
+	if (line[spl->i] == 39 && (spl->dq == 0 || spl->dq % 2 == 0))
+		spl->sq++;
 }
 
-static void	ft_handle_redirects(char *line, t_split *data)
+static void	ft_handle_redirects(char *line, t_split *spl)
 {
-	if ((line[data->i] == 60 || line[data->i] == 62)
-		&& ft_whether_quotes(data))
+	if ((line[spl->i] == 60 || line[spl->i] == 62)
+		&& ft_whether_quotes(spl))
 	{
-		data->i++;
-		if ((line[data->i - 1] == 60 && line[data->i] == 60)
-			|| (line[data->i - 1] == 62 && line[data->i] == 62))
-			data->i++;
-		if (line[data->i] == 32)
-			data->i++;
-		while (!ft_is_stop(line[data->i], 1))
+		spl->i++;
+		if ((line[spl->i - 1] == 60 && line[spl->i] == 60)
+			|| (line[spl->i - 1] == 62 && line[spl->i] == 62))
+			spl->i++;
+		while (line[spl->i] == 32)
+			spl->i++;
+		while (!ft_is_stop(line[spl->i], 1))
 		{
-			ft_count_quotes(line, data);
-			data->i++;
-			while ((line[data->i] == 124 || line[data->i] == 32)
-				&& !ft_whether_quotes(data))
-				data->i++;
+			ft_count_quotes(line, spl);
+			spl->i++;
+			while ((line[spl->i] == 124 || line[spl->i] == 32)
+				&& !ft_whether_quotes(spl))
+				spl->i++;
 		}
-		data->words++;
+		spl->words++;
 	}
 	else
-		data->i++;
+		spl->i++;
 }
 
 static int	ft_red_count(char *line, int i)
 {
-	t_split	data;
+	t_split	spl;
 
-	data.i = i;
-	data.dq = 0;
-	data.sq = 0;
-	data.words = 0;
-	while (line && !ft_is_stop(line[data.i], 3))
+	spl.i = i;
+	spl.dq = 0;
+	spl.sq = 0;
+	spl.words = 0;
+	while (line && !ft_is_stop(line[spl.i], 3))
 	{
-		ft_count_quotes(line, &data);
-		ft_handle_redirects(line, &data);
+		ft_count_quotes(line, &spl);
+		ft_handle_redirects(line, &spl);
 	}
-	return (data.words);
+	return (spl.words);
 }
 
 static int	ft_red_length(char *line)
@@ -69,7 +69,7 @@ static int	ft_red_length(char *line)
 	if ((line[len - 1] == 60 && line[len] == 60)
 		|| (line[len - 1] == 62 && line[len] == 62))
 		len++;
-	if (line[len] == 32)
+	while (line[len] == 32)
 		len++;
 	while (line && !ft_is_stop(line[len], 1))
 	{
