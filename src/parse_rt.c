@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 16:10:03 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/14 12:17:49 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/14 12:42:32 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ void	ft_spaces(char **mtx)
 	{
 		x = 0;
 		prs.new = NULL;
+		ft_count_qs(mtx[y], &prs);
 		while (mtx[y][x])
 		{
-			ft_count_qs(mtx[y], &prs);
 			if (prs.sq == 0 || prs.dq == 0)
 			{
 				while (mtx[y][x] && ft_is_space(mtx[y], x))
@@ -64,9 +64,9 @@ void	ft_quotes(char **mtx)
 	{
 		x = 0;
 		prs.new = NULL;
+		ft_count_qs(mtx[y], &prs);
 		while (mtx[y][x])
 		{
-			ft_count_qs(mtx[y], &prs);
 			if (prs.sq != 0 || prs.dq != 0)
 			{
 				while (mtx[y][x] && ft_is_quotes(mtx[y], x))
