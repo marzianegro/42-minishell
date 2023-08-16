@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:51:10 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/16 19:51:36 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/16 23:33:04 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	ft_parse_line(t_mini *shell);
 int		ft_stoppers(char c);
 int		ft_handle_stoppers(char **mtx, t_mini *shell, t_parse *prs);
 void	ft_single_quotes(char **mtx, t_parse *prs);
-void	ft_double_quotes(char **mtx, t_mini *shell, t_parse *prs);
+int		ft_double_quotes(char **mtx, t_mini *shell, t_parse *prs);
 int		ft_variables(char **mtx, t_mini *shell, t_parse *prs);
 /* prs.c */
 void	ft_parse_token(t_token **tk, t_mini *shell);
