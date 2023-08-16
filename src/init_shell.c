@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 14:50:58 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/07 14:12:41 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/16 15:47:16 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,22 @@ void	ft_init_history(t_mini *shell)
 	}
 }
 
-void	ft_init_shell(t_mini *shell)
+void	ft_init_env(char **mtx)
+{
+	t_env	**envp;
+	int		y;
+
+	y = 0;
+	while (mtx[y])
+	{
+		ft_set_env(mtx, y, envp);
+		y++; 
+	}
+}
+
+void	ft_init_shell(t_mini *shell, char **envp)
 {
 	shell->parsley = NULL;
 	ft_init_history(shell);
+	ft_init_env(envp);
 }

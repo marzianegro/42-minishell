@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:51:17 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/09 15:42:50 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/16 15:47:10 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_parse_line(t_mini *shell)
 	ft_print_rt(shell->parsley);
 }
 
-int	main(int argc, char **argv)
+int	main(int argc, char **argv, char **envp)
 {
 	t_mini		shell;
 
@@ -42,7 +42,7 @@ int	main(int argc, char **argv)
 		ft_putstr_fd("\033[1;91mError\033[0;39m: invalid input!\n", 2);
 		return (1);
 	}
-	ft_init_shell(&shell);
+	ft_init_shell(&shell, envp);
 	while (1)
 	{
 		shell.line = readline("minishell-$ ");
