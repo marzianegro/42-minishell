@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 16:14:13 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/16 15:46:43 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/16 17:34:08 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ int	ft_is_stop(char c, int n)
 	return (0);
 }
 
-int	ft_whether_quotes(t_split *data)
+int	ft_whether_quotes(t_split *spl)
 {
-	if ((data->sq == 0 || data->sq % 2 == 0)
-		&& (data->dq == 0 || data->dq % 2 == 0))
+	if ((spl->sq == 0 || spl->sq % 2 == 0)
+		&& (spl->dq == 0 || spl->dq % 2 == 0))
 		return (1);
 	return (0);
 }

@@ -24,6 +24,7 @@
 		"tuple": "c",
 		"type_traits": "c",
 		"cstddef": "c",
-		"init_utils": "c"
+		"init_utils": "c",
+		"ostream": "c"
 	}
 }

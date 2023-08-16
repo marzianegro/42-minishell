@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   variables_utils.c                                  :+:      :+:    :+:   */
+/*   vbl_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 15:43:57 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/16 15:46:41 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/16 18:23:45 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	ft_is_key(char *str, int i, int n)
+int	ft_is_key(char c, int n)
 {
 	if (n == 0)
 	{
-		if (str[i] > 'A' && str[i] < 'Z' || str[i] > 'a' && str[i] < 'z'
-			|| str[i] == '_')
+		if ((c > 'A' && c < 'Z') || (c > 'a' && c < 'z')
+			|| c == '_')
 			return (0);
 	}
 	else if (n == 1)
 	{
-		if (str[i] > 'A' && str[i] < 'Z' || str[i] > 'a' && str[i] < 'z'
-			|| str[i] > '0' && str[i] < '_')
+		if ((c > 'A' && c < 'Z') || (c > 'a' && c < 'z')
+			|| (c > '0' && c < '_'))
 			return (0);
 	}
 	return (1);
@@ -39,12 +39,12 @@ void	ft_fix_key(char *str, t_parse *prs)
 	prs->key = NULL;
 	while (str && str[i] && !prs->key)
 	{
-		while (ft_is_key(str, i, 1))
+		while (ft_is_key(str[i], 1))
 		{
 			i++;
 			len++;
 		}
-		ft_new_str(str[i], prs->key, i - len, len);
+		ft_new_str(str, &prs->key, i - len, len);
 	}
 }
 

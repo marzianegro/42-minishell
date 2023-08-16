@@ -1,71 +1,71 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rt_utils.c                                         :+:      :+:    :+:   */
+/*   tkn_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 14:15:34 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/16 15:47:00 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/16 17:25:55 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_addfront_new(t_rt **rt, char **toby, char **red)
+void	ft_addfront_new(t_token **tkn, char **toby, char **red)
 {
-	t_rt	*newnode;
+	t_token	*newnode;
 
-	newnode = (t_rt *)ft_calloc(1, sizeof(t_rt));
+	newnode = (t_token *)ft_calloc(1, sizeof(t_token));
 	if (!newnode)
 		return ;
 	newnode->toby = toby;
 	newnode->red = red;
 	newnode->next = NULL;
-	if (rt)
+	if (tkn)
 	{
-		newnode->next = *rt;
-		*rt = newnode;
+		newnode->next = *tkn;
+		*tkn = newnode;
 	}
 }
 
-void	ft_clear(t_rt **rt)
+void	ft_clear(t_token **tkn)
 {
-	t_rt	*ptr;
+	t_token	*ptr;
 
-	if (!*rt)
+	if (!*tkn)
 		return ;
-	while (*rt)
+	while (*tkn)
 	{
-		ptr = (*rt)->next;
-		ft_freematrix((*rt)->toby);
-		ft_freematrix((*rt)->red);
-		free(*rt);
-		*rt = ptr;
+		ptr = (*tkn)->next;
+		ft_freematrix((*tkn)->toby);
+		ft_freematrix((*tkn)->red);
+		free(*tkn);
+		*tkn = ptr;
 	}
-	*rt = NULL;
+	*tkn = NULL;
 }
 
-void	ft_iter(t_rt *rt, void (*f)(char **))
+void	ft_iter(t_token *tkn, t_mini *shell, void (*f)(char **, t_mini *))
 {
-	t_rt	*tmp;
+	t_token	*tmp;
 
-	tmp = rt;
+	tmp = tkn;
 	while (tmp)
 	{
-		(*f)(rt->toby);
-		(*f)(rt->red);
+		(*f)(tkn->toby, shell);
+		(*f)(tkn->red, shell);
 		tmp = tmp->next;
 	}
 	free(tmp);
 }
 
-void	ft_print_rt(t_rt *rt)
+void	ft_print_token(t_token *tkn)
 {
 	printf(" ----- NEW NODE -----\n");
 	printf(" --- toby ---\n");
-	ft_print_mtx(rt->toby);
+	ft_print_mtx(tkn->toby);
 	printf(" --- red ---\n");
-	ft_print_mtx(rt->red);
+	ft_print_mtx(tkn->red);
 	printf("\n");
 }
