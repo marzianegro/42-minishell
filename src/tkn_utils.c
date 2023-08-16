@@ -48,16 +48,12 @@ void	ft_clear(t_token **tkn)
 
 void	ft_iter(t_token *tkn, t_mini *shell, void (*f)(char **, t_mini *))
 {
-	t_token	*tmp;
-
-	tmp = tkn;
-	while (tmp)
+	while (tkn)
 	{
 		(*f)(tkn->toby, shell);
 		(*f)(tkn->red, shell);
-		tmp = tmp->next;
+		tkn = tkn->next;
 	}
-	free(tmp);
 }
 
 void	ft_print_token(t_token *tkn)

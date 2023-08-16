@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:51:17 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/16 18:34:06 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/16 19:55:30 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	main(int argc, char **argv, char **envp)
 			add_history(shell.line);
 			ft_parse_line(&shell);
 		}
+		ft_clear(&shell.token);
 		free(shell.line);
 	}
 	return (0);

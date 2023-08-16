@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 16:10:03 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/16 18:34:04 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/16 20:19:32 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,23 +30,27 @@ void	ft_parser(char **mtx, t_mini *shell)
 {
 	t_parse	prs;
 
-	prs.x = 0;
 	prs.y = 0;
 	while (mtx[prs.y])
 	{
+		prs.x = 0;
+		prs.new = NULL;
+		prs.len = 0;
 		while (mtx[prs.y][prs.x])
 		{
-			prs.len = 0;
-			if (ft_stoppers(mtx[prs.y][prs.x]))
+			if (!ft_stoppers(mtx[prs.y][prs.x]))
 			{
 				prs.x++;
 				prs.len++;
 			}
-			if (!ft_handle_stoppers(mtx, shell, &prs))
+			if (ft_handle_stoppers(mtx, shell, &prs))
 				continue ;
 		}
 		if (prs.new)
+		{
+			free(mtx[prs.y]);
 			mtx[prs.y] = prs.new;
+		}
 		prs.y++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 15:43:57 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/16 18:23:45 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/16 20:19:31 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_is_key(char c, int n)
 	else if (n == 1)
 	{
 		if ((c > 'A' && c < 'Z') || (c > 'a' && c < 'z')
-			|| (c > '0' && c < '_'))
+			|| (c > '0' && c < '9') || c == '_')
 			return (0);
 	}
 	return (1);
@@ -39,7 +39,7 @@ void	ft_fix_key(char *str, t_parse *prs)
 	prs->key = NULL;
 	while (str && str[i] && !prs->key)
 	{
-		while (ft_is_key(str[i], 1))
+		while (!ft_is_key(str[i], 1))
 		{
 			i++;
 			len++;
@@ -52,7 +52,7 @@ t_env	*ft_get_key(t_env *envp, t_parse *prs)
 {
 	while (envp)
 	{
-		if (ft_strncmp(envp->key, prs->key, ft_strlen(prs->key)))
+		if (!ft_strncmp(envp->key, prs->key, ft_strlen(prs->key)))
 			return (envp);
 		else
 			envp = envp->next;
