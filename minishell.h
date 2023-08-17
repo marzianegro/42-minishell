@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:51:10 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/16 23:33:04 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/17 12:12:43 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct s_mini
 	int			history_fd;
 	t_token		*token;
 	t_env		*envp;
+	int			exitcode;
 }			t_mini;
 
 
@@ -84,8 +85,9 @@ int		ft_double_quotes(char **mtx, t_mini *shell, t_parse *prs);
 int		ft_variables(char **mtx, t_mini *shell, t_parse *prs);
 /* prs.c */
 void	ft_parse_token(t_token **tk, t_mini *shell);
-void	ft_new_str(char *str, char **new, int start, int len);
+void	ft_new_str(char *str, t_parse *prs);
 void	ft_parser(char **mtx, t_mini *shell);
+int		ft_parser_red(char **mtx, t_parse *prs);
 /* spl_red.c */
 char	**ft_split_red(char *line, int *i);
 /* spl_toby.c */
@@ -106,6 +108,7 @@ void	ft_print_mtx(char **mtx);
 void	ft_putstr_fd_ms(char *s, int fd);
 /* vbl_utils.c */
 int		ft_is_key(char c, int n);
+void	ft_new_key(char *str, char **new, int start, int len);
 void	ft_fix_key(char *str, t_parse *prs);
 t_env	*ft_get_key(t_env *envp, t_parse *prs);
 void	ft_expand(t_env *envp, t_parse *prs);
