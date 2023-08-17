@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:51:10 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/17 12:12:43 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/17 14:52:56 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,14 +78,16 @@ void	ft_set_env(char **mtx, int y, t_env **envp);
 /* main.c */
 void	ft_parse_line(t_mini *shell);
 /* prs_utils.c */
+void	ft_new_str(char *str, t_parse *prs);
 int		ft_stoppers(char c);
 int		ft_handle_stoppers(char **mtx, t_mini *shell, t_parse *prs);
 void	ft_single_quotes(char **mtx, t_parse *prs);
 int		ft_double_quotes(char **mtx, t_mini *shell, t_parse *prs);
+/* prs_utils2.c */
 int		ft_variables(char **mtx, t_mini *shell, t_parse *prs);
+int		ft_regular_vbl(char **mtx, t_mini *shell, t_parse *prs);
 /* prs.c */
 void	ft_parse_token(t_token **tk, t_mini *shell);
-void	ft_new_str(char *str, t_parse *prs);
 void	ft_parser(char **mtx, t_mini *shell);
 int		ft_parser_red(char **mtx, t_parse *prs);
 /* spl_red.c */

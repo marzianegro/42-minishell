@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 14:57:46 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/16 23:32:24 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/17 15:40:27 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,24 @@
 
 static int	ft_handle_redirects(char *line, t_split *spl)
 {
-	if ((line[spl->i] == 60 || line[spl->i] == 62) && ft_whether_quotes(spl))
+	if ((line[spl->i] == '<' || line[spl->i] == '>') && ft_whether_quotes(spl))
 	{
-		if (spl->i != 0 && line[spl->i - 1] != 32)
+		if (spl->i != '\0' && line[spl->i - 1] != ' ')
 			spl->words++;
 		spl->i++;
-		if ((line[spl->i - 1] == 60 && line[spl->i] == 60)
-			|| (line[spl->i - 1] == 62 && line[spl->i] == 62))
+		if ((line[spl->i - 1] == '<' && line[spl->i] == '<')
+			|| (line[spl->i - 1] == '>' && line[spl->i] == '>'))
 			spl->i++;
-		while (line[spl->i] == 32)
+		while (line[spl->i] == ' ')
 			spl->i++;
 		while (!ft_is_stop(line[spl->i], 1))
 		{
-			if (line[spl->i] == 34 && (spl->sq == 0 || spl->sq % 2 == 0))
+			if (line[spl->i] == '"' && (spl->sq == 0 || spl->sq % 2 == 0))
 				spl->dq++;
-			if (line[spl->i] == 39 && (spl->dq == 0 || spl->dq % 2 == 0))
+			if (line[spl->i] == '\'' && (spl->dq == 0 || spl->dq % 2 == 0))
 				spl->sq++;
 			spl->i++;
-			while ((line[spl->i] == 124 || line[spl->i] == 32)
+			while ((line[spl->i] == '|' || line[spl->i] == ' ')
 				&& !ft_whether_quotes(spl))
 				spl->i++;
 		}
@@ -43,13 +43,13 @@ static int	ft_handle_redirects(char *line, t_split *spl)
 
 static void	ft_handle_quotes(char *line, t_split *spl)
 {
-	if (line[spl->i] == 34 && (spl->sq == 0 || spl->sq % 2 == 0))
+	if (line[spl->i] == '"' && (spl->sq == 0 || spl->sq % 2 == 0))
 		spl->dq++;
-	if (line[spl->i] == 39 && (spl->dq == 0 || spl->dq % 2 == 0))
+	if (line[spl->i] == '\'' && (spl->dq == 0 || spl->dq % 2 == 0))
 		spl->sq++;
 	if (!ft_handle_redirects(line, spl))
 		spl->i++;
-	while (line[spl->i] == 124 && !ft_whether_quotes(spl))
+	while (line[spl->i] == '|' && !ft_whether_quotes(spl))
 		spl->i++;
 	if (ft_is_stop(line[spl->i], 2)
 		&& ft_whether_quotes(spl))
@@ -66,7 +66,7 @@ static int	ft_toby_count(char *line, int i)
 	spl.words = 0;
 	while (line && !ft_is_stop(line[spl.i], 3))
 	{
-		if (line[spl.i] == 32)
+		if (line[spl.i] == ' ')
 			spl.i++;
 		else
 			ft_handle_quotes(line, &spl);
@@ -84,10 +84,10 @@ static int	ft_toby_length(char *line)
 	len = 0;
 	while (line && !ft_is_stop(line[len], 1))
 	{
-		if (line[len] == 34)
-			ft_check_quotes(line, 34, &len);
-		else if (line[len] == 39)
-			ft_check_quotes(line, 39, &len);
+		if (line[len] == '"')
+			ft_check_quotes(line, '"', &len);
+		else if (line[len] == '\'')
+			ft_check_quotes(line, '\'', &len);
 		else
 			len++;
 	}
@@ -105,9 +105,9 @@ char	**ft_split_toby(char *line, int i)
 	j = 0;
 	while (line && !ft_is_stop(line[i], 3))
 	{
-		if (line[i] == 32)
+		if (line[i] == ' ')
 			i++;
-		else if (line[i] == 60 || line[i] == 62)
+		else if (line[i] == '<' || line[i] == '>')
 			ft_check_redirects(line, &i);
 		else
 		{

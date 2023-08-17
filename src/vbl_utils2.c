@@ -1,56 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   vbl_utils2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/07 14:11:24 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/17 15:40:47 by mnegro           ###   ########.fr       */
+/*   Created: 2023/08/17 14:33:46 by mnegro            #+#    #+#             */
+/*   Updated: 2023/08/17 15:40:56 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_freematrix(char **matrix)
+int	ft_regular_vbl(char **mtx, t_mini *shell, t_parse *prs)
 {
-	int	i;
-
-	i = 0;
-	if (matrix)
+	prs->x++;
+	if (ft_is_key(mtx[prs->y][prs->x], 0))
 	{
-		while (matrix[i])
-		{
-			free(matrix[i]);
-			i++;
-		}
-		free(matrix);
+		prs->x++;
+		return (1);
 	}
-}
-
-void	ft_print_mtx(char **mtx)
-{
-	int	y;
-
-	y = 0;
-	while (mtx[y] != NULL)
+	else
 	{
-		printf("%s\n", mtx[y]);
-		y++;
+		ft_fix_key(&(mtx[prs->y][prs->x]), prs);
+		ft_get_key(shell->envp, prs);
+		ft_expand(shell->envp, prs);
+		prs->x += ft_strlen(prs->key);
 	}
-}
-
-void	ft_putstr_fd_ms(char *s, int fd)
-{
-	int	i;
-
-	i = 0;
-	if (fd < 0 || s[i] == '\n')
-		return ;
-	while (s[i] != '\0')
-	{
-		write(fd, &s[i], 1);
-		i++;
-	}
-	write(fd, "\n", 1);
 }

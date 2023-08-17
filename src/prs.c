@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 16:10:03 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/17 12:19:01 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/17 15:39:45 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,6 @@
 void	ft_parse_token(t_token **tkn, t_mini *shell)
 {
 	ft_iter(*tkn, shell, ft_parser);
-}
-
-void	ft_new_str(char *str, t_parse *prs)
-{
-	char	*tmp;
-
-	tmp = ft_substr(str, prs->x - prs->len, prs->len);
-	prs->new = ft_strjoin(prs->new, tmp);
-	prs->len = 0;
-	free(tmp);
 }
 
 void	ft_parser(char **mtx, t_mini *shell)

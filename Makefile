@@ -6,7 +6,7 @@
 #    By: mnegro <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/06 14:56:20 by mnegro            #+#    #+#              #
-#    Updated: 2023/08/16 23:32:53 by mnegro           ###   ########.fr        #
+#    Updated: 2023/08/17 14:52:58 by mnegro           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,8 @@ RLFLAGS = -lreadline
 RM = rm -f
 
 #### TARGETS ####
-FL_SRCS = init_shell.c init_utils.c main.c prs_utils.c prs.c \
-			spl_red.c spl_toby.c spl_utils.c tkn_utils.c utils.c \
+FL_SRCS = init_shell.c init_utils.c main.c prs_utils.c prs_utils2.c \
+			prs.c spl_red.c spl_toby.c spl_utils.c tkn_utils.c utils.c \
 			vbl_utils.c
 DIRSRCS = src/
 SRCS = ${addprefix ${DIRSRCS},${FL_SRCS}}

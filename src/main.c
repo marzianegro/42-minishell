@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:51:17 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/17 10:49:06 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/17 15:39:30 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_parse_line(t_mini *shell)
 	i = 0;
 	while (shell->line && shell->line[i])
 	{
-		if (shell->line[i] == 124)
+		if (shell->line[i] == '|')
 			i++;
 		toby = ft_split_toby(shell->line, i);
 		red = ft_split_red(shell->line, &i);
