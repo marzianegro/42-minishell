@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 16:10:03 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/17 15:39:45 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/17 16:03:29 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,3 @@ int	ft_parser_red(char **mtx, t_parse *prs)
 	}
 	return (0);
 }
-
-
-
-// 1. Rimuovere TUTTI gli spazi -> FATTO
-// 2. Gestire >> e << -> FATTO
-// 3. NON espandere le variabili se c'è << -> FATTO
-// 4. Se la key è ?, ritornare l'exit code (non mi ricordo bene come)

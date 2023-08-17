@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:51:10 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/17 14:52:56 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/17 16:01:57 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ void	ft_check_quotes(char *str, char c, int *len);
 void	ft_check_redirects(char *str, int *i);
 int		ft_is_stop(char c, int n);
 int		ft_whether_quotes(t_split *spl);
+void	ft_regular_red(char *line, t_split *spl);
 /* tkn_utils.c */
 void	ft_addfront_new(t_token **tkn, char **toby, char **red);
 void	ft_clear(t_token **tkn);

@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 16:14:13 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/17 15:40:35 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/17 16:01:56 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,16 @@ void	ft_check_redirects(char *str, int *i)
 				*i += 1;
 		}
 	}
+}
+
+void	ft_regular_red(char *line, t_split *spl)
+{
+	if (line[spl->i] == '"' && (spl->sq == 0 || spl->sq % 2 == 0))
+		spl->dq++;
+	if (line[spl->i] == '\'' && (spl->dq == 0 || spl->dq % 2 == 0))
+		spl->sq++;
+	spl->i++;
+	while ((line[spl->i] == '|' || line[spl->i] == ' ')
+		&& !ft_whether_quotes(spl))
+		spl->i++;
 }
