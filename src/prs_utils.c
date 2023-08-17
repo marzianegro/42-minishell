@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 15:37:32 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/17 09:53:31 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/17 10:18:24 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,11 @@ int	ft_double_quotes(char **mtx, t_mini *shell, t_parse *prs)
 
 int	ft_variables(char **mtx, t_mini *shell, t_parse *prs)
 {
+	if (prs->len != 0)
+	{
+		ft_new_str(mtx[prs->y], &prs->new, prs->x - prs->len, prs->len);
+		prs->len = 0;
+	}
 	prs->x++;
 	if (ft_is_key(mtx[prs->y][prs->x], 0))
 	{
