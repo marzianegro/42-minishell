@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:51:10 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/18 12:05:03 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/18 14:24:39 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	ft_pwd(t_mini *shell, char **mtx);
 /* built_ins2.c */
 void	ft_clear(t_mini *shell, char **mtx);
 void	ft_export(t_mini *shell, char **mtx);
-void	ft_env(t_mini *shell, char **mtx);
+void	ft_env(t_mini *shell);
 void	ft_exit(t_mini *shell, char **mtx);
 void	ft_vbl(t_mini *shell, char **mtx);
 /* exec_multi.c */

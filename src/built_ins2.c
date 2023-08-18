@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 18:37:24 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/18 11:22:54 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/18 14:31:31 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,18 @@ void	ft_export(t_mini *shell, char **mtx)
 	(void)mtx;
 }
 
-void	ft_env(t_mini *shell, char **mtx)
+void	ft_env(t_mini *shell)
 {
-	(void)shell;
-	(void)mtx;
+	t_env	*tmp;
+
+	tmp = shell->envp;
+	while (tmp->next)
+	{
+		if (tmp->value)
+			printf("%s\n", tmp->vbl);
+		tmp = tmp->next;
+	}
+	free(tmp);
 }
 
 void	ft_exit(t_mini *shell, char **mtx)
