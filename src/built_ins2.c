@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 18:37:24 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/18 14:31:31 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/18 14:39:34 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,12 @@ void	ft_env(t_mini *shell)
 	t_env	*tmp;
 
 	tmp = shell->envp;
-	while (tmp->next)
+	while (tmp && tmp->next)
 	{
 		if (tmp->value)
 			printf("%s\n", tmp->vbl);
 		tmp = tmp->next;
 	}
-	free(tmp);
 }
 
 void	ft_exit(t_mini *shell, char **mtx)

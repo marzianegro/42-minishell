@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 17:56:23 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/18 14:31:10 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/18 14:36:21 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_exec_toby(t_mini *shell, char **mtx)
 	else if (!ft_strncmp("unset", cmd, 6))
 		ft_unset(shell, mtx);
 	else if (!ft_strncmp("pwd", cmd, 4))
-		ft_pwd(shell, mtx);
+		ft_pwd(shell);
 	else if (!ft_strncmp("clear", cmd, 6)) // optional
 		ft_clear(shell, mtx);
 	else if (!ft_strncmp("export", cmd, 7))

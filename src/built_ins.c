@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 18:02:01 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/18 14:24:10 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/18 14:39:33 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	ft_echo(char **mtx)
 		printf("\n");
 	while (mtx[y])
 	{
-		if (!ft_strncmp(mtx[1], "-n", 3) && flag == 0)
+		if (!ft_strncmp("-n", mtx[1], 3) && flag == 0)
 		{
 			flag = 1;
 			y++;
@@ -72,8 +72,15 @@ void	ft_unset(t_mini *shell, char **mtx)
 	(void)mtx;
 }
 
-void	ft_pwd(t_mini *shell, char **mtx)
+void	ft_pwd(t_mini *shell)
 {
-	(void)shell;
-	(void)mtx;
+	t_env	*tmp;
+
+	tmp = shell->envp;
+	while (tmp && tmp->next)
+	{
+		if (!ft_strncmp("PWD", tmp->key, 4))
+			printf("%s\n", tmp->value);
+		tmp = tmp->next;
+	}
 }
