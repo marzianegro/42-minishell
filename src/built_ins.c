@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 18:02:01 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/18 11:51:20 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/18 12:07:08 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,32 @@ void	ft_history(t_mini *shell)
 	}
 }
 
-void	ft_echo(t_mini *shell, char **mtx)
+void	ft_echo(char **mtx)
 {
-	(void)shell;
-	(void)mtx;
+	int	y;
+
+	y = 1;
+	while (mtx[y])
+	{
+		if (!ft_strncmp(mtx[1], "-n", 2))
+		{
+			if (y == 1)
+				y++;
+			if (!mtx[y + 1])
+				printf("%s", mtx[y]);
+			else
+				printf("%s ", mtx[y]);
+			y++;
+		}
+		else
+		{
+			if (!mtx[y + 1])
+				printf("%s\n", mtx[y]);
+			else
+				printf("%s ", mtx[y]);
+			y++;
+		}
+	}
 }
 
 void	ft_unset(t_mini *shell, char **mtx)
