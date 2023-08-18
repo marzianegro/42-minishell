@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:51:10 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/17 16:01:57 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/17 19:04:35 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct s_env
 {
 	char			*key;
 	char			*value;
+	char			*vbl;
 	struct s_env	*next;
 }			t_env;
 
@@ -61,13 +62,31 @@ typedef struct s_mini
 	char		*line;
 	const char	*history;
 	int			history_fd;
-	t_token		*token;
+	t_token		*tkn;
 	t_env		*envp;
 	int			exitcode;
 }			t_mini;
 
 
 /* PROTOTYPES */
+/* built_ins.c */
+void	ft_cd();
+void	ft_history();
+void	ft_echo();
+void	ft_unset();
+void	ft_pwd();
+/* built_ins2.c */
+void	ft_clear();
+void	ft_export();
+void	ft_env();
+void	ft_exit();
+void	ft_vbl();
+/* exec_red.c */
+/* exec_toby.c */
+void	ft_exec_toby(t_mini *shell);
+/* exec.c */
+int		ft_exec_line(t_mini *shell);
+void	ft_binary();
 /* init_shell.c */
 void	ft_init_history(t_mini *shell);
 t_env	*ft_init_env(char **mtx);
@@ -102,7 +121,7 @@ int		ft_whether_quotes(t_split *spl);
 void	ft_regular_red(char *line, t_split *spl);
 /* tkn_utils.c */
 void	ft_addfront_new(t_token **tkn, char **toby, char **red);
-void	ft_clear(t_token **tkn);
+void	ft_clear_token(t_token **tkn);
 void	ft_iter(t_token *tkn, t_mini *shell, void (*f)(char **, t_mini *));
 void	ft_print_token(t_token *tkn);
 /* utils.c */

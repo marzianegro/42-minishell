@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 14:50:58 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/17 14:54:56 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/18 10:48:05 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_env	*ft_init_env(char **mtx)
 
 void	ft_init_shell(t_mini *shell, char **envp)
 {
-	shell->token = NULL;
+	shell->tkn = NULL;
 	ft_init_history(shell);
 	shell->envp = ft_init_env(envp);
 	shell->exitcode = 0;

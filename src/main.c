@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:51:17 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/17 15:39:30 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/17 18:39:38 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ void	ft_parse_line(t_mini *shell)
 			i++;
 		toby = ft_split_toby(shell->line, i);
 		red = ft_split_red(shell->line, &i);
-		ft_addfront_new(&(shell->token), toby, red);
+		ft_addfront_new(&(shell->tkn), toby, red);
 	}
-	ft_print_token(shell->token);
-	ft_parse_token(&shell->token, shell);
-	ft_print_token(shell->token);
+	ft_print_token(shell->tkn);
+	ft_parse_token(&shell->tkn, shell);
+	ft_print_token(shell->tkn);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -51,8 +51,9 @@ int	main(int argc, char **argv, char **envp)
 			ft_putstr_fd_ms(shell.line, shell.history_fd);
 			add_history(shell.line);
 			ft_parse_line(&shell);
+			ft_exec_line(&shell);
 		}
-		ft_clear(&shell.token);
+		ft_clear_token(&shell.tkn);
 		free(shell.line);
 	}
 	return (0);

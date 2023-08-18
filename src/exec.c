@@ -1,56 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/07 14:11:24 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/17 18:32:20 by mnegro           ###   ########.fr       */
+/*   Created: 2023/08/17 16:09:33 by mnegro            #+#    #+#             */
+/*   Updated: 2023/08/18 10:48:01 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_freematrix(char **matrix)
+int	ft_exec_line(t_mini *shell)
 {
-	int	i;
-
-	i = 0;
-	if (matrix)
+	se sei al primo nodo e next = NULL
 	{
-		while (matrix[i])
-		{
-			free(matrix[i]);
-			i++;
-		}
-		free(matrix);
+		ft_exec_red(shell);
+		ft_exec_toby(shell);
 	}
+	else
+		ft_mini_pipe();
+			chiamare ricorsivamente ft_exec_red(), usando pipe(), con tkn->next come argomento
 }
 
-void	ft_print_mtx(char **mtx)
-{
-	int	y;
-
-	y = 0;
-	while (mtx[y] != NULL)
-	{
-		printf("%s\n", mtx[y]);
-		y++;
-	}
-}
-
-void	ft_putstr_fd_ms(char *s, int fd)
-{
-	int	i;
-
-	i = 0;
-	if (fd < 0 || s[i] == '\n')
-		return ;
-	while (s[i] != '\0')
-	{
-		write(fd, &s[i], 1);
-		i++;
-	}
-	write(fd, "\n", 1);
-}
+void	ft_binary()
+{}

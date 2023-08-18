@@ -6,11 +6,20 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:51:55 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/17 15:39:19 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/18 10:49:02 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+char	*ft_key_value(char *key, char *value)
+{
+	char	*vbl;
+
+	vbl = ft_strjoin(key, "=");
+	vbl = ft_strjoin(vbl, value);
+	return (vbl);
+}
 
 void	ft_addback_new(t_env **envp, char *key, char *value)
 {
@@ -22,6 +31,7 @@ void	ft_addback_new(t_env **envp, char *key, char *value)
 		return ;
 	newnode->key = key;
 	newnode->value = value;
+	newnode->vbl = ft_key_value(key, value);
 	newnode->next = NULL;
 	if (!*envp)
 	{

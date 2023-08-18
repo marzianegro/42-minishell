@@ -29,7 +29,7 @@ void	ft_addfront_new(t_token **tkn, char **toby, char **red)
 	}
 }
 
-void	ft_clear(t_token **tkn)
+void	ft_clear_token(t_token **tkn)
 {
 	t_token	*ptr;
 
