@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 14:38:47 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/17 18:31:04 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/18 11:20:12 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	ft_regular_vbl(char **mtx, t_mini *shell, t_parse *prs)
 	prs->x++;
 	if (mtx[prs->y][prs->x] == '?')
 	{
-		itoa_exit = ft_itoa(shell->exitcode);
+		itoa_exit = ft_itoa(shell->exit_code);
 		prs->new = ft_strjoin(prs->new, itoa_exit);
 		free(itoa_exit);
 		prs->x++;

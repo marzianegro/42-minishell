@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:51:10 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/18 11:14:07 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/18 11:20:13 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,13 +81,15 @@ void	ft_export(t_mini *shell, char **mtx);
 void	ft_env(t_mini *shell, char **mtx);
 void	ft_exit(t_mini *shell, char **mtx);
 void	ft_vbl(t_mini *shell, char **mtx);
+/* exec_multi.c */
+void	ft_mini_pipe(t_mini *shell, t_token *tkn);
 /* exec_red.c */
 void	ft_exec_red(t_mini *shell, char **mtx);
 /* exec_toby.c */
 void	ft_exec_toby(t_mini *shell, char **mtx);
 void	ft_binary(t_mini *shell);
 /* exec.c */
-int		ft_exec_line(t_mini *shell);
+void	ft_exec_line(t_mini *shell);
 /* init_shell.c */
 void	ft_init_history(t_mini *shell);
 t_env	*ft_init_env(char **mtx);

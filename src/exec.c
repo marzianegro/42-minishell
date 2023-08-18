@@ -6,13 +6,13 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 16:09:33 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/18 11:12:00 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/18 11:19:35 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	ft_exec_line(t_mini *shell)
+void	ft_exec_line(t_mini *shell)
 {
 	if (shell->tkn && !shell->tkn->next)
 	{

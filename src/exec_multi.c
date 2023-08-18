@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:08:37 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/18 11:14:25 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/18 11:20:17 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,4 +16,6 @@
 e con tkn->next come parametro */
 void	ft_mini_pipe(t_mini *shell, t_token *tkn)
 {
+	(void)shell;
+	(void)tkn;
 }
