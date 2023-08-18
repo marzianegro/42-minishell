@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 18:02:01 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/18 11:22:58 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/18 11:51:20 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,21 @@ void	ft_cd(t_mini *shell, char **mtx)
 	(void)mtx;
 }
 
-void	ft_history(t_mini *shell, char **mtx)
+void	ft_history(t_mini *shell)
 {
-	(void)shell;
-	(void)mtx;
+	char	*line;
+	int		n;
+
+	shell->history_fd = open(shell->history, O_RDONLY);
+	line = get_next_line(shell->history_fd);
+	n = 0;
+	while (line)
+	{
+		printf("%d  %s", n, line);
+		n++;
+		free(line);
+		line = get_next_line(shell->history_fd);
+	}
 }
 
 void	ft_echo(t_mini *shell, char **mtx)

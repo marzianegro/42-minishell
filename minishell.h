@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:51:10 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/18 11:20:13 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/18 11:30:18 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ typedef struct s_mini
 /* PROTOTYPES */
 /* built_ins.c */
 void	ft_cd(t_mini *shell, char **mtx);
-void	ft_history(t_mini *shell, char **mtx);
+void	ft_history(t_mini *shell);
 void	ft_echo(t_mini *shell, char **mtx);
 void	ft_unset(t_mini *shell, char **mtx);
 void	ft_pwd(t_mini *shell, char **mtx);

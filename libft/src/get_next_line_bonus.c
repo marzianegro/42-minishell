@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 16:50:32 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/03 16:01:37 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/18 11:50:24 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ char	*ft_strjoin_gnl(char *s1, char *s2)
 
 	i = 0;
 	j = 0;
-	str = (char *)ft_calloc_gnl(ft_strlen(s1) + (ft_strlen(s2) + 1), sizeof(char));
+	str = (char *)ft_calloc_gnl(ft_strlen(s1) + (ft_strlen(s2) + 1),
+			sizeof(char));
 	if (!str)
 		return (NULL);
 	while (s1 && s1[i])
