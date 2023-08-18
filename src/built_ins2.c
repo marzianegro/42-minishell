@@ -6,12 +6,15 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 18:37:24 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/18 11:17:41 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/18 11:22:54 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+/* I cast a void mi servivano solo per vedere se tutto compilava correttamente,
+	si possono tranquillamente togliere una volta che si inizia a lavorare
+	effettivamente sulle funzioni */
 void	ft_clear(t_mini *shell, char **mtx)
 {
 	(void)shell;

@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 17:56:23 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/18 11:20:14 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/18 11:22:45 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@ void	ft_exec_toby(t_mini *shell, char **mtx)
 		ft_binary(shell);
 }
 
+/* Il cast a void mi serviva solo per vedere se tutto compilava correttamente,
+	si può tranquillamente togliere una volta che si inizia a lavorare
+	effettivamente sulla funzione */
 void	ft_binary(t_mini *shell)
 {
 	(void)shell;
