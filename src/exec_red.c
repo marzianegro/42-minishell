@@ -6,12 +6,12 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 17:55:47 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/17 17:56:12 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/18 11:11:04 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_exec_red()
+void	ft_exec_red(t_mini *shell, char **mtx)
 {
 }

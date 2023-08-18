@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:51:10 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/17 19:04:35 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/18 11:14:07 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,29 +64,30 @@ typedef struct s_mini
 	int			history_fd;
 	t_token		*tkn;
 	t_env		*envp;
-	int			exitcode;
+	int			exit_code;
 }			t_mini;
 
 
 /* PROTOTYPES */
 /* built_ins.c */
-void	ft_cd();
-void	ft_history();
-void	ft_echo();
-void	ft_unset();
-void	ft_pwd();
+void	ft_cd(t_mini *shell, char **mtx);
+void	ft_history(t_mini *shell, char **mtx);
+void	ft_echo(t_mini *shell, char **mtx);
+void	ft_unset(t_mini *shell, char **mtx);
+void	ft_pwd(t_mini *shell, char **mtx);
 /* built_ins2.c */
-void	ft_clear();
-void	ft_export();
-void	ft_env();
-void	ft_exit();
-void	ft_vbl();
+void	ft_clear(t_mini *shell, char **mtx);
+void	ft_export(t_mini *shell, char **mtx);
+void	ft_env(t_mini *shell, char **mtx);
+void	ft_exit(t_mini *shell, char **mtx);
+void	ft_vbl(t_mini *shell, char **mtx);
 /* exec_red.c */
+void	ft_exec_red(t_mini *shell, char **mtx);
 /* exec_toby.c */
-void	ft_exec_toby(t_mini *shell);
+void	ft_exec_toby(t_mini *shell, char **mtx);
+void	ft_binary(t_mini *shell);
 /* exec.c */
 int		ft_exec_line(t_mini *shell);
-void	ft_binary();
 /* init_shell.c */
 void	ft_init_history(t_mini *shell);
 t_env	*ft_init_env(char **mtx);

@@ -6,13 +6,13 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 17:56:23 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/17 18:40:19 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/18 11:11:46 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_exec_toby(t_mini *shell)
+void	ft_exec_toby(t_mini *shell, char **mtx)
 {
 	char	*cmd;
 
@@ -38,5 +38,8 @@ void	ft_exec_toby(t_mini *shell)
 	else if (!ft_strncmp("KEY=value", cmd, 10))
 		ft_vbl();
 	else
-		ft_binary();
+		ft_binary(shell);
 }
+
+void	ft_binary(t_mini *shell)
+{}

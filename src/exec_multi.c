@@ -1,33 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_ins2.c                                       :+:      :+:    :+:   */
+/*   exec_multi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/17 18:37:24 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/18 11:13:21 by mnegro           ###   ########.fr       */
+/*   Created: 2023/08/18 11:08:37 by mnegro            #+#    #+#             */
+/*   Updated: 2023/08/18 11:14:25 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_clear(t_mini *shell, char **mtx)
-{
-}
-
-void	ft_export(t_mini *shell, char **mtx)
-{
-}
-
-void	ft_env(t_mini *shell, char **mtx)
-{
-}
-
-void	ft_exit(t_mini *shell, char **mtx)
-{
-}
-
-void	ft_vbl(t_mini *shell, char **mtx)
+/* In questa funzione ft_exec_red() viene chiamata ricorsivamente usando pipe()
+e con tkn->next come parametro */
+void	ft_mini_pipe(t_mini *shell, t_token *tkn)
 {
 }
