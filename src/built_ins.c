@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 18:02:01 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/18 12:07:08 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/18 13:02:23 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,28 +41,28 @@ void	ft_history(t_mini *shell)
 void	ft_echo(char **mtx)
 {
 	int	y;
+	int	flag;
 
 	y = 1;
+	flag = 0;
+	if (!mtx[y])
+		printf("\n");
 	while (mtx[y])
 	{
-		if (!ft_strncmp(mtx[1], "-n", 2))
+		if (!ft_strncmp(mtx[1], "-n", 3) && flag == 0)
 		{
-			if (y == 1)
-				y++;
-			if (!mtx[y + 1])
-				printf("%s", mtx[y]);
-			else
-				printf("%s ", mtx[y]);
+			flag = 1;
 			y++;
 		}
-		else
+		if (mtx[y] && mtx[y + 1])
+			printf("%s ", mtx[y]);
+		else if (mtx[y] && !mtx[y + 1])
 		{
-			if (!mtx[y + 1])
-				printf("%s\n", mtx[y]);
-			else
-				printf("%s ", mtx[y]);
-			y++;
+			printf("%s", mtx[y]);
+			if (flag != 1)
+				printf("\n");
 		}
+		y++;
 	}
 }
 
