@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:51:10 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/18 14:36:20 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/19 13:50:35 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,13 @@ typedef struct s_env
 	struct s_env	*next;
 }			t_env;
 
+typedef struct s_variable
+{
+	char				*key;
+	char				*value;
+	struct s_variable	*next;
+}			t_variable;	
+
 typedef struct s_mini
 {
 	char		*line;
@@ -64,6 +71,7 @@ typedef struct s_mini
 	int			history_fd;
 	t_token		*tkn;
 	t_env		*envp;
+	t_variable	*vbl;
 	int			exit_code;
 }			t_mini;
 
@@ -77,10 +85,15 @@ void	ft_unset(t_mini *shell, char **mtx);
 void	ft_pwd(t_mini *shell);
 /* built_ins2.c */
 void	ft_clear(t_mini *shell, char **mtx);
-void	ft_export(t_mini *shell, char **mtx);
+void	ft_export(t_mini *shell, char *cmd);
 void	ft_env(t_mini *shell);
 void	ft_exit(t_mini *shell, char **mtx);
-void	ft_vbl(t_mini *shell, char **mtx);
+void	ft_vbl(t_mini *shell, char *cmd);
+/* builtins_utils.c */
+int		ft_check_vbl(char *str);
+char	*ft_key(char *str);
+char	*ft_value(char *str);
+void	ft_set_exp(t_mini *shell);
 /* exec_multi.c */
 void	ft_mini_pipe(t_mini *shell, t_token *tkn);
 /* exec_red.c */

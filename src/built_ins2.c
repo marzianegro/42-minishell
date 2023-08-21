@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 18:37:24 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/18 14:39:34 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/19 13:49:02 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,24 @@ void	ft_clear(t_mini *shell, char **mtx)
 	(void)mtx;
 }
 
-void	ft_export(t_mini *shell, char **mtx)
+/* ft_addback_new() forse è da fare qui: se (!shell->tkn->toby[1]) lo faccio
+	e stampo, altrimenti lo faccio senza stampare */
+void	ft_export(t_mini *shell, char *cmd)
 {
-	(void)shell;
-	(void)mtx;
+	t_env	*tmp;
+
+	(void)cmd;
+	tmp = shell->envp;
+	ft_set_exp(shell);
+	if (!shell->tkn->toby[1])
+	{
+		while (tmp && tmp->next)
+		{
+			printf("declare -x %s=\"%s\"\n", tmp->key, tmp->value);
+			tmp = tmp->next;
+		}
+	}
+	//else
 }
 
 void	ft_env(t_mini *shell)
@@ -46,8 +60,24 @@ void	ft_exit(t_mini *shell, char **mtx)
 	(void)mtx;
 }
 
-void	ft_vbl(t_mini *shell, char **mtx)
+void	ft_vbl(t_mini *shell, char *cmd)
 {
-	(void)shell;
-	(void)mtx;
+	char		*key;
+	char		*value;
+	t_variable	*tmp;
+
+	key = ft_key(cmd);
+	value = ft_value(cmd);
+	tmp = shell->vbl;
+	while (tmp && tmp->next)
+	{
+		if (!ft_strncmp(key, tmp->key, ft_strlen(key) + 1))
+		{
+			ft_free(&tmp->value);
+			tmp->value = value;
+			return ;
+		}
+		tmp = tmp->next;
+	}
+	ft_addback_new(shell->vbl, key, value);
 }
