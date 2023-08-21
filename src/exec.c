@@ -12,6 +12,12 @@
 
 #include "../minishell.h"
 
+int	ft_get_token(t_mini *shell, t_token *tkn)
+{
+	char	*path;
+	
+}
+
 int	ft_whether_pipe(t_mini *shell)
 {
 	signal(SIGINT, ft_signal_exec());

@@ -36,30 +36,6 @@ int	ft_exec_toby(t_mini *shell, char **mtx)
 	else if (ft_strchr(cmd, '=') && ft_check_vbl(cmd))
 		ft_vbl(shell, cmd);
 	else
-		ft_binary(shell, shell->tkn);
+		ft_exec_binary(shell, shell->tkn);
 	return (shell->exit_status);
-}
-
-/* execve: esegue un programma con riferimento a un pathname (il programma
-	runnnato dal processo viene rimpiazzato da un nuovo programma i cui elemneti
-	vengono inizializzati)
-
-	WEXITSTATUS: macro che ritorna l'exitcode specificato dal processo figlio, 
-	ovvero lo stato di uscita del figlio;
-	#include <sys/wait.h>
-	int WEXITSTATUS(int status) : status = wait o waitpid function */
-void	ft_binary(t_mini *shell, t_token *tkn)
-{
-	pid_t	pid;
-	int		status;
-
-	ft_command(shell, tkn);
-	pid = fork();
-	if (!pid)
-	{
-		execve(tkn->toby[0], tkn->toby, shell->envp);
-		//da inserire il controllo su WEXITSTATUS
-	}
-	waitpid(pid, status, 0);
-	shell->exit_status = WEXITSTATUS(status);
 }

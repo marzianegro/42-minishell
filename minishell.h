@@ -106,7 +106,7 @@ int		ft_mini_pipe(t_mini *shell, t_token *tkn);
 int		ft_exec_red(t_mini *shell, char **mtx);
 /* exec_toby.c */
 int		ft_exec_toby(t_mini *shell, char **mtx);
-void	ft_binary(t_mini *shell, t_token *tkn);
+void	ft_exec_binary(t_mini *shell, t_token *tkn);
 /* exec.c */
 int		ft_whether_pipe(t_mini *shell);
 /* init_shell.c */
