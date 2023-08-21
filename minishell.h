@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:51:10 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/19 13:50:35 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/21 15:59:31 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include "libft/libft.h"
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <signal.h>
+# include <sys/wait.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -72,7 +74,10 @@ typedef struct s_mini
 	t_token		*tkn;
 	t_env		*envp;
 	t_variable	*vbl;
+	int			std_in;
+	int			std_out;
 	int			exit_code;
+	int			exit_status;
 }			t_mini;
 
 
@@ -95,14 +100,15 @@ char	*ft_key(char *str);
 char	*ft_value(char *str);
 void	ft_set_exp(t_mini *shell);
 /* exec_multi.c */
-void	ft_mini_pipe(t_mini *shell, t_token *tkn);
+int		ft_exec_pipe(t_mini *shell, t_token *tkn);
+int		ft_mini_pipe(t_mini *shell, t_token *tkn);
 /* exec_red.c */
-void	ft_exec_red(t_mini *shell, char **mtx);
+int		ft_exec_red(t_mini *shell, char **mtx);
 /* exec_toby.c */
-void	ft_exec_toby(t_mini *shell, char **mtx);
-void	ft_binary(t_mini *shell);
+int		ft_exec_toby(t_mini *shell, char **mtx);
+void	ft_binary(t_mini *shell, t_token *tkn);
 /* exec.c */
-void	ft_exec_line(t_mini *shell);
+int		ft_whether_pipe(t_mini *shell);
 /* init_shell.c */
 void	ft_init_history(t_mini *shell);
 t_env	*ft_init_env(char **mtx);

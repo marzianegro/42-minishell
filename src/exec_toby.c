@@ -6,13 +6,13 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 17:56:23 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/19 13:33:56 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/21 15:57:27 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_exec_toby(t_mini *shell, char **mtx)
+int	ft_exec_toby(t_mini *shell, char **mtx)
 {
 	char	*cmd;
 
@@ -27,8 +27,6 @@ void	ft_exec_toby(t_mini *shell, char **mtx)
 		ft_unset(shell, mtx);
 	else if (!ft_strncmp("pwd", cmd, 4))
 		ft_pwd(shell);
-	else if (!ft_strncmp("clear", cmd, 6))
-		ft_clear(shell, mtx);
 	else if (!ft_strncmp("export", cmd, 7))
 		ft_export(shell, cmd);
 	else if (!ft_strncmp("env", cmd, 4))
@@ -36,15 +34,32 @@ void	ft_exec_toby(t_mini *shell, char **mtx)
 	else if (!ft_strncmp("exit", cmd, 5))
 		ft_exit(shell, mtx);
 	else if (ft_strchr(cmd, '=') && ft_check_vbl(cmd))
-		ft_vbl(cmd);
+		ft_vbl(shell, cmd);
 	else
-		ft_binary(shell);
+		ft_binary(shell, shell->tkn);
+	return (shell->exit_status);
 }
 
-/* Il cast a void mi serviva solo per vedere se tutto compilava correttamente,
-	si può tranquillamente togliere una volta che si inizia a lavorare
-	effettivamente sulla funzione */
-void	ft_binary(t_mini *shell)
+/* execve: esegue un programma con riferimento a un pathname (il programma
+	runnnato dal processo viene rimpiazzato da un nuovo programma i cui elemneti
+	vengono inizializzati)
+
+	WEXITSTATUS: macro che ritorna l'exitcode specificato dal processo figlio, 
+	ovvero lo stato di uscita del figlio;
+	#include <sys/wait.h>
+	int WEXITSTATUS(int status) : status = wait o waitpid function */
+void	ft_binary(t_mini *shell, t_token *tkn)
 {
-	(void)shell;
+	pid_t	pid;
+	int		status;
+
+	ft_command(shell, tkn);
+	pid = fork();
+	if (!pid)
+	{
+		execve(tkn->toby[0], tkn->toby, shell->envp);
+		//da inserire il controllo su WEXITSTATUS
+	}
+	waitpid(pid, status, 0);
+	shell->exit_status = WEXITSTATUS(status);
 }

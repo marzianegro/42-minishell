@@ -25,6 +25,7 @@
 		"type_traits": "c",
 		"cstddef": "c",
 		"init_utils": "c",
-		"ostream": "c"
+		"ostream": "c",
+		"signal.h": "c"
 	}
 }

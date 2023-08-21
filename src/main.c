@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:51:17 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/18 12:11:07 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/21 15:37:06 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	main(int argc, char **argv, char **envp)
 			ft_putstr_fd_ms(shell.line, shell.history_fd);
 			add_history(shell.line);
 			ft_parse_line(&shell);
-			ft_exec_line(&shell);
+			shell.exit_code = ft_whether_pipe(&shell); // aggiungere controllo?
 		}
 		ft_clear_token(&shell.tkn);
 		free(shell.line);
