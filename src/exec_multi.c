@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:08:37 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/21 15:59:11 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/21 17:40:47 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ int	ft_exec_pipe(t_mini *shell, t_token *tkn)
 	pid = fork();
 	if (!pid)
 	{
-		shell->exit_status = ft_exec_red(shell, shell->tkn->red);
+		shell->exit_status = ft_exec_red(shell, tkn->red);
 		if (!shell->exit_status)
 		{
 			ft_exec_toby(shell, shell->tkn->toby);
-			shell->exit_status = ft_exec_line(shell);
+			shell->exit_status = ft_whether_pipe(shell);
 		}
 		free(shell); // forse è necessaria un afunzione di free della shell
 		exit(shell->exit_status);

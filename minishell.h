@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:51:10 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/21 15:59:31 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/21 17:42:21 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	ft_unset(t_mini *shell, char **mtx);
 void	ft_pwd(t_mini *shell);
 /* built_ins2.c */
 void	ft_clear(t_mini *shell, char **mtx);
-void	ft_export(t_mini *shell, char *cmd);
+void	ft_export(t_mini *shell);
 void	ft_env(t_mini *shell);
 void	ft_exit(t_mini *shell, char **mtx);
 void	ft_vbl(t_mini *shell, char *cmd);
@@ -99,6 +99,7 @@ int		ft_check_vbl(char *str);
 char	*ft_key(char *str);
 char	*ft_value(char *str);
 void	ft_set_exp(t_mini *shell);
+void	ft_backnew_vbl(t_variable **vbl, char *key, char *value);
 /* exec_multi.c */
 int		ft_exec_pipe(t_mini *shell, t_token *tkn);
 int		ft_mini_pipe(t_mini *shell, t_token *tkn);
@@ -114,7 +115,7 @@ void	ft_init_history(t_mini *shell);
 t_env	*ft_init_env(char **mtx);
 void	ft_init_shell(t_mini *shell, char **envp);
 /* init_utils.c */
-void	ft_addback_new(t_env **envp, char *key, char *value);
+void	ft_backnew_env(t_env **envp, char *key, char *value);
 void	ft_set_env(char **mtx, int y, t_env **envp);
 /* main.c */
 void	ft_parse_line(t_mini *shell);

@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 17:55:47 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/21 15:53:47 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/21 16:53:51 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,4 +19,5 @@ int	ft_exec_red(t_mini *shell, char **mtx)
 {
 	(void)shell;
 	(void)mtx;
+	return (0);
 }
