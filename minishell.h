@@ -76,6 +76,8 @@ typedef struct s_mini
 	t_variable	*vbl;
 	int			std_in;
 	int			std_out;
+	int			fd_input;
+	int			fd_output;
 	int			exit_code;
 	int			exit_status;
 }			t_mini;
@@ -103,12 +105,17 @@ void	ft_set_exp(t_mini *shell);
 int		ft_exec_pipe(t_mini *shell, t_token *tkn);
 int		ft_mini_pipe(t_mini *shell, t_token *tkn);
 /* exec_red.c */
-int		ft_exec_red(t_mini *shell, char **mtx);
+int		ft_exec_red(t_mini *shell, t_token *tkn);
+int		ft_exec_red2(t_mini *shell, t_token *tkn, int count);
+int		ft_file_input(t_mini *shell, char *file);
+int		ft_file_output(t_mini *shell, char *file, int a_or_c);
 /* exec_toby.c */
 int		ft_exec_toby(t_mini *shell, char **mtx);
 void	ft_exec_binary(t_mini *shell, t_token *tkn);
 /* exec.c */
 int		ft_whether_pipe(t_mini *shell);
+/* here_doc.c */
+int ft_heredoc(t_mini *shell, char *del);
 /* init_shell.c */
 void	ft_init_history(t_mini *shell);
 t_env	*ft_init_env(char **mtx);
