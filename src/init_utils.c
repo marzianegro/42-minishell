@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:51:55 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/19 13:50:05 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/21 18:32:58 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_key_value(char *key, char *value)
 	return (vbl);
 }
 
-void	ft_addback_new(t_env **envp, char *key, char *value)
+void	ft_backnew_env(t_env **envp, char *key, char *value)
 {
 	t_env	*newnode;
 	t_env	*tmp;
@@ -68,5 +68,5 @@ void	ft_set_env(char **mtx, int y, t_env **envp)
 			len++;
 		value = ft_substr(mtx[y], x - len, len);
 	}
-	ft_addback_new(envp, key, value);
+	ft_backnew_env(envp, key, value);
 }

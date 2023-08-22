@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 18:37:24 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/19 13:49:02 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/21 17:59:01 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,11 @@ void	ft_clear(t_mini *shell, char **mtx)
 	(void)mtx;
 }
 
-/* ft_addback_new() forse è da fare qui: se (!shell->tkn->toby[1]) lo faccio
-	e stampo, altrimenti lo faccio senza stampare */
-void	ft_export(t_mini *shell, char *cmd)
+void	ft_export(t_mini *shell)
 {
 	t_env	*tmp;
 
-	(void)cmd;
 	tmp = shell->envp;
-	ft_set_exp(shell);
 	if (!shell->tkn->toby[1])
 	{
 		while (tmp && tmp->next)
@@ -38,7 +34,8 @@ void	ft_export(t_mini *shell, char *cmd)
 			tmp = tmp->next;
 		}
 	}
-	//else
+	else
+		ft_set_exp(shell);
 }
 
 void	ft_env(t_mini *shell)
@@ -79,5 +76,5 @@ void	ft_vbl(t_mini *shell, char *cmd)
 		}
 		tmp = tmp->next;
 	}
-	ft_addback_new(shell->vbl, key, value);
+	ft_backnew_vbl(&shell->vbl, key, value);
 }

@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 15:39:01 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/19 13:47:15 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/21 17:58:57 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,15 +77,36 @@ void	ft_set_exp(t_mini *shell)
 	tmp = shell->vbl;
 	while (tmp && tmp->next)
 	{
-		if (ft_strncmp(shell->tkn->toby[i], tmp->key,
-				ft_strlen(shell->tkn->toby[i] + 1)))
+		if (ft_strncmp(tmp->key, shell->tkn->toby[i],
+				ft_strlen(tmp->key + 1)))
 			tmp = tmp->next;
 		else
 			flag = 1;
 	}
 	if (flag == 0)
-		ft_addback_new(shell->envp, tmp->key, tmp->value);
+		ft_backnew_env(&shell->envp, tmp->key, tmp->value);
 	else
-		ft_addback_new(shell->envp, shell->tkn->toby[i], NULL);
+		ft_backnew_env(&shell->envp, shell->tkn->toby[i], tmp->value);
 }
 
+void	ft_backnew_vbl(t_variable **vbl, char *key, char *value)
+{
+	t_variable	*newnode;
+	t_variable	*tmp;
+
+	newnode = (t_variable *)ft_calloc(1, sizeof(t_variable));
+	if (!newnode)
+		return ;
+	newnode->key = key;
+	newnode->value = value;
+	newnode->next = NULL;
+	if (!*vbl)
+	{
+		*vbl = newnode;
+		return ;
+	}
+	tmp = *vbl;
+	while (tmp->next)
+		tmp = tmp->next;
+	tmp->next = newnode;
+}

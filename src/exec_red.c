@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 17:55:47 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/21 15:53:47 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/21 18:37:52 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	ft_exec_red(t_mini *shell, t_token *tkn)
 {
 	int	count;
 	int	exitcode;
-	
+
 	count = 0;
 	while (tkn->red && tkn->red[count++])
 	{
