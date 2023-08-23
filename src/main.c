@@ -51,7 +51,7 @@ int	main(int argc, char **argv, char **envp)
 			ft_putstr_fd_ms(shell.line, shell.history_fd);
 			add_history(shell.line);
 			ft_parse_line(&shell);
-			shell.exit_code = ft_whether_pipe(&shell); // aggiungere controllo?
+			ft_whether_pipe(&shell); // salvare in variabile exit_code e fare controllo?
 		}
 		ft_clear_token(&shell.tkn);
 		free(shell.line);

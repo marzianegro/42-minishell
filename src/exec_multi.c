@@ -13,19 +13,23 @@
 #include "../minishell.h"
 
 //	DA RICONTROLARE TUTTO - NON TESTATO
+
+
 int	ft_exec_pipe(t_mini *shell, t_token *tkn)
 {
 	pid_t	pid;
+	int		pipe;
 	int		status;
 
 	pid = fork();
 	if (!pid)
 	{
-		shell->exit_status = ft_exec_red(shell, tkn->red);
-		if (!shell->exit_status)
+		pipe = ft_exec_red(shell, tkn);
+		if (!pipe)
 		{
-			ft_exec_toby(shell, shell->tkn->toby);
-			shell->exit_status = ft_whether_pipe(shell);
+			ft_dup(shell, oldfd, newfd);
+			pipe = ft_exec_toby(shell, tkn->toby);
+			
 		}
 		free(shell); // forse è necessaria un afunzione di free della shell
 		exit(shell->exit_status);
@@ -35,23 +39,26 @@ int	ft_exec_pipe(t_mini *shell, t_token *tkn)
 	return (shell->exit_status);
 }
 
-/* In questa funzione ft_exec_red() viene chiamata ricorsivamente usando pipe()
-e con tkn->next come parametro */
+/*
+pipe():  allows you to create a unidirectional communication channel,
+commonly referred to as a pipe, through which data can be passed from 
+one process (the "writing" process) to another process (the "reading" process)
+*/
 int	ft_mini_pipe(t_mini *shell, t_token *tkn)
 {
-	int	p[2];
+	int	pipefd[2];
 
 	if (tkn->next)
 	{
-		pipe(p);
+		pipe(pipefd);
 		ft_mini_pipe(shell, tkn->next);
 	}
 	else
 	{
-		p[0] = -1;
-		p[1] = shell->std_in;
+		pipefd[0] = -1;
+		pipefd[1] = shell->std_in;
 	}
-	if (p[1] < 0)
-		close(p[1]);
+	if (pipefd[1] < 0)
+		close(pipefd[1]);
 	return (ft_exec_pipe(shell, tkn));
 }

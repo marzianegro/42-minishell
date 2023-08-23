@@ -103,7 +103,7 @@ char	*ft_value(char *str);
 void	ft_set_exp(t_mini *shell);
 void	ft_backnew_vbl(t_variable **vbl, char *key, char *value);
 /* exec_multi.c */
-int		ft_exec_pipe(t_mini *shell, t_token *tkn);
+int		ft_pipe(t_mini *shell, t_token *tkn);
 int		ft_mini_pipe(t_mini *shell, t_token *tkn);
 /* exec_red.c */
 int		ft_exec_red(t_mini *shell, t_token *tkn);
@@ -139,6 +139,8 @@ int		ft_regular_vbl(char **mtx, t_mini *shell, t_parse *prs);
 void	ft_parse_token(t_token **tk, t_mini *shell);
 void	ft_parser(char **mtx, t_mini *shell);
 int		ft_parser_red(char **mtx, t_parse *prs);
+/* redirects.c */
+void	dup(t_mini *shell, int oldfd, int newfd);
 /* spl_red.c */
 char	**ft_split_red(char *line, int *i);
 /* spl_toby.c */

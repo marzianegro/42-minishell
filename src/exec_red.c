@@ -66,6 +66,7 @@ int	ft_exec_red2(t_mini *shell, t_token *tkn, int count)
 		if (ft_file_output(shell, &tkn->red[count][1], 2) == 0)
 		{
 			ft_putstr_fd("shell: syntax error near unexpected token `newline'", 2);
+			shell->exit_status = 2;
 			return (2);
 		}
 	}
@@ -92,8 +93,11 @@ int	ft_exec_red(t_mini *shell, t_token *tkn)
 		if (tkn->red[count][0] == '<' && tkn->red[count][1] == '<')
 		{
 			if(!tkn->red[count][2])
-				ft_error_with_red(shell);
-				return (1);
+			{
+				ft_putstr_fd("shell: syntax error near unexpected token `newline'", 2);
+				shell->exit_status = 2;
+				return (2);
+			}
 			//if (!heredoc)
 				return (128 + exitcode); //forse 130 per comando terminato da user
 		}
