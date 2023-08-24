@@ -9,13 +9,32 @@
 /*   Updated: 2023/08/21 17:40:47 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "../minishell.h"
+/*
+-1 means there was an error
+-2 means that no file has been opened otherwise it means,
+ another file is about to be opened and we need to close the previous one
+*/
 
-//	DA RICONTROLARE TUTTO - NON TESTATO
+int	ft_close_fd(int oldfd, int newfd)
+{
+	int err_fd;
+	int	returne;
 
+	err_fd = 0;
+	returne = 0;
+	if (oldfd != -1 && oldfd != -2)
+		close(oldfd);
+	if (newfd != -1 && newfd != -2)
+		close(newfd);
+	if (err_fd != -1 && err_fd != -2)
+		colse(err_fd);
+	if (returne != -2)
+		return (0);
+	return (returne);
+}
 
-int	ft_exec_pipe(t_mini *shell, t_token *tkn)
+int	ft_pipe_exec(t_mini *shell, t_token *tkn, int oldfd, int newfd)
 {
 	pid_t	pid;
 	int		pipe;
@@ -29,9 +48,9 @@ int	ft_exec_pipe(t_mini *shell, t_token *tkn)
 		{
 			ft_dup(shell, oldfd, newfd);
 			pipe = ft_exec_toby(shell, tkn->toby);
-			
+			ft_close_fd(oldfd, newfd);
 		}
-		free(shell); // forse è necessaria un afunzione di free della shell
+		free(shell); // forse è necessaria una funzione di free della shell
 		exit(shell->exit_status);
 	}
 	wait(&status);
@@ -47,7 +66,9 @@ one process (the "writing" process) to another process (the "reading" process)
 int	ft_mini_pipe(t_mini *shell, t_token *tkn)
 {
 	int	pipefd[2];
-
+	int fd_out;
+	
+	(void) fd_out;
 	if (tkn->next)
 	{
 		pipe(pipefd);
@@ -60,5 +81,5 @@ int	ft_mini_pipe(t_mini *shell, t_token *tkn)
 	}
 	if (pipefd[1] < 0)
 		close(pipefd[1]);
-	return (ft_exec_pipe(shell, tkn));
+	return (ft_pipe_exec(shell, tkn, pipefd[0], fd_out));
 }

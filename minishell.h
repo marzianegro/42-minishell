@@ -103,8 +103,9 @@ char	*ft_value(char *str);
 void	ft_set_exp(t_mini *shell);
 void	ft_backnew_vbl(t_variable **vbl, char *key, char *value);
 /* exec_multi.c */
-int		ft_pipe(t_mini *shell, t_token *tkn);
+int		ft_pipe_exec(t_mini *shell, t_token *tkn, int oldfd, int newfd);
 int		ft_mini_pipe(t_mini *shell, t_token *tkn);
+int		ft_close_fd(int oldfd, int newfd);
 /* exec_red.c */
 int		ft_exec_red(t_mini *shell, t_token *tkn);
 int		ft_exec_red2(t_mini *shell, t_token *tkn, int count);

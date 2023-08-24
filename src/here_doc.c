@@ -13,10 +13,10 @@ UNLINK()
 is used to remove a file from the filesystem,It deletes the directory entry for a file
 */
 
-int ft_heredoc(t_mini *shell, char *del)
+int ft_here_doc(t_mini *shell, char *del)
 {
     int pid;
-    signal(SIGINT, ft_handle_singal_heredoc);
+    signal(SIGINT, ft_handle_signal_heredoc);
 
 
 }
