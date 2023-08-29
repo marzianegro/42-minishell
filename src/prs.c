@@ -6,16 +6,11 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 16:10:03 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/17 18:31:14 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/22 17:11:24 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-void	ft_parse_token(t_token **tkn, t_mini *shell)
-{
-	ft_iter(*tkn, shell, ft_parser);
-}
 
 void	ft_parser(char **mtx, t_mini *shell)
 {
@@ -66,4 +61,9 @@ int	ft_parser_red(char **mtx, t_parse *prs)
 		}
 	}
 	return (0);
+}
+
+void	ft_parse_token(t_token **tkn, t_mini *shell)
+{
+	ft_iter(*tkn, shell, ft_parser);
 }

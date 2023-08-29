@@ -5,108 +5,100 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/18 15:39:01 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/21 17:58:57 by mnegro           ###   ########.fr       */
+/*   Created: 2023/08/23 15:18:49 by mnegro            #+#    #+#             */
+/*   Updated: 2023/08/24 18:30:45 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	ft_check_vbl(char *str)
+void	ft_clear_env(t_env **envp)
 {
-	int	i;
+	t_env	*ptr;
 
-	i = 0;
-	if (str && (ft_is_key(str[0], 0) || str[0] == '='))
-		return (1);
-	while (str && str[i] != '=')
-	{
-		if (ft_is_key(str[i], 1))
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-char	*ft_key(char *str)
-{
-	int		i;
-	int		len;
-	char	*key;
-
-	i = 0;
-	len = 0;
-	while (str && str[i] != '=')
-	{
-		len++;
-		i++;
-	}
-	key = ft_substr(str, 0, len);
-	return (key);
-}
-
-char	*ft_value(char *str)
-{
-	int		i;
-	int		len;
-	char	*value;
-
-	i = 0;
-	len = 0;
-	while (str && str[i] != '=')
-		i++;
-	if (str && str[i] == '=')
-		i++;
-	while (str && str[i])
-	{
-		len++;
-		i++;
-	}
-	value = ft_substr(str, i - len, len);
-	return (value);
-}
-
-void	ft_set_exp(t_mini *shell)
-{
-	int			i;
-	int			flag;
-	t_variable	*tmp;
-
-	i = 1;
-	flag = 0;
-	tmp = shell->vbl;
-	while (tmp && tmp->next)
-	{
-		if (ft_strncmp(tmp->key, shell->tkn->toby[i],
-				ft_strlen(tmp->key + 1)))
-			tmp = tmp->next;
-		else
-			flag = 1;
-	}
-	if (flag == 0)
-		ft_backnew_env(&shell->envp, tmp->key, tmp->value);
-	else
-		ft_backnew_env(&shell->envp, shell->tkn->toby[i], tmp->value);
-}
-
-void	ft_backnew_vbl(t_variable **vbl, char *key, char *value)
-{
-	t_variable	*newnode;
-	t_variable	*tmp;
-
-	newnode = (t_variable *)ft_calloc(1, sizeof(t_variable));
-	if (!newnode)
+	if (!*envp)
 		return ;
-	newnode->key = key;
-	newnode->value = value;
-	newnode->next = NULL;
+	while (*envp)
+	{
+		ptr = (*envp)->next;
+		ft_free(&(*envp)->key);
+		ft_free(&(*envp)->value);
+		ft_free(&(*envp)->vbl);
+		free(*envp);
+		*envp = ptr;
+	}
+	*envp = NULL;
+}
+
+void	ft_clear_vbl(t_variable **vbl)
+{
+	t_variable	*ptr;
+
 	if (!*vbl)
+		return ;
+	while (*vbl)
 	{
-		*vbl = newnode;
+		ptr = (*vbl)->next;
+		ft_free(&(*vbl)->key);
+		ft_free(&(*vbl)->value);
+		free(*vbl);
+		*vbl = ptr;
+	}
+	*vbl = NULL;
+}
+
+void	ft_del_vbl(t_env *envp, t_env *del)
+{
+	if (!envp)
+		return ;
+	while (envp && envp->next != del)
+		envp = envp->next;
+	if (envp)
+	{
+		envp->next = del->next;
+		ft_free(&del->key);
+		ft_free(&del->value);
+		ft_free(&del->vbl);
+		free(del);
+	}
+}
+
+void	ft_exp_vbl(t_mini *shell, int i)
+{
+	char		*vbl;
+	t_variable	*tmp;
+
+	vbl = ft_strdup(shell->tkn->toby[i]);
+	tmp = shell->vbl;
+	while (tmp)
+	{
+		if (!ft_strncmp(vbl, tmp->key, ft_strlen(vbl) + 1))
+		{
+			ft_backnew_env(&shell->envp, tmp->key, tmp->value);
+			return ;
+		}
+		else
+			tmp = tmp->next;
+	}
+	if (ft_strfind(vbl, '=') && !ft_check_vbl(vbl))
+		ft_vbl(shell, vbl, 1);
+	else if (!ft_check_vbl(vbl))
+		ft_backnew_env(&shell->envp, vbl, NULL);
+}
+
+void	ft_update_pwd(t_mini *shell)
+{
+	t_env	*tmp;
+	char	*newpwd;
+
+	tmp = shell->envp;
+	newpwd = getcwd(NULL, 0);
+	while (tmp)
+	{
+		while (ft_strncmp("PWD", tmp->key, 4))
+			tmp = tmp->next;
+		ft_free(&tmp->value);
+		tmp->value = newpwd;
 		return ;
 	}
-	tmp = *vbl;
-	while (tmp->next)
-		tmp = tmp->next;
-	tmp->next = newnode;
 }

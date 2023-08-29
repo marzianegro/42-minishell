@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-void	ft_addfront_new(t_token **tkn, char **toby, char **red)
+void	ft_frontnew_tkn(t_token **tkn, char **toby, char **red)
 {
 	t_token	*newnode;
 
@@ -29,7 +29,7 @@ void	ft_addfront_new(t_token **tkn, char **toby, char **red)
 	}
 }
 
-void	ft_clear_token(t_token **tkn)
+void	ft_clear_tkn(t_token **tkn)
 {
 	t_token	*ptr;
 
@@ -56,7 +56,7 @@ void	ft_iter(t_token *tkn, t_mini *shell, void (*f)(char **, t_mini *))
 	}
 }
 
-void	ft_print_token(t_token *tkn)
+void	ft_print_tkn(t_token *tkn)
 {
 	printf(" ----- NEW NODE -----\n");
 	printf(" --- toby ---\n");

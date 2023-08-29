@@ -1,34 +1,88 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   binary.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/28 15:47:55 by mnegro            #+#    #+#             */
+/*   Updated: 2023/08/29 18:51:38 by mnegro           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
+int	ft_find_bin(t_mini *shell, char *cmd)
+{
+	t_env	*tmp;
+	char	*path;
+	char	**dir;
+	char	*tmp_bin;
+	int		y;
 
-/* execve: esegue un programma con riferimento a un pathname (il programma
-	runnnato dal processo viene rimpiazzato da un nuovo programma i cui elemneti
-	vengono inizializzati)
+	y = -1;
+	tmp = shell->envp;
+	while (tmp && ft_strncmp("PATH", tmp->key, 5))
+		tmp = tmp->next;
+	path = ft_strdup(tmp->value);
+	if (!path)
+		return (1);
+	dir = ft_split(path, ':');
+	while (dir[++y])
+	{
+		tmp_bin = ft_strjoin(dir[y], "/");
+		shell->bin = ft_strjoin(tmp_bin, cmd);
+		free(tmp_bin);
+		if (!access(shell->bin, F_OK))
+			return (ft_freematrix(dir), 0);
+		free(shell->bin);
+	}
+	ft_freematrix(dir);
+	return (1);
+}
 
-	WEXITSTATUS: macro che ritorna l'exitcode specificato dal processo figlio, 
-	ovvero lo stato di uscita del figlio;
-	#include <sys/wait.h>
-	int WEXITSTATUS(int status) : status = wait o waitpid function */
-void	ft_exec_binary(t_mini *shell, t_token *tkn)
+void	ft_convert_envp(t_mini *shell)
+{
+	int		y;
+	int		size;
+	t_env	*tmp;
+
+	y = 0;
+	size = 0;
+	tmp = shell->envp;
+	while (tmp)
+	{
+		size++;
+		tmp = tmp->next;
+	}
+	shell->envp_mtx = (char **)ft_calloc(size, sizeof(char *));
+	tmp = shell->envp;
+	while (shell->envp_mtx[y] && tmp)
+	{
+		shell->envp_mtx[y] = ft_strdup(tmp->vbl);
+		y++;
+		tmp = tmp->next;
+	}
+}
+
+void	ft_exec_binary(t_mini *shell, char *cmd)
 {
 	pid_t	pid;
 	int		status;
 
-	ft_get_token(shell, tkn);
+	if (ft_find_bin(shell, cmd))
+		shell->bin = ft_strdup(cmd);
+	ft_convert_envp(shell);
 	pid = fork();
 	if (!pid)
 	{
-		execve(tkn->toby[0], tkn->toby, shell->envp);
-		if (waitpid(pid, &status, 0) == -1) // equivale a (WEXITSTATUS(EXIT_FAILURE) != 1)
+		execve(shell->bin, shell->tkn->toby, shell->envp_mtx);
+		if (waitpid(pid, &status, 0) == -1)
 		{
-			ft_putstr_fd(&tkn->toby[0][ft_path(tkn->toby[0])], 2); //fare ft_path
+			ft_putstr_fd(cmd, 2);
 			ft_putstr_fd(": command not found\n", 2);
-			//free(shell); //forse serve funzione di free shell
-			//exit(1);
+			ft_exit(shell, -1);
 		}
-		perror(&tkn->toby[0][ft_endpath(tkn->toby[0])]);
-		//free(shell); //forse serve funzione di free shell
-		//exit(1); //valutare se exit(EXIT_FAILURE)
 	}
 	waitpid(pid, &status, 0);
 	shell->exit_status = WEXITSTATUS(status);

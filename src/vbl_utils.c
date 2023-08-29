@@ -6,36 +6,19 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 15:43:57 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/21 17:37:41 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/24 15:01:49 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	ft_is_key(char c, int n)
+void	ft_expand(t_env *envp, t_parse *prs)
 {
-	if (n == 0)
-	{
-		if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')
-			|| c == '_')
-			return (0);
-	}
-	else if (n == 1)
-	{
-		if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')
-			|| (c >= '0' && c <= '9') || c == '_')
-			return (0);
-	}
-	return (1);
-}
+	t_env	*tmp;
 
-void	ft_new_key(char *str, char **new, int start, int len)
-{
-	char	*tmp;
-
-	tmp = ft_substr(str, start, len);
-	*new = ft_strjoin(*new, tmp);
-	free(tmp);
+	tmp = ft_get_key(envp, prs);
+	if (tmp)
+		prs->new = ft_strjoin(prs->new, tmp->value);
 }
 
 void	ft_fix_key(char *str, t_parse *prs)
@@ -69,11 +52,28 @@ t_env	*ft_get_key(t_env *envp, t_parse *prs)
 	return (NULL);
 }
 
-void	ft_expand(t_env *envp, t_parse *prs)
+int	ft_is_key(char c, int n)
 {
-	t_env	*tmp;
+	if (n == 0)
+	{
+		if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')
+			|| c == '_')
+			return (0);
+	}
+	else if (n == 1)
+	{
+		if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')
+			|| (c >= '0' && c <= '9') || c == '_')
+			return (0);
+	}
+	return (1);
+}
 
-	tmp = ft_get_key(envp, prs);
-	if (tmp)
-		prs->new = ft_strjoin(prs->new, tmp->value);
+void	ft_new_key(char *str, char **new, int start, int len)
+{
+	char	*tmp;
+
+	tmp = ft_substr(str, start, len);
+	*new = ft_strjoin(*new, tmp);
+	free(tmp);
 }

@@ -6,19 +6,26 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 18:02:01 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/21 16:47:26 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/24 18:29:34 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-/* I cast a void mi servivano solo per vedere se tutto compilava correttamente,
-	si possono tranquillamente togliere una volta che si inizia a lavorare
-	effettivamente sulle funzioni */
-void	ft_cd(t_mini *shell, char **mtx)
+int	ft_cd(t_mini *shell)
 {
-	(void)shell;
-	(void)mtx;
+	char	*path;
+
+	path = shell->tkn->toby[1];
+	if (!path)
+		chdir(getenv("HOME"));
+	else
+	{
+		if (chdir(path) == -1)
+			return (1);
+	}
+	ft_update_pwd(shell);
+	return (0);
 }
 
 void	ft_history(t_mini *shell)
@@ -52,11 +59,12 @@ void	ft_echo(char **mtx)
 		if (!ft_strncmp("-n", mtx[1], 3) && flag == 0)
 		{
 			flag = 1;
-			y++;
+			if (!mtx[++y])
+				break ;
 		}
-		if (mtx[y] && mtx[y + 1])
+		if (mtx[y + 1])
 			printf("%s ", mtx[y]);
-		else if (mtx[y] && !mtx[y + 1])
+		else if (!mtx[y + 1])
 		{
 			printf("%s", mtx[y]);
 			if (flag != 1)
@@ -66,10 +74,24 @@ void	ft_echo(char **mtx)
 	}
 }
 
-void	ft_unset(t_mini *shell, char **mtx)
+void	ft_unset(t_mini *shell)
 {
-	(void)shell;
-	(void)mtx;
+	int		i;
+	t_env	*tmp;
+
+	i = 1;
+	while (shell->tkn->toby[i])
+	{
+		tmp = shell->envp;
+		while (tmp)
+		{
+			if (!ft_strncmp(shell->tkn->toby[i], tmp->key,
+					ft_strlen(shell->tkn->toby[i]) + 1))
+				ft_del_vbl(shell->envp, tmp);
+			tmp = tmp->next;
+		}
+		i++;
+	}
 }
 
 void	ft_pwd(t_mini *shell)

@@ -6,39 +6,46 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 16:09:33 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/21 18:32:56 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/29 18:51:19 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	ft_get_token(t_mini *shell, t_token *tkn)
+void	ft_save_exit(t_mini *shell, int code)
 {
-	char	*path;
-	
+	static t_mini	*tmp;
+
+	if (shell)
+		tmp = shell;
+	else
+		tmp->exit_code = code;
 }
 
-void ft_check_signal(t_mini *shell, int signal, int exit_code)
+void	ft_check_signal(void)
 {
-	t_mini	*sign;
+	signal(SIGINT, ft_signal_handler);
+	// signal(CTRL-D ft_signal_handler);
+	signal(SIGQUIT, SIG_IGN);
+}
 
+void	ft_signal_handler(int signal)
+{
 	if (signal == SIGINT)
 	{
-		if (shell)
-			sign = shell;
-		else
-			sign->exit_code = exit_code;
-			shell = NULL;
-			write (1, "\n", 1);	
+		// ft_save_exit(NULL, 130);
+		write(1, "\n", 1);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
 	}
 }
 
 int	ft_whether_pipe(t_mini *shell)
 {
-	signal(SIGINT, ft_check_signal); //controlla segnale interrotto Ctrl+C
 	if (shell->tkn && !shell->tkn->next)
 	{
-		shell->exit_status = ft_exec_red(shell, shell->tkn->red);
+		shell->exit_status = ft_exec_red(shell, shell->tkn);
 		if (shell->exit_status)
 			return (shell->exit_status);
 		ft_dup(shell, -1, -1);
@@ -47,4 +54,5 @@ int	ft_whether_pipe(t_mini *shell)
 	}
 	else
 		return (ft_mini_pipe(shell, shell->tkn));
+	return (0);
 }

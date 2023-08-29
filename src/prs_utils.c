@@ -6,26 +6,27 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 15:37:32 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/17 18:30:47 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/22 17:11:22 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_new_str(char *str, t_parse *prs)
+int	ft_double_quotes(char **mtx, t_mini *shell, t_parse *prs)
 {
-	char	*tmp;
-
-	tmp = ft_substr(str, prs->x - prs->len, prs->len);
-	prs->new = ft_strjoin(prs->new, tmp);
-	prs->len = 0;
-	free(tmp);
-}
-
-int	ft_stoppers(char c)
-{
-	if (c == '"' || c == '$' || c == '\'' || c == '\0')
-		return (1);
+	prs->x++;
+	while (mtx[prs->y][prs->x] != '"')
+	{
+		if (mtx[prs->y][prs->x] == '$')
+			ft_variables(mtx, shell, prs);
+		else
+		{
+			prs->x++;
+			prs->len++;
+		}
+	}
+	ft_new_str(mtx[prs->y], prs);
+	prs->x++;
 	return (0);
 }
 
@@ -46,6 +47,16 @@ int	ft_handle_stoppers(char **mtx, t_mini *shell, t_parse *prs)
 	return (0);
 }
 
+void	ft_new_str(char *str, t_parse *prs)
+{
+	char	*tmp;
+
+	tmp = ft_substr(str, prs->x - prs->len, prs->len);
+	prs->new = ft_strjoin(prs->new, tmp);
+	prs->len = 0;
+	free(tmp);
+}
+
 void	ft_single_quotes(char **mtx, t_parse *prs)
 {
 	prs->x++;
@@ -58,20 +69,9 @@ void	ft_single_quotes(char **mtx, t_parse *prs)
 	prs->x++;
 }
 
-int	ft_double_quotes(char **mtx, t_mini *shell, t_parse *prs)
+int	ft_stoppers(char c)
 {
-	prs->x++;
-	while (mtx[prs->y][prs->x] != '"')
-	{
-		if (mtx[prs->y][prs->x] == '$')
-			ft_variables(mtx, shell, prs);
-		else
-		{
-			prs->x++;
-			prs->len++;
-		}
-	}
-	ft_new_str(mtx[prs->y], prs);
-	prs->x++;
+	if (c == '"' || c == '$' || c == '\'' || c == '\0')
+		return (1);
 	return (0);
 }
