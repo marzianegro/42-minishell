@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:51:17 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/29 18:51:20 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/30 17:03:42 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,21 @@ int	main(int argc, char **argv, char **envp)
 	ft_init_shell(&shell, envp);
 	while (1)
 	{
-		ft_check_signal();
+		signal(SIGINT, ft_signal_handler);
+		signal(SIGQUIT, SIG_IGN);
 		shell.line = readline("minishell-$ ");
+		if (!shell.line)
+		{
+			ft_putstr_fd("exit\n", 1);
+			break ;
+		}
 		if (shell.line[0] != '\0')
 		{
 			ft_putstr_fd_ms(shell.line, shell.history_fd);
 			add_history(shell.line);
 			ft_parse_line(&shell);
-			shell.exit_code = ft_whether_pipe(&shell); // aggiungere controllo? why not
+			//forse controllo? beppe dice: why not?
+			shell.exit_code = ft_whether_pipe(&shell);
 		}
 		ft_clear_tkn(&shell.tkn);
 		free(shell.line);

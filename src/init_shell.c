@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 14:50:58 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/29 16:01:38 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/30 16:45:52 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,6 @@ void	ft_init_shell(t_mini *shell, char **envp)
 	shell->envp_mtx = NULL;
 	shell->vbl = NULL;
 	shell->bin = NULL;
+	ft_save_exit(shell, 0);
 	shell->exit_status = 0;
 }

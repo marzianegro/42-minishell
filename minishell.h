@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:51:10 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/21 17:42:21 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/30 16:25:59 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,102 +69,111 @@ typedef struct s_variable
 typedef struct s_mini
 {
 	char		*line;
-	const char	*history;
+	char		*history;
 	int			history_fd;
 	t_token		*tkn;
 	t_env		*envp;
+	char		**envp_mtx;
 	t_variable	*vbl;
+	char		*bin;
 	int			std_in;
 	int			std_out;
-	int			fd_input;
-	int			fd_output;
 	int			exit_code;
 	int			exit_status;
 }			t_mini;
 
-
 /* PROTOTYPES */
+/* binary.c */
+int		ft_find_bin(t_mini *shell, char *cmd);
+void	ft_convert_envp(t_mini *shell);
+void	ft_exec_binary(t_mini *shell, char *cmd);
 /* built_ins.c */
-void	ft_cd(t_mini *shell, char **mtx);
+int		ft_cd(t_mini *shell);
 void	ft_history(t_mini *shell);
 void	ft_echo(char **mtx);
-void	ft_unset(t_mini *shell, char **mtx);
+void	ft_unset(t_mini *shell);
 void	ft_pwd(t_mini *shell);
 /* built_ins2.c */
-void	ft_clear(t_mini *shell, char **mtx);
 void	ft_export(t_mini *shell);
 void	ft_env(t_mini *shell);
-void	ft_exit(t_mini *shell, char **mtx);
-void	ft_vbl(t_mini *shell, char *cmd);
+void	ft_exit(t_mini *shell, int n);
+void	ft_vbl(t_mini *shell, char *cmd, int n);
 /* builtins_utils.c */
-int		ft_check_vbl(char *str);
-char	*ft_key(char *str);
-char	*ft_value(char *str);
-void	ft_set_exp(t_mini *shell);
-void	ft_backnew_vbl(t_variable **vbl, char *key, char *value);
+void	ft_clear_env(t_env **envp);
+void	ft_clear_vbl(t_variable **vbl);
+void	ft_del_vbl(t_env *envp, t_env *del);
+void	ft_exp_vbl(t_mini *shell, int i);
+void	ft_update_pwd(t_mini *shell);
 /* exec_multi.c */
-int		ft_pipe_exec(t_mini *shell, t_token *tkn, int oldfd, int newfd);
+int		ft_close_fd(int fd_old, int fd_new);
+void	ft_dup(t_mini *shell, int fd_old, int fd_new);
+int		ft_exec_pipe(t_mini *shell, t_token *tkn, int fd_old, int fd_new);
 int		ft_mini_pipe(t_mini *shell, t_token *tkn);
-int		ft_close_fd(int oldfd, int newfd);
 /* exec_red.c */
-int		ft_exec_red(t_mini *shell, t_token *tkn);
-int		ft_exec_red2(t_mini *shell, t_token *tkn, int count);
 int		ft_file_input(t_mini *shell, char *file);
 int		ft_file_output(t_mini *shell, char *file, int a_or_c);
+int		ft_exec_red2(t_mini *shell, t_token *tkn, int count);
+int		ft_exec_red(t_mini *shell, t_token *tkn);
 /* exec_toby.c */
 int		ft_exec_toby(t_mini *shell, char **mtx);
-void	ft_exec_binary(t_mini *shell, t_token *tkn);
 /* exec.c */
 int		ft_whether_pipe(t_mini *shell);
-/* here_doc.c */
-int ft_heredoc(t_mini *shell, char *del);
 /* init_shell.c */
 void	ft_init_history(t_mini *shell);
 t_env	*ft_init_env(char **mtx);
 void	ft_init_shell(t_mini *shell, char **envp);
 /* init_utils.c */
+char	*ft_key_value(char *key, char *value);
 void	ft_backnew_env(t_env **envp, char *key, char *value);
 void	ft_set_env(char **mtx, int y, t_env **envp);
 /* main.c */
 void	ft_parse_line(t_mini *shell);
+/* misc_utils.c */
+void	ft_freematrix(char **matrix);
+void	ft_print_mtx(char **mtx);
+void	ft_putstr_fd_ms(char *s, int fd);
+int		ft_strfind(char *str, char c);
 /* prs_utils.c */
-void	ft_new_str(char *str, t_parse *prs);
-int		ft_stoppers(char c);
-int		ft_handle_stoppers(char **mtx, t_mini *shell, t_parse *prs);
-void	ft_single_quotes(char **mtx, t_parse *prs);
 int		ft_double_quotes(char **mtx, t_mini *shell, t_parse *prs);
+int		ft_handle_stoppers(char **mtx, t_mini *shell, t_parse *prs);
+void	ft_new_str(char *str, t_parse *prs);
+void	ft_single_quotes(char **mtx, t_parse *prs);
+int		ft_stoppers(char c);
 /* prs_utils2.c */
+int		ft_vbl_cases(char **mtx, t_mini *shell, t_parse *prs);
 int		ft_variables(char **mtx, t_mini *shell, t_parse *prs);
-int		ft_regular_vbl(char **mtx, t_mini *shell, t_parse *prs);
 /* prs.c */
-void	ft_parse_token(t_token **tk, t_mini *shell);
 void	ft_parser(char **mtx, t_mini *shell);
 int		ft_parser_red(char **mtx, t_parse *prs);
-/* redirects.c */
-void	dup(t_mini *shell, int oldfd, int newfd);
+void	ft_parse_token(t_token **tk, t_mini *shell);
+/* signals.c */
+void	ft_save_exit(t_mini *shell, int code);
+void	ft_signal_handler(int signal);
 /* spl_red.c */
 char	**ft_split_red(char *line, int *i);
 /* spl_toby.c */
 char	**ft_split_toby(char *line, int i);
 /* spl_utils.c */
-void	ft_check_quotes(char *str, char c, int *len);
 void	ft_check_redirects(char *str, int *i);
+void	ft_check_quotes(char *str, char c, int *len);
 int		ft_is_stop(char c, int n);
-int		ft_whether_quotes(t_split *spl);
 void	ft_regular_red(char *line, t_split *spl);
+int		ft_whether_quotes(t_split *spl);
 /* tkn_utils.c */
-void	ft_addfront_new(t_token **tkn, char **toby, char **red);
-void	ft_clear_token(t_token **tkn);
+void	ft_frontnew_tkn(t_token **tkn, char **toby, char **red);
+void	ft_clear_tkn(t_token **tkn);
 void	ft_iter(t_token *tkn, t_mini *shell, void (*f)(char **, t_mini *));
-void	ft_print_token(t_token *tkn);
-/* utils.c */
-void	ft_freematrix(char **matrix);
-void	ft_print_mtx(char **mtx);
-void	ft_putstr_fd_ms(char *s, int fd);
+void	ft_print_tkn(t_token *tkn);
 /* vbl_utils.c */
-int		ft_is_key(char c, int n);
-void	ft_new_key(char *str, char **new, int start, int len);
+void	ft_expand(t_env *envp, t_parse *prs);
 void	ft_fix_key(char *str, t_parse *prs);
 t_env	*ft_get_key(t_env *envp, t_parse *prs);
-void	ft_expand(t_env *envp, t_parse *prs);
+int		ft_is_key(char c, int n);
+void	ft_new_key(char *str, char **new, int start, int len);
+/* vbl_utils2.c */
+void	ft_backnew_vbl(t_variable **vbl, char *key, char *value);
+int		ft_check_vbl(char *str);
+char	*ft_key(char *str);
+int		ft_norm_vbl(char **mtx, t_mini *shell, t_parse *prs);
+char	*ft_value(char *str);
 #endif

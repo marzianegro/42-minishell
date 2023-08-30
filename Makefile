@@ -6,7 +6,7 @@
 #    By: mnegro <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/06 14:56:20 by mnegro            #+#    #+#              #
-#    Updated: 2023/08/21 17:42:14 by mnegro           ###   ########.fr        #
+#    Updated: 2023/08/30 16:27:41 by mnegro           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,11 +26,11 @@ RLFLAGS = -lreadline
 RM = rm -f
 
 #### TARGETS ####
-FL_SRCS = built_ins.c built_ins2.c builtins_utils.c exec_multi.c \
+FL_SRCS = binary.c built_ins.c built_ins2.c builtins_utils.c exec_multi.c \
 			exec_red.c exec_toby.c exec.c init_shell.c init_utils.c \
-			main.c prs_utils.c prs_utils2.c prs.c spl_red.c \
-			spl_toby.c spl_utils.c tkn_utils.c utils.c \
-			vbl_utils.c
+			main.c misc_utils.c prs_utils.c prs_utils2.c prs.c signals.c \
+			spl_red.c spl_toby.c spl_utils.c tkn_utils.c vbl_utils.c \
+			vbl_utils2.c
 DIRSRCS = src/
 SRCS = ${addprefix ${DIRSRCS},${FL_SRCS}}
 

@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:47:55 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/29 18:51:38 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/30 17:11:28 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,14 @@ void	ft_exec_binary(t_mini *shell, char *cmd)
 	if (!pid)
 	{
 		execve(shell->bin, shell->tkn->toby, shell->envp_mtx);
-		if (waitpid(pid, &status, 0) == -1)
+		if (WEXITSTATUS(EXIT_FAILURE) != 1)
 		{
 			ft_putstr_fd(cmd, 2);
 			ft_putstr_fd(": command not found\n", 2);
-			ft_exit(shell, -1);
+			ft_exit(shell, 127);
 		}
+		perror(cmd);
+		ft_exit(shell, EXIT_FAILURE);
 	}
 	waitpid(pid, &status, 0);
 	shell->exit_status = WEXITSTATUS(status);
