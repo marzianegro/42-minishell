@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 17:14:12 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/29 18:27:08 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/30 17:16:26 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ int	ft_exec_red2(t_mini *shell, t_token *tkn, int count)
 int	ft_exec_red(t_mini *shell, t_token *tkn)
 {
 	int	count;
-	int	exit_code;
 
 	count = 0;
 	while (tkn->red && tkn->red[count++])
@@ -97,13 +96,13 @@ int	ft_exec_red(t_mini *shell, t_token *tkn)
 				return (2);
 			}
 			//if (!heredoc)
-				return (128 + exit_code); //forse 130 per comando terminato da user
+				return (128 + shell->exit_status); //forse 130 per comando terminato da user
 		}
 		else
 		{
-			exit_code = ft_exec_red2(shell, tkn, count);
-			if (exit_code)
-				return (exit_code);
+			shell->exit_status = ft_exec_red2(shell, tkn, count);
+			if (shell->exit_status)
+				return (shell->exit_status);
 		}
 	}
 	return (0);

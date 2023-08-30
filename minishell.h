@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:51:10 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/30 16:25:59 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/30 17:14:27 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ typedef struct s_mini
 	char		*bin;
 	int			std_in;
 	int			std_out;
-	int			exit_code;
 	int			exit_status;
 }			t_mini;
 

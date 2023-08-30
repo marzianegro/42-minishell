@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:51:17 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/30 17:03:42 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/08/30 17:13:51 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	main(int argc, char **argv, char **envp)
 			add_history(shell.line);
 			ft_parse_line(&shell);
 			//forse controllo? beppe dice: why not?
-			shell.exit_code = ft_whether_pipe(&shell);
+			shell.exit_status = ft_whether_pipe(&shell);
 		}
 		ft_clear_tkn(&shell.tkn);
 		free(shell.line);
