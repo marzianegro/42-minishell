@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:51:10 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/30 17:14:27 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/09/01 17:07:21 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ typedef struct s_mini
 	char		*bin;
 	int			std_in;
 	int			std_out;
+	int			fd_in;
+	int			fd_out;
 	int			exit_status;
 }			t_mini;
 
@@ -104,15 +106,14 @@ void	ft_del_vbl(t_env *envp, t_env *del);
 void	ft_exp_vbl(t_mini *shell, int i);
 void	ft_update_pwd(t_mini *shell);
 /* exec_multi.c */
-int		ft_close_fd(int fd_old, int fd_new);
-void	ft_dup(t_mini *shell, int fd_old, int fd_new);
-int		ft_exec_pipe(t_mini *shell, t_token *tkn, int fd_old, int fd_new);
+int		ft_fd_close(int fd_old, int fd_new, int nbr);
+void	ft_fd_dup(t_mini *shell, int fd_old, int fd_new);
+void	ft_post_exec(t_mini *shell);
 int		ft_mini_pipe(t_mini *shell, t_token *tkn);
 /* exec_red.c */
-int		ft_file_input(t_mini *shell, char *file);
-int		ft_file_output(t_mini *shell, char *file, int a_or_c);
-int		ft_exec_red2(t_mini *shell, t_token *tkn, int count);
 int		ft_exec_red(t_mini *shell, t_token *tkn);
+int		ft_red_in(t_mini *shell, t_token *tkn, int y);
+int		ft_red_out(t_mini *shell, t_token *tkn, int y);
 /* exec_toby.c */
 int		ft_exec_toby(t_mini *shell, char **mtx);
 /* exec.c */
@@ -145,6 +146,10 @@ int		ft_variables(char **mtx, t_mini *shell, t_parse *prs);
 void	ft_parser(char **mtx, t_mini *shell);
 int		ft_parser_red(char **mtx, t_parse *prs);
 void	ft_parse_token(t_token **tk, t_mini *shell);
+/* red_in.c */
+int		ft_file_input(t_mini *shell, char *file);
+/* red_out.c */
+int		ft_file_output(t_mini *shell, char *file, int a_or_c);
 /* signals.c */
 void	ft_save_exit(t_mini *shell, int code);
 void	ft_signal_handler(int signal);
