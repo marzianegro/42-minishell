@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 17:08:34 by mnegro            #+#    #+#             */
-/*   Updated: 2023/09/01 17:07:21 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/09/01 17:37:48 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,12 @@
 
 int	ft_fd_close(int fd_old, int fd_new, int nbr)
 {
-	if (fd_old != -2)
-		if (fd_old != -1)
-			close(fd_old);
-	if (fd_new != -2)
-		if (fd_new != -1)
-			close(fd_new);
+	if (fd_old != -1 && fd_old != -2)
+		close(fd_old);
+	if (fd_new != -1 && fd_new != -2)
+		close(fd_new);
 	if (nbr == -2)
 		return (1);
-	// if (fd_old != -1 && fd_old != -2)
-	// 	close(fd_old);
-	// if (fd_new != -1 && fd_new != -2)
-	// 	close(fd_new);
 	return (nbr);
 }
 

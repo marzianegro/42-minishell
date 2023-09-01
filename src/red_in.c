@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 15:21:59 by mnegro            #+#    #+#             */
-/*   Updated: 2023/09/01 16:44:18 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/09/01 18:02:07 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ int	ft_file_input(t_mini *shell, char *file)
 {
 	if (!file[0])
 	{
-		ft_putstr_fd("shell: syntax error near unexpected token `newline'", 2);
+		ft_putstr_fd("bash: syntax error near unexpected token `newline'", 2);
 		return (1);
 	}
-	if (!(shell->fd_in == -1 || shell->fd_in == -2))
+	if (shell->fd_in != -1 && shell->fd_in != -2)
 		close(shell->fd_in);
 	shell->fd_in = open(file, O_RDONLY);
 	if (shell->fd_in == -1)
