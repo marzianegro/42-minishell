@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 16:24:58 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/30 17:16:27 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/09/02 17:51:50 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_save_exit(t_mini *shell, int n)
 		tmp->exit_status = n;
 }
 
-void	ft_signal_handler(int signal)
+void	ft_handler_main(int signal)
 {
 	if (signal == SIGINT)
 	{
@@ -33,3 +33,22 @@ void	ft_signal_handler(int signal)
 		rl_redisplay();
 	}
 }
+
+void	ft_handler_exec(int signal)
+{
+	if (signal == SIGINT)
+	{
+		ft_save_exit(NULL, 130);
+		write(1, "\n", 1);
+	}
+}
+
+// void	ft_handler_heredoc(int signal)
+// {
+// 	if (signal == SIGINT)
+// 	{
+// 		ft_save_exit(NULL, 130);
+// 		write(1, "\n", 1);
+// 		???
+// 	}
+// }

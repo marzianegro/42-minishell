@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   red_out.c                                          :+:      :+:    :+:   */
+/*   red_files.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 15:22:07 by mnegro            #+#    #+#             */
-/*   Updated: 2023/09/01 18:01:25 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/09/02 17:46:08 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 	>>: Redirects standard output to a file, but appends to the file
 	instead of overwriting it. */
 
-// >
+// > & >>
 /* Opens the file in write-only mode, creating if it doesn't exist,
 	and truncating its content */
 /* If -2, no file has been opened, otherwise it means that another
@@ -36,4 +36,29 @@ int	ft_file_output(t_mini *shell, char *file, int a_or_c)
 	return (0);
 }
 
-// >>
+/* <: Redirects standard input from a file.
+	<<: Allows you to provide multiple lines of input to a command. */
+
+// <
+void	ft_file_input(t_mini *shell, char *file)
+{
+	if (!file[0])
+	{
+		ft_putstr_fd("miniscam: syntax error near "
+			"unexpected token `newline'\n", 2);
+		shell->exit_status = 1;
+		return ;
+	}
+	if (shell->fd_in != -1 && shell->fd_in != -2)
+		close(shell->fd_in);
+	shell->fd_in = open(file, O_RDONLY);
+	if (shell->fd_in == -1)
+	{
+		ft_putstr_fd("miniscam: ", 2);
+		perror(file);
+		shell->exit_status = 2;
+	}
+}
+
+// <<
+

@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:51:17 by mnegro            #+#    #+#             */
-/*   Updated: 2023/09/01 18:02:21 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/09/02 17:52:42 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,35 +30,34 @@ void	ft_parse_line(t_mini *shell)
 	ft_parse_token(&shell->tkn, shell);
 }
 
+void	ft_handle_line(t_mini *shell)
+{
+	ft_putstr_fd_ms(shell->line, shell->history_fd);
+	add_history(shell->line);
+	ft_parse_line(shell);
+	shell->exit_status = ft_whether_pipe(shell);
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	t_mini		shell;
 
 	(void)argv;
 	if (argc != 1)
-	{
-		ft_putstr_fd("\033[1;91mError\033[0;39m: invalid input!\n", 2);
-		return (1);
-	}
+		return (ft_putstr_fd("\033[1;91mError\033[0;39m: invalid input!\n", 2), 1);
 	ft_init_shell(&shell, envp);
 	while (1)
 	{
-		signal(SIGINT, ft_signal_handler);
+		signal(SIGINT, ft_handler_main);
 		signal(SIGQUIT, SIG_IGN);
-		shell.line = readline("minishell-$ ");
+		shell.line = readline("miniscam-$ ");
 		if (!shell.line)
 		{
 			ft_putstr_fd("exit\n", 1);
 			break ;
 		}
-		if (shell.line[0] != '\0')
-		{
-			ft_putstr_fd_ms(shell.line, shell.history_fd);
-			add_history(shell.line);
-			ft_parse_line(&shell);
-			//forse controllo? beppe dice: why not?
-			shell.exit_status = ft_whether_pipe(&shell);
-		}
+		if (shell.line[0])
+			ft_handle_line(&shell);
 		ft_clear_tkn(&shell.tkn);
 		free(shell.line);
 	}
