@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 12:14:28 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/30 16:46:47 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/09/02 19:14:15 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 void	ft_freematrix(char **matrix)
 {
-	int	i;
+	int	y;
 
-	i = 0;
+	y = 0;
 	if (matrix)
 	{
-		while (matrix[i])
+		while (matrix[y])
 		{
-			free(matrix[i]);
-			i++;
+			free(matrix[y]);
+			y++;
 		}
 		free(matrix);
 	}

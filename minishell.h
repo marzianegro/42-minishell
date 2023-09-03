@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:51:10 by mnegro            #+#    #+#             */
-/*   Updated: 2023/09/02 17:52:32 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/09/03 15:35:18 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ int		ft_red_out(t_mini *shell, t_token *tkn, int y);
 int		ft_exec_toby(t_mini *shell, char **mtx);
 /* exec_utils.c */
 void	ft_dup_fd(t_mini *shell, int fd_old, int fd_new);
-int		ft_close_fd(int fd_old, int fd_new, int nbr);
+void	ft_close_fd(int fd_old, int fd_new);
 void	ft_post_red(t_mini *shell);
 /* exec.c */
 int		ft_whether_pipe(t_mini *shell);
@@ -177,7 +177,7 @@ void	ft_expand(t_env *envp, t_parse *prs);
 void	ft_fix_key(char *str, t_parse *prs);
 t_env	*ft_get_key(t_env *envp, t_parse *prs);
 int		ft_is_key(char c, int n);
-void	ft_new_key(char *str, char **new, int start, int len);
+// void	ft_new_key(char *str, char **new, int start, int len);
 /* vbl_utils2.c */
 void	ft_backnew_vbl(t_variable **vbl, char *key, char *value);
 int		ft_check_vbl(char *str);

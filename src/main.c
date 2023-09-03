@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:51:17 by mnegro            #+#    #+#             */
-/*   Updated: 2023/09/02 17:52:42 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/09/03 14:52:03 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,7 @@ int	main(int argc, char **argv, char **envp)
 		signal(SIGQUIT, SIG_IGN);
 		shell.line = readline("miniscam-$ ");
 		if (!shell.line)
-		{
-			ft_putstr_fd("exit\n", 1);
-			break ;
-		}
+			ft_exit(&shell, 1);
 		if (shell.line[0])
 			ft_handle_line(&shell);
 		ft_clear_tkn(&shell.tkn);

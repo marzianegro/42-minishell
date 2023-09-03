@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 17:08:34 by mnegro            #+#    #+#             */
-/*   Updated: 2023/09/02 17:29:41 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/09/02 18:05:58 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	ft_exec_pipe(t_mini *shell, t_token *tkn, int fd_old, int fd_new)
 		{
 			ft_dup_fd(shell, fd_old, fd_new);
 			pipe = ft_exec_toby(shell, tkn->toby);
-			ft_close_fd(fd_old, fd_new, 0);
+			ft_close_fd(fd_old, fd_new);
 		}
 		ft_exit(shell, shell->exit_status);
 	}

@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 17:22:43 by mnegro            #+#    #+#             */
-/*   Updated: 2023/09/02 17:52:36 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/09/03 14:46:23 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,30 +28,23 @@ void	ft_dup_fd(t_mini *shell, int fd_old, int fd_new)
 		dup2(shell->fd_out, 1);
 }
 
-int	ft_close_fd(int fd_old, int fd_new, int nbr)
+void	ft_close_fd(int fd_old, int fd_new)
 {
 	if (fd_old != -1 && fd_old != -2)
 		close(fd_old);
 	if (fd_new != -1 && fd_new != -2)
 		close(fd_new);
-	if (nbr == -2)
-		return (1);
-	return (nbr);
 }
 
 void	ft_post_red(t_mini *shell)
 {
-	if (shell->fd_in != -2 || shell->fd_out != -2)
-	{
-		if (shell->fd_in != -1)
-			close(shell->fd_in);
-		shell->fd_in = -2;
-		dup2(shell->std_in, 0);
-		if (shell->fd_out != -1)
-			close(shell->fd_out);
-		shell->fd_out = -2;
-		dup2(shell->std_out, 1);
-	}
-	ft_close_fd(shell->fd_in, shell->fd_out, 0);
+	if (shell->fd_in != -1 && shell->fd_in != -2)
+		close(shell->fd_in);
+	shell->fd_in = -2;
+	dup2(shell->std_in, 0);
+	if (shell->fd_out != -1 && shell->fd_out != -2)
+		close(shell->fd_out);
+	shell->fd_out = -2;
+	dup2(shell->std_out, 1);
 }
 

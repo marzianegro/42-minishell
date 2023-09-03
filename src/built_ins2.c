@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 18:37:24 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/30 17:03:52 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/09/03 14:54:58 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,10 @@ void	ft_exit(t_mini *shell, int n)
 	ft_freematrix(shell->envp_mtx);
 	ft_clear_vbl(&shell->vbl);
 	free(shell->bin);
-	if (n != 0)
-		exit (n);
 	ft_putstr_fd("exit", 1);
-	exit (n);
+	if (n != 0)
+		exit(n);
+	exit(n);
 }
 
 void	ft_vbl(t_mini *shell, char *cmd, int n)
@@ -74,9 +74,9 @@ void	ft_vbl(t_mini *shell, char *cmd, int n)
 	char	*value;
 	t_env	*tmp;
 
-	key = ft_key(cmd);
-	value = ft_value(cmd);
-	ft_free(&cmd);
+	key = ft_key(cmd); // MAYBE I CAN FT_STRDUP CMD
+	value = ft_value(cmd); // SAME HERE
+	// ft_free(&cmd); THIS RIGHT HERE IS WHERE MY PROBLEMS ARE, BUT NOW I HAVE MEMORY PROBLEMS
 	tmp = shell->envp;
 	while (tmp)
 	{

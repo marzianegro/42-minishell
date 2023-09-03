@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:47:55 by mnegro            #+#    #+#             */
-/*   Updated: 2023/09/02 17:46:12 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/09/03 14:56:57 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ int	ft_find_bin(t_mini *shell, char *cmd)
 	while (dir[++y])
 	{
 		tmp_bin = ft_strjoin(dir[y], "/");
-		shell->bin = ft_strjoin(tmp_bin, cmd);
-		free(tmp_bin);
+		shell->bin = ft_strjoin_gnl(tmp_bin, cmd);
+		// free(tmp_bin);
 		if (!access(shell->bin, F_OK))
 			return (ft_freematrix(dir), 0);
 		free(shell->bin);

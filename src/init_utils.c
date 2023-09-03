@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:51:55 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/24 14:49:54 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/09/03 14:56:56 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ char	*ft_key_value(char *key, char *value)
 	char	*vbl;
 
 	tmp = ft_strjoin(key, "=");
-	vbl = ft_strjoin(tmp, value);
-	free(tmp);
+	vbl = ft_strjoin_gnl(tmp, value);
+	// free(tmp);
 	return (vbl);
 }
 

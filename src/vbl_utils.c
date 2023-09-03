@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 15:43:57 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/24 15:01:49 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/09/03 15:35:19 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ void	ft_fix_key(char *str, t_parse *prs)
 			i++;
 			len++;
 		}
-		ft_new_key(str, &prs->key, i - len, len);
+		prs->key = ft_substr(str, i - len, len);
+		// ft_new_key(str, &prs->key, i - len, len);
 	}
 }
 
@@ -69,11 +70,11 @@ int	ft_is_key(char c, int n)
 	return (1);
 }
 
-void	ft_new_key(char *str, char **new, int start, int len)
-{
-	char	*tmp;
+// void	ft_new_key(char *str, char **new, int start, int len)
+// {
+// 	// char	*tmp;
 
-	tmp = ft_substr(str, start, len);
-	*new = ft_strjoin(*new, tmp);
-	free(tmp);
-}
+// 	*new = ft_substr(str, start, len);
+// 	// *new = ft_strjoin(*new, tmp);
+// 	// free(tmp);
+// }

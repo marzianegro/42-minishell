@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 16:50:32 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/18 11:50:24 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/09/02 19:13:18 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	ft_read_from_fd(int fd, char **buftomem)
 			ft_free(&buf);
 			return ;
 		}
-		*buftomem = ft_strjoin(*buftomem, buf);
+		*buftomem = ft_strjoin_gnl(*buftomem, buf);
 		ft_free(&buf);
 	}
 }

@@ -6,7 +6,7 @@
 #    By: mnegro <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/06 14:56:20 by mnegro            #+#    #+#              #
-#    Updated: 2023/09/02 17:29:31 by mnegro           ###   ########.fr        #
+#    Updated: 2023/09/02 18:06:02 by mnegro           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,6 +67,9 @@ fclean:
 
 libft:
 	${MAKE} -C libft
+
+test: all
+	valgrind --leak-check=full --show-leak-kinds=all --suppressions=readline.supp  ./minishell
 
 re:	fclean all
 	@echo "Rule '${GREEN}re${DEF_COLOR}' for ${NAME} executed successfully!"
