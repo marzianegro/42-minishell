@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:51:10 by mnegro            #+#    #+#             */
-/*   Updated: 2023/09/04 21:19:49 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/09/11 17:32:40 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,9 @@ void	ft_clear_env(t_env **envp);
 void	ft_del_env(t_env *envp, t_env *del);
 void	ft_clear_vbl(t_variable **vbl);
 void	ft_del_vbl(t_variable *vbl, t_variable *del);
+/* here_doc.c */
+void	ft_here_doc(t_mini *shell, char *delimiter, int fd);
+int		ft_handler_here_doc(t_mini *shell, char *delimiter);
 /* init_shell.c */
 void	ft_init_history(t_mini *shell);
 t_env	*ft_init_env(char **mtx);
@@ -159,7 +162,7 @@ int		ft_file_output(t_mini *shell, char *file, int a_or_c);
 void	ft_save_exit(t_mini *shell, int code);
 void	ft_handler_main(int signal);
 void	ft_handler_exec(int signal);
-// void	ft_handler_heredoc(int signal);
+void	ft_sig_here_doc(int signal);
 /* spl_red.c */
 char	**ft_split_red(char *line, int *i);
 /* spl_toby.c */

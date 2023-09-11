@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 17:56:23 by mnegro            #+#    #+#             */
-/*   Updated: 2023/09/04 21:08:57 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/09/11 16:37:02 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	ft_exec_toby(t_mini *shell, char **mtx)
 	char	*cmd;
 
 	cmd = mtx[0];
+	if (!cmd)
+		return (shell->exit_status);
 	if (!ft_strncmp("cd", cmd, 3))
 		ft_cd(shell);
 	else if (!ft_strncmp("history", cmd, 8))

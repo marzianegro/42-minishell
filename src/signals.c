@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 16:24:58 by mnegro            #+#    #+#             */
-/*   Updated: 2023/09/04 14:51:39 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/09/11 16:57:13 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,8 @@ void	ft_handler_exec(int signal)
 	}
 }
 
-// void	ft_handler_heredoc(int signal)
-// {
-// 	if (signal == SIGINT)
-// 	{
-// 		ft_save_exit(NULL, 130);
-// 		write(1, "\n", 1);
-// 		???
-// 	}
-// }
+void	ft_sig_here_doc(int signal)
+{
+	if (signal == SIGINT)
+		exit(130);
+}

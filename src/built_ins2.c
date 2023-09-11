@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 18:37:24 by mnegro            #+#    #+#             */
-/*   Updated: 2023/09/04 21:22:12 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/09/11 16:40:18 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	ft_exit(t_mini *shell, int n)
 	ft_freematrix(shell->envp_mtx);
 	ft_clear_vbl(&shell->vbl);
 	free(shell->bin);
-	ft_putstr_fd("exit", 1);
+	ft_putstr_fd("exit\n", 1);
 	if (n != 0)
 		exit(n);
 	exit(n);
