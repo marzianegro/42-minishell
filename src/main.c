@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:51:17 by mnegro            #+#    #+#             */
-/*   Updated: 2023/09/11 17:49:24 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/09/11 20:57:54 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	main(int argc, char **argv, char **envp)
 	if (argc != 1)
 		return (ft_putstr_fd("\033[1;91mError\033[0;39m: invalid input!\n", 2), 1);
 	ft_init_shell(&shell, envp);
+	ft_img(&shell);
 	while (1)
 	{
 		signal(SIGINT, ft_handler_main);

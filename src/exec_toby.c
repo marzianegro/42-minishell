@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 17:56:23 by mnegro            #+#    #+#             */
-/*   Updated: 2023/09/11 16:37:02 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/09/11 21:09:48 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,17 @@ int	ft_exec_toby(t_mini *shell, char **mtx)
 		ft_env(shell);
 	else if (!ft_strncmp("exit", cmd, 5))
 		ft_exit(shell, 0);
+	else
+		ft_exec_toby_continue(shell, cmd);
+	return (shell->exit_status);
+}
+
+void	ft_exec_toby_continue(t_mini *shell, char *cmd)
+{
+	if (!ft_strncmp("gringo", cmd, 7))
+		ft_img(shell);
 	else if (ft_strfind(cmd, '=') && !ft_check_vbl(cmd))
 		ft_vbl(shell, cmd, 0);
 	else
 		ft_exec_binary(shell, cmd);
-	return (shell->exit_status);
 }

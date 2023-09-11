@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 17:14:12 by mnegro            #+#    #+#             */
-/*   Updated: 2023/09/11 17:50:28 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/09/11 21:20:52 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	ft_red_in(t_mini *shell, t_token *tkn, int y)
 			return (shell->exit_status);
 		}
 		else
-			shell->fd_in = ft_handler_here_doc(shell, &tkn->red[y][2]);
+			shell->fd_in = ft_handle_here_doc(shell, &tkn->red[y][2]);
 	}
 	return (shell->exit_status);
 }

@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:51:10 by mnegro            #+#    #+#             */
-/*   Updated: 2023/09/11 17:32:40 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/09/11 21:16:19 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ typedef struct s_mini
 	int			fd_in;
 	int			fd_out;
 	int			exit_status;
+	pid_t		img;
 }			t_mini;
 
 /* PROTOTYPES */
@@ -111,6 +112,7 @@ int		ft_red_in(t_mini *shell, t_token *tkn, int y);
 int		ft_red_out(t_mini *shell, t_token *tkn, int y);
 /* exec_toby.c */
 int		ft_exec_toby(t_mini *shell, char **mtx);
+void	ft_exec_toby_continue(t_mini *shell, char *cmd);
 /* exec_utils.c */
 void	ft_dup_red(t_mini *shell, int fd_old, int fd_new);
 void	ft_close_fd(int fd_old, int fd_new);
@@ -125,7 +127,9 @@ void	ft_clear_vbl(t_variable **vbl);
 void	ft_del_vbl(t_variable *vbl, t_variable *del);
 /* here_doc.c */
 void	ft_here_doc(t_mini *shell, char *delimiter, int fd);
-int		ft_handler_here_doc(t_mini *shell, char *delimiter);
+int		ft_handle_here_doc(t_mini *shell, char *delimiter);
+/* img.c */
+void	ft_img(t_mini *shell);
 /* init_shell.c */
 void	ft_init_history(t_mini *shell);
 t_env	*ft_init_env(char **mtx);
@@ -160,9 +164,10 @@ void	ft_file_input(t_mini *shell, char *file);
 int		ft_file_output(t_mini *shell, char *file, int a_or_c);
 /* signals.c */
 void	ft_save_exit(t_mini *shell, int code);
+void	ft_free_exit(t_mini *shell);
 void	ft_handler_main(int signal);
 void	ft_handler_exec(int signal);
-void	ft_sig_here_doc(int signal);
+void	ft_handler_here_doc(int signal);
 /* spl_red.c */
 char	**ft_split_red(char *line, int *i);
 /* spl_toby.c */

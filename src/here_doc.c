@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 15:09:32 by mnegro            #+#    #+#             */
-/*   Updated: 2023/09/11 16:57:52 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/09/11 21:19:47 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_here_doc(t_mini *shell, char *delimiter, int fd)
 	char	*del;
 
 	(void)shell;
-	signal(SIGINT, ft_sig_here_doc);
+	signal(SIGINT, ft_handler_here_doc);
 	del = ft_strjoin(delimiter, "\n");
 	line = "";
 	while (line)
@@ -57,8 +57,8 @@ void	ft_here_doc(t_mini *shell, char *delimiter, int fd)
 	Il processo padre (pid > 0) aspetta che il processo figlio finisca tramite waitpid; quando ha finito
 	chiude l'fd di scrittura (fd_pipe[1]) e duplica lo std_in (fd_pipe[0]) sul'fd di lettura (fd_pipe[0])
 	Chiudo anche l'fd di lettura (fd_pipe[0]) */
-    
-int	ft_handler_here_doc(t_mini *shell, char *delimiter)
+
+int	ft_handle_here_doc(t_mini *shell, char *delimiter)
 {
 	pid_t	pid;
 	int		status;

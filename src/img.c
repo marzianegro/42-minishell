@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.c                                             :+:      :+:    :+:   */
+/*   img.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/17 16:09:33 by mnegro            #+#    #+#             */
-/*   Updated: 2023/09/11 21:20:53 by mnegro           ###   ########.fr       */
+/*   Created: 2023/09/11 20:22:04 by mnegro            #+#    #+#             */
+/*   Updated: 2023/09/11 21:06:40 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	ft_whether_pipe(t_mini *shell)
+void	ft_img(t_mini *shell)
 {
-	signal(SIGINT, ft_handler_exec);
-	if (shell->tkn && !shell->tkn->next)
+	char	*args[5];
+
+	args[0] = "eog";
+	args[1] = "--display=:0";
+	args[2] = "--gtk-no-debug=unset";
+	args[3] = "doge.jpg";
+	args[4] = NULL;
+	if (shell->img != 0)
+		kill(shell->img, SIGTERM);
+	shell->img = fork();
+	if (!shell->img)
 	{
-		shell->exit_status = ft_exec_red(shell, shell->tkn);
-		if (shell->exit_status != 0)
-			return (shell->exit_status);
-		ft_dup_red(shell, -1, -1);
-		shell->exit_status = ft_exec_toby(shell, shell->tkn->toby);
-		ft_post_red(shell);
-		return (shell->exit_status);
+		dup2(open("/dev/null", O_WRONLY), STDERR_FILENO);
+		close(open("/dev/null", O_WRONLY));
+		execve("/usr/bin/eog", args, NULL);
 	}
-	else
-		return (ft_mini_pipe(shell, shell->tkn, 1));
-	return (0);
 }

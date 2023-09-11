@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 16:24:58 by mnegro            #+#    #+#             */
-/*   Updated: 2023/09/11 16:57:13 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/09/11 21:20:53 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,24 @@ void	ft_save_exit(t_mini *shell, int n)
 		tmp = shell;
 	else
 		tmp->exit_status = n;
+}
+
+void	ft_free_exit(t_mini *shell)
+{
+	static t_mini	*tmp;
+
+	if (shell)
+		tmp = shell;
+	else
+	{
+		free(tmp->line);
+		free(tmp->history);
+		ft_clear_tkn(&tmp->tkn);
+		ft_clear_env(&tmp->envp);
+		ft_freematrix(tmp->envp_mtx);
+		ft_clear_vbl(&tmp->vbl);
+		free(tmp->bin);
+	}
 }
 
 void	ft_handler_main(int signal)
@@ -43,8 +61,11 @@ void	ft_handler_exec(int signal)
 	}
 }
 
-void	ft_sig_here_doc(int signal)
+void	ft_handler_here_doc(int signal)
 {
 	if (signal == SIGINT)
+	{
+		// ft_free_exit(NULL);
 		exit(130);
+	}
 }
