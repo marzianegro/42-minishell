@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 18:02:01 by mnegro            #+#    #+#             */
-/*   Updated: 2023/09/01 17:06:44 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/09/04 16:07:38 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,10 @@ void	ft_unset(t_mini *shell)
 		{
 			if (!ft_strncmp(shell->tkn->toby[i], tmp->key,
 					ft_strlen(shell->tkn->toby[i]) + 1))
-				ft_del_vbl(shell->envp, tmp);
+			{
+				ft_del_env(shell->envp, tmp);
+				break ;
+			}
 			tmp = tmp->next;
 		}
 		i++;

@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:51:10 by mnegro            #+#    #+#             */
-/*   Updated: 2023/09/03 15:35:18 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/09/04 21:19:49 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,14 +100,11 @@ void	ft_env(t_mini *shell);
 void	ft_exit(t_mini *shell, int n);
 void	ft_vbl(t_mini *shell, char *cmd, int n);
 /* builtins_utils.c */
-void	ft_clear_env(t_env **envp);
-void	ft_clear_vbl(t_variable **vbl);
-void	ft_del_vbl(t_env *envp, t_env *del);
 void	ft_exp_vbl(t_mini *shell, int i);
 void	ft_update_pwd(t_mini *shell);
 /* exec_multi.c */
-int		ft_exec_pipe(t_mini *shell, t_token *tkn, int fd_old, int fd_new);
-int		ft_mini_pipe(t_mini *shell, t_token *tkn);
+int		ft_exec_pipe(t_mini *shell, t_token *tkn, int fd_in, int fd_out);
+int		ft_mini_pipe(t_mini *shell, t_token *tkn, int fd_out);
 /* exec_red.c */
 int		ft_exec_red(t_mini *shell, t_token *tkn);
 int		ft_red_in(t_mini *shell, t_token *tkn, int y);
@@ -115,11 +112,17 @@ int		ft_red_out(t_mini *shell, t_token *tkn, int y);
 /* exec_toby.c */
 int		ft_exec_toby(t_mini *shell, char **mtx);
 /* exec_utils.c */
-void	ft_dup_fd(t_mini *shell, int fd_old, int fd_new);
+void	ft_dup_red(t_mini *shell, int fd_old, int fd_new);
 void	ft_close_fd(int fd_old, int fd_new);
 void	ft_post_red(t_mini *shell);
+void	ft_dup_pipe(t_mini *shell, int fd_in, int fd_out);
 /* exec.c */
 int		ft_whether_pipe(t_mini *shell);
+/* free.c */
+void	ft_clear_env(t_env **envp);
+void	ft_del_env(t_env *envp, t_env *del);
+void	ft_clear_vbl(t_variable **vbl);
+void	ft_del_vbl(t_variable *vbl, t_variable *del);
 /* init_shell.c */
 void	ft_init_history(t_mini *shell);
 t_env	*ft_init_env(char **mtx);
@@ -182,6 +185,6 @@ int		ft_is_key(char c, int n);
 void	ft_backnew_vbl(t_variable **vbl, char *key, char *value);
 int		ft_check_vbl(char *str);
 char	*ft_key(char *str);
-int		ft_norm_vbl(char **mtx, t_mini *shell, t_parse *prs);
 char	*ft_value(char *str);
+
 #endif

@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 18:37:24 by mnegro            #+#    #+#             */
-/*   Updated: 2023/09/04 14:51:04 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/09/04 21:22:12 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,8 @@ void	ft_vbl(t_mini *shell, char *cmd, int n)
 	char	*value;
 	t_env	*tmp;
 
-	key = ft_key(cmd); // MAYBE I CAN FT_STRDUP CMD
-	value = ft_value(cmd); // SAME HERE
-	// ft_free(&cmd); THIS RIGHT HERE IS WHERE MY PROBLEMS ARE, BUT NOW I HAVE MEMORY PROBLEMS
+	key = ft_key(cmd);
+	value = ft_value(cmd);
 	tmp = shell->envp;
 	while (tmp)
 	{

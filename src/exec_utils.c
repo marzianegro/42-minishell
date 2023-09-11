@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 17:22:43 by mnegro            #+#    #+#             */
-/*   Updated: 2023/09/03 14:46:23 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/09/04 21:21:55 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 	descriptor; used for redirecting input and output streams, changing
 	the target of a file descriptor, or setting up communication
 	between processes */
-void	ft_dup_fd(t_mini *shell, int fd_old, int fd_new)
+void	ft_dup_red(t_mini *shell, int fd_old, int fd_new)
 {
 	if (fd_old != -1)
 		dup2(fd_old, 0);
@@ -48,3 +48,14 @@ void	ft_post_red(t_mini *shell)
 	dup2(shell->std_out, 1);
 }
 
+void	ft_dup_pipe(t_mini *shell, int fd_in, int fd_out)
+{
+	if (shell->fd_in == -2)
+		dup2(fd_in, 0);
+	else
+		dup2(shell->fd_in, 0);
+	if (shell->fd_out == -2)
+		dup2(fd_out, 1);
+	else
+		dup2(shell->fd_out, 1);
+}

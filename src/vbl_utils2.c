@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 14:33:46 by mnegro            #+#    #+#             */
-/*   Updated: 2023/09/03 14:52:02 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/09/04 16:17:33 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,25 +71,6 @@ char	*ft_key(char *str)
 	}
 	key = ft_substr(str, 0, len);
 	return (key);
-}
-
-/* Not sure if this function is actually useful, since I haven't used it yet */
-int	ft_norm_vbl(char **mtx, t_mini *shell, t_parse *prs)
-{
-	prs->x++;
-	if (ft_is_key(mtx[prs->y][prs->x], 0))
-	{
-		prs->x++;
-		return (1);
-	}
-	else
-	{
-		ft_fix_key(&(mtx[prs->y][prs->x]), prs);
-		ft_get_key(shell->envp, prs);
-		ft_expand(shell->envp, prs);
-		prs->x += ft_strlen(prs->key);
-	}
-	return (0);
 }
 
 char	*ft_value(char *str)
