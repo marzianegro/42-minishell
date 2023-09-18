@@ -47,8 +47,6 @@ static void	ft_handle_quotes(char *line, t_split *spl)
 		spl->sq++;
 	if (!ft_handle_redirects(line, spl))
 		spl->i++;
-	while (line[spl->i] == '|' && !ft_whether_quotes(spl))
-		spl->i++;
 	if (ft_is_stop(line[spl->i], 2)
 		&& ft_whether_quotes(spl))
 		spl->words++;
@@ -68,6 +66,8 @@ static int	ft_toby_count(char *line, int i)
 			spl.i++;
 		else
 			ft_handle_quotes(line, &spl);
+		while (line[spl.i] == '|' && !ft_whether_quotes(&spl))
+			spl.i++;
 	}
 	if (spl.dq % 2 || spl.sq % 2)
 		while (1)

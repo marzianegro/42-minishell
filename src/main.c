@@ -53,7 +53,7 @@ int	main(int argc, char **argv, char **envp)
 		signal(SIGQUIT, SIG_IGN);
 		shell.line = readline("perroshell-$ ");
 		if (!shell.line)
-			ft_exit(&shell, 1);
+			ft_exit_cmd(&shell, NULL);
 		if (shell.line[0])
 			ft_handle_line(&shell);
 		ft_clear_tkn(&shell.tkn);

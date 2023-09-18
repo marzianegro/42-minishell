@@ -34,7 +34,7 @@ int	ft_exec_toby(t_mini *shell, char **mtx)
 	else if (!ft_strncmp("env", cmd, 4))
 		ft_env(shell);
 	else if (!ft_strncmp("exit", cmd, 5))
-		ft_exit(shell, 0);
+		ft_exit_cmd(shell, mtx[1]);	
 	else
 		ft_exec_toby_continue(shell, cmd);
 	return (shell->exit_status);

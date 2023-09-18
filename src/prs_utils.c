@@ -52,7 +52,7 @@ void	ft_new_str(char *str, t_parse *prs)
 	char	*tmp;
 
 	tmp = ft_substr(str, prs->x - prs->len, prs->len);
-	prs->new = ft_strjoin(prs->new, tmp);
+	prs->new = ft_strjoin_gnl(prs->new, tmp);
 	prs->len = 0;
 	free(tmp);
 }

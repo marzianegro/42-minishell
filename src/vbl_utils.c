@@ -28,7 +28,7 @@ void	ft_fix_key(char *str, t_parse *prs)
 
 	i = 0;
 	len = 0;
-	prs->key = NULL;
+	ft_free(&prs->key);
 	while (str && str[i] && !prs->key)
 	{
 		while (!ft_is_key(str[i], 1))

@@ -53,21 +53,45 @@ void	ft_env(t_mini *shell)
 	}
 }
 
-void	ft_exit(t_mini *shell, int n)
+void	ft_exit_cmd(t_mini *shell, char *cmd)
 {
-	free(shell->line);
-	free(shell->history);
+	int	code;
+	int	i;
+
+	i = 0;
+	ft_putstr_fd("exit\n", 1);
+	if (cmd)
+	{
+		if (cmd[i] == '+' || cmd[i] == '-')
+			i++;
+		while (cmd[i] >= '0' && cmd[i] <= '9')
+			i++;
+		if (cmd[i] != '\0')
+		{
+			code = 2;
+			ft_putstr_fd("perroshell: exit: ", 2);
+			ft_putstr_fd(cmd, 2);
+			ft_putstr_fd(": numeric argument required\n", 2);
+		}
+		else
+			code = ft_atoi(cmd);
+	}
+	else
+		code = 0;
+	ft_exit(shell, code, 0);
+}
+
+void	ft_exit(t_mini *shell, int code, int child)
+{
+	ft_free(&shell->line);
+	ft_free(&shell->history);
 	ft_clear_tkn(&shell->tkn);
 	ft_clear_env(&shell->envp);
-	ft_freematrix(shell->envp_mtx);
 	ft_clear_vbl(&shell->vbl);
-	free(shell->bin);
-	if (n == 0)
-	{
-		ft_putstr_fd("exit\n", 1);
+	ft_free(&shell->bin);
+	if (child == 0)
 		kill(shell->img, SIGTERM);
-	}
-	exit(n);
+	exit(code);
 }
 
 void	ft_vbl(t_mini *shell, char *cmd, int n)
@@ -85,7 +109,9 @@ void	ft_vbl(t_mini *shell, char *cmd, int n)
 		{
 			ft_free(&tmp->value);
 			tmp->value = value;
+			ft_free(&tmp->vbl);
 			tmp->vbl = ft_key_value(key, value);
+			ft_free(&key);
 			return ;
 		}
 		tmp = tmp->next;

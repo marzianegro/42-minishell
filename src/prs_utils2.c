@@ -20,13 +20,13 @@ int	ft_vbl_cases(char **mtx, t_mini *shell, t_parse *prs)
 	if (mtx[prs->y][prs->x] == '?')
 	{
 		itoa_exit = ft_itoa(shell->exit_status);
-		prs->new = ft_strjoin(prs->new, itoa_exit);
+		prs->new = ft_strjoin_gnl(prs->new, itoa_exit);
 		free(itoa_exit);
 		prs->x++;
 	}
 	else if (ft_is_key(mtx[prs->y][prs->x], 0))
 	{
-		prs->x++;
+		prs->new = ft_strjoin_gnl(prs->new, "$");
 		return (1);
 	}
 	else

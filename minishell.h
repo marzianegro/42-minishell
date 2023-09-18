@@ -98,7 +98,8 @@ void	ft_pwd(t_mini *shell);
 /* built_ins2.c */
 void	ft_export(t_mini *shell);
 void	ft_env(t_mini *shell);
-void	ft_exit(t_mini *shell, int n);
+void	ft_exit_cmd(t_mini *shell, char *cmd);
+void	ft_exit(t_mini *shell, int n, int child);
 void	ft_vbl(t_mini *shell, char *cmd, int n);
 /* builtins_utils.c */
 void	ft_exp_vbl(t_mini *shell, int i);

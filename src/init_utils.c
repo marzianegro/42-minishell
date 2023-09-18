@@ -19,8 +19,16 @@ char	*ft_key_value(char *key, char *value)
 
 	tmp = ft_strjoin(key, "=");
 	vbl = ft_strjoin_gnl(tmp, value);
-	// free(tmp);
 	return (vbl);
+}
+
+static void	ft_free_void(char **buf)
+{
+	if (*buf)
+	{
+		free(*buf);
+		*buf = NULL;
+	}
 }
 
 void	ft_backnew_env(t_env **envp, char *key, char *value)
@@ -28,6 +36,15 @@ void	ft_backnew_env(t_env **envp, char *key, char *value)
 	t_env	*newnode;
 	t_env	*tmp;
 
+	tmp = *envp;
+	while (tmp)
+	{
+		if (!ft_strncmp(key, tmp->key, ft_strlen(key) + 1))
+			return (ft_free_void(&key), ft_free_void(&value));
+		if (!tmp->next)
+			break ;
+		tmp = tmp->next;
+	}
 	newnode = (t_env *)ft_calloc(1, sizeof(t_env));
 	if (!newnode)
 		return ;
@@ -36,20 +53,9 @@ void	ft_backnew_env(t_env **envp, char *key, char *value)
 	newnode->vbl = ft_key_value(key, value);
 	newnode->next = NULL;
 	if (!*envp)
-	{
 		*envp = newnode;
-		return ;
-	}
-	tmp = *envp;
-	while (tmp->next)
-	{
-		if (!ft_strncmp(key, tmp->key, ft_strlen(key) + 1))
-			return ;
-		tmp = tmp->next;
-	}
-	if (!ft_strncmp(key, tmp->key, ft_strlen(key) + 1))
-		return ;
-	tmp->next = newnode;
+	else
+		tmp->next = newnode;
 }
 
 void	ft_set_env(char **mtx, int y, t_env **envp)
@@ -78,3 +84,4 @@ void	ft_set_env(char **mtx, int y, t_env **envp)
 	}
 	ft_backnew_env(envp, key, value);
 }
+

@@ -48,7 +48,7 @@ int	ft_exec_pipe(t_mini *shell, t_token *tkn, int fd_in, int fd_out)
 		ft_dup_pipe(shell, fd_in, fd_out);
 		ft_exec_toby(shell, tkn->toby);
 		ft_post_red(shell);
-		ft_exit(shell, shell->exit_status);
+		ft_exit(shell, shell->exit_status, 1);
 	}
 	wait(&status);
 	ft_dup_pipe(shell, shell->std_in, shell->std_out);
