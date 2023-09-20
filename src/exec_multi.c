@@ -41,11 +41,12 @@ int	ft_exec_pipe(t_mini *shell, t_token *tkn, int fd_in, int fd_out)
 	if (!pid)
 	{
 		ft_exec_red(shell, tkn);
-		if (shell->exit_status != 0)
-			ft_exit(shell, shell->exit_status, 1);
-		ft_dup_pipe(shell, fd_in, fd_out);
-		ft_exec_toby(shell, tkn->toby);
-		ft_post_red(shell);
+		if (shell->exit_status == 0)
+		{
+			ft_dup_pipe(shell, fd_in, fd_out);
+			ft_exec_toby(shell, tkn->toby);
+			ft_post_red(shell);
+		}
 		ft_exit(shell, shell->exit_status, 1);
 	}
 	waitpid(pid, &status, 0);
