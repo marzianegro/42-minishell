@@ -26,7 +26,7 @@ RLFLAGS = -lreadline
 RM = rm -f
 
 #### TARGETS ####
-FL_SRCS =	binary.c built_ins.c built_ins2.c builtins_utils.c exec_multi.c \
+FL_SRCS =	binary.c built_ins.c built_ins2.c builtins_utils.c exec_pipe.c \
 			exec_red.c exec_toby.c exec_utils.c exec.c free.c here_doc.c img.c \
 			init_shell.c init_utils.c main.c misc_utils.c prs_utils.c prs_utils2.c \
 			prs.c red_files.c signals.c spl_red.c spl_toby.c spl_utils.c tkn_utils.c \

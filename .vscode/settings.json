@@ -27,6 +27,7 @@
 		"init_utils": "c",
 		"ostream": "c",
 		"signal.h": "c",
-		"wait.h": "c"
+		"wait.h": "c",
+		"signum-arch.h": "c"
 	}
 }

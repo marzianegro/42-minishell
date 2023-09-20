@@ -25,6 +25,8 @@
 # include <unistd.h>
 
 /* MACROS */
+# define IN 0
+# define OUT 1
 
 /* STRUCTURES */
 typedef struct s_split
@@ -39,6 +41,7 @@ typedef struct s_token
 {
 	char			**toby;
 	char			**red;
+	int				pid;
 	struct s_token	*next;
 }			t_token;
 
@@ -104,9 +107,10 @@ void	ft_vbl(t_mini *shell, char *cmd, int n);
 /* builtins_utils.c */
 void	ft_exp_vbl(t_mini *shell, int i);
 void	ft_update_pwd(t_mini *shell);
-/* exec_multi.c */
-int		ft_exec_pipe(t_mini *shell, t_token *tkn, int fd_in, int fd_out);
-int		ft_mini_pipe(t_mini *shell, t_token *tkn, int fd_out);
+/* exec_pipe.c */
+int		ft_exec_pipe(t_mini *shell, t_token *tkn, int *fd, int unused);
+void	ft_wait_pipe(t_mini *shell);
+void	ft_mini_pipe(t_mini *shell);
 /* exec_red.c */
 void	ft_exec_red(t_mini *shell, t_token *tkn);
 int		ft_red_in(t_mini *shell, t_token *tkn, int y);
@@ -181,7 +185,7 @@ int		ft_is_stop(char c, int n);
 void	ft_regular_red(char *line, t_split *spl);
 int		ft_whether_quotes(t_split *spl);
 /* tkn_utils.c */
-void	ft_frontnew_tkn(t_token **tkn, char **toby, char **red);
+void	ft_backnew_tkn(t_token **tkn, char **toby, char **red);
 void	ft_clear_tkn(t_token **tkn);
 void	ft_iter(t_token *tkn, t_mini *shell, void (*f)(char **, t_mini *));
 void	ft_print_tkn(t_token *tkn);

@@ -12,21 +12,28 @@
 
 #include "../minishell.h"
 
-void	ft_frontnew_tkn(t_token **tkn, char **toby, char **red)
+void	ft_backnew_tkn(t_token **tkn, char **toby, char **red)
 {
 	t_token	*newnode;
+	t_token	*tmp;
 
+	tmp = *tkn;
+	while (tmp)
+	{
+		if (!tmp->next)
+			break ;
+		tmp = tmp->next;
+	}
 	newnode = (t_token *)ft_calloc(1, sizeof(t_token));
 	if (!newnode)
 		return ;
 	newnode->toby = toby;
 	newnode->red = red;
 	newnode->next = NULL;
-	if (tkn)
-	{
-		newnode->next = *tkn;
+	if (!*tkn)
 		*tkn = newnode;
-	}
+	else
+		tmp->next = newnode;
 }
 
 void	ft_clear_tkn(t_token **tkn)

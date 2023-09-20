@@ -25,9 +25,16 @@ void	ft_parse_line(t_mini *shell)
 			i++;
 		toby = ft_split_toby(shell->line, i);
 		red = ft_split_red(shell->line, &i);
-		ft_frontnew_tkn(&(shell->tkn), toby, red);
+		ft_backnew_tkn(&(shell->tkn), toby, red);
 	}
 	ft_parse_token(&shell->tkn, shell);
+	// t_token	*tmp = shell->tkn;
+	// while (tmp)
+	// {
+	// 	ft_print_tkn(tmp);
+	// 	tmp = tmp->next;
+	// }
+	// printf("----------\n");
 }
 
 void	ft_handle_line(t_mini *shell)

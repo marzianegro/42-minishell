@@ -16,7 +16,9 @@ int	ft_kill_child(int n)
 {
 	static int	pid = 0;
 
-	if (pid)
+	if (n == -1)
+		pid = 0;
+	else if (pid)
 	{
 		kill(pid, SIGKILL);
 		pid = 0;
@@ -31,6 +33,7 @@ void	ft_here_doc(t_mini *shell, char *delimiter, int fd)
 	char	*line;
 	char	*del;
 
+	signal(SIGINT, ft_handler_here_doc);
 	del = ft_strjoin(delimiter, "\n");
 	line = "";
 	while (line)
@@ -61,8 +64,9 @@ int	ft_handle_here_doc(t_mini *shell, char *delimiter)
 	if (!pid)
 		ft_here_doc(shell, delimiter, fd_tmp);
 	ft_kill_child(pid);
-	wait(NULL);
-	ft_kill_child(0);
+	waitpid(pid, &shell->exit_status, 0);
+	ft_kill_child(-1);
+	signal(SIGINT, ft_handler_exec);
 	close(fd_tmp);
 	shell->fd_in = open("/tmp/here_doc", O_RDONLY);
 	return (0);

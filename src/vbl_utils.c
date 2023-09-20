@@ -37,7 +37,6 @@ void	ft_fix_key(char *str, t_parse *prs)
 			len++;
 		}
 		prs->key = ft_substr(str, i - len, len);
-		// ft_new_key(str, &prs->key, i - len, len);
 	}
 }
 
@@ -69,12 +68,3 @@ int	ft_is_key(char c, int n)
 	}
 	return (1);
 }
-
-// void	ft_new_key(char *str, char **new, int start, int len)
-// {
-// 	// char	*tmp;
-
-// 	*new = ft_substr(str, start, len);
-// 	// *new = ft_strjoin(*new, tmp);
-// 	// free(tmp);
-// }

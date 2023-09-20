@@ -20,13 +20,12 @@ int	ft_whether_pipe(t_mini *shell)
 	{
 		ft_exec_red(shell, shell->tkn);
 		if (shell->exit_status != 0)
-			return (shell->exit_status);
+			return (ft_post_red(shell), shell->exit_status);
 		ft_dup_red(shell, -1, -1);
 		shell->exit_status = ft_exec_toby(shell, shell->tkn->toby);
 		ft_post_red(shell);
-		return (shell->exit_status);
 	}
 	else
-		return (ft_mini_pipe(shell, shell->tkn, 1));
-	return (0);
+		ft_mini_pipe(shell);
+	return (shell->exit_status);
 }

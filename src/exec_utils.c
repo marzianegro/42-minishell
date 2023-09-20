@@ -58,4 +58,6 @@ void	ft_dup_pipe(t_mini *shell, int fd_in, int fd_out)
 		dup2(shell->fd_out, 1);
 	else if (fd_out != -1)
 		dup2(fd_out, 1);
+	close(fd_in);
+	close(fd_out);
 }
