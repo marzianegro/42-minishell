@@ -12,10 +12,6 @@
 
 #include "../minishell.h"
 
-/* The pipe() function  allows you to create a unidirectional communication
-	channel, commonly referred to as a pipe, through which data can be
-	passed from one process (the "writing" process) to another
-	process (the "reading" process) */
 int	ft_mini_pipe(t_mini *shell, t_token *tkn, int fd_out)
 {
 	int	fd_pipe[2];
