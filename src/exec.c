@@ -15,9 +15,10 @@
 int	ft_whether_pipe(t_mini *shell)
 {
 	signal(SIGINT, ft_handler_exec);
+	shell->exit_status = 0;
 	if (shell->tkn && !shell->tkn->next)
 	{
-		shell->exit_status = ft_exec_red(shell, shell->tkn);
+		ft_exec_red(shell, shell->tkn);
 		if (shell->exit_status != 0)
 			return (shell->exit_status);
 		ft_dup_red(shell, -1, -1);

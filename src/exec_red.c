@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-int	ft_exec_red(t_mini *shell, t_token *tkn)
+void	ft_exec_red(t_mini *shell, t_token *tkn)
 {
 	int	y;
 
@@ -20,12 +20,11 @@ int	ft_exec_red(t_mini *shell, t_token *tkn)
 	while (tkn->red && tkn->red[y])
 	{
 		if (ft_red_in(shell, tkn, y))
-			return (1);
+			break ;
 		else if (ft_red_out(shell, tkn, y))
-			return (1);
+			break ;
 		y++;
 	}
-	return (0);
 }
 
 int	ft_red_in(t_mini *shell, t_token *tkn, int y)
@@ -39,10 +38,9 @@ int	ft_red_in(t_mini *shell, t_token *tkn, int y)
 			ft_putstr_fd("perroshell: syntax error near "
 				"unexpected token `newline'\n", 2);
 			shell->exit_status = 2;
-			return (shell->exit_status);
 		}
 		else
-			shell->fd_in = ft_handle_here_doc(shell, &tkn->red[y][2]);
+			ft_handle_here_doc(shell, &tkn->red[y][2]);
 	}
 	return (shell->exit_status);
 }
@@ -58,8 +56,7 @@ int	ft_red_out(t_mini *shell, t_token *tkn, int y)
 			ft_putstr_fd("perroshell: syntax error near "
 				"unexpected token `newline'\n", 2);
 			shell->exit_status = 2;
-			return (shell->exit_status);
 		}
 	}
-	return (0);
+	return (shell->exit_status);
 }

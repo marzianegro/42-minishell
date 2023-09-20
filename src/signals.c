@@ -29,15 +29,7 @@ void	ft_free_exit(t_mini *shell)
 	if (shell)
 		tmp = shell;
 	else
-	{
-		free(tmp->line);
-		free(tmp->history);
-		ft_clear_tkn(&tmp->tkn);
-		ft_clear_env(&tmp->envp);
-		ft_freematrix(tmp->envp_mtx);
-		ft_clear_vbl(&tmp->vbl);
-		free(tmp->bin);
-	}
+		ft_exit(tmp, tmp->exit_status, 1);
 }
 
 void	ft_handler_main(int signal)
@@ -65,7 +57,8 @@ void	ft_handler_here_doc(int signal)
 {
 	if (signal == SIGINT)
 	{
-		// ft_free_exit(NULL);
-		exit(130);
+		ft_save_exit(NULL, 130);
+		ft_kill_child(0);
+		write(1, "\n", 1);
 	}
 }

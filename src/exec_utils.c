@@ -50,12 +50,12 @@ void	ft_post_red(t_mini *shell)
 
 void	ft_dup_pipe(t_mini *shell, int fd_in, int fd_out)
 {
-	if (shell->fd_in == -2)
-		dup2(fd_in, 0);
-	else
+	if (shell->fd_in != -2)
 		dup2(shell->fd_in, 0);
-	if (shell->fd_out == -2)
-		dup2(fd_out, 1);
-	else
+	else if (fd_in != -1)
+		dup2(fd_in, 0);
+	if (shell->fd_out != -2)
 		dup2(shell->fd_out, 1);
+	else if (fd_out != -1)
+		dup2(fd_out, 1);
 }

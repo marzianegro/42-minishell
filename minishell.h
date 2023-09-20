@@ -88,7 +88,7 @@ typedef struct s_mini
 /* binary.c */
 int		ft_find_bin(t_mini *shell, char *cmd);
 void	ft_convert_envp(t_mini *shell);
-void	ft_exec_binary(t_mini *shell, char *cmd);
+void	ft_exec_binary(t_mini *shell, char **mtx);
 /* built_ins.c */
 int		ft_cd(t_mini *shell);
 void	ft_history(t_mini *shell);
@@ -108,12 +108,12 @@ void	ft_update_pwd(t_mini *shell);
 int		ft_exec_pipe(t_mini *shell, t_token *tkn, int fd_in, int fd_out);
 int		ft_mini_pipe(t_mini *shell, t_token *tkn, int fd_out);
 /* exec_red.c */
-int		ft_exec_red(t_mini *shell, t_token *tkn);
+void	ft_exec_red(t_mini *shell, t_token *tkn);
 int		ft_red_in(t_mini *shell, t_token *tkn, int y);
 int		ft_red_out(t_mini *shell, t_token *tkn, int y);
 /* exec_toby.c */
 int		ft_exec_toby(t_mini *shell, char **mtx);
-void	ft_exec_toby_continue(t_mini *shell, char *cmd);
+void	ft_exec_toby_continue(t_mini *shell, char *cmd, char **mtx);
 /* exec_utils.c */
 void	ft_dup_red(t_mini *shell, int fd_old, int fd_new);
 void	ft_close_fd(int fd_old, int fd_new);
@@ -127,6 +127,7 @@ void	ft_del_env(t_env *envp, t_env *del);
 void	ft_clear_vbl(t_variable **vbl);
 void	ft_del_vbl(t_variable *vbl, t_variable *del);
 /* here_doc.c */
+int		ft_kill_child(int n);
 void	ft_here_doc(t_mini *shell, char *delimiter, int fd);
 int		ft_handle_here_doc(t_mini *shell, char *delimiter);
 /* img.c */

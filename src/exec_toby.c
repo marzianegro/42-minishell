@@ -36,16 +36,16 @@ int	ft_exec_toby(t_mini *shell, char **mtx)
 	else if (!ft_strncmp("exit", cmd, 5))
 		ft_exit_cmd(shell, mtx[1]);	
 	else
-		ft_exec_toby_continue(shell, cmd);
+		ft_exec_toby_continue(shell, cmd, mtx);
 	return (shell->exit_status);
 }
 
-void	ft_exec_toby_continue(t_mini *shell, char *cmd)
+void	ft_exec_toby_continue(t_mini *shell, char *cmd, char **mtx)
 {
 	if (!ft_strncmp("gringo", cmd, 7))
 		ft_img(shell);
 	else if (ft_strfind(cmd, '=') && !ft_check_vbl(cmd))
 		ft_vbl(shell, cmd, 0);
 	else
-		ft_exec_binary(shell, cmd);
+		ft_exec_binary(shell, mtx);
 }

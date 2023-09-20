@@ -65,7 +65,7 @@ void	ft_convert_envp(t_mini *shell)
 	}
 }
 
-void	ft_exec_binary(t_mini *shell, char *cmd)
+void	ft_exec_binary(t_mini *shell, char **mtx)
 {
 	pid_t	pid;
 	int		status;
@@ -73,18 +73,18 @@ void	ft_exec_binary(t_mini *shell, char *cmd)
 	pid = fork();
 	if (!pid)
 	{
-		if (ft_find_bin(shell, cmd))
-			shell->bin = ft_strdup(cmd);
+		if (ft_find_bin(shell, mtx[0]))
+			shell->bin = ft_strdup(mtx[0]);
 		ft_convert_envp(shell);
-		execve(shell->bin, shell->tkn->toby, shell->envp_mtx);
+		execve(shell->bin, mtx, shell->envp_mtx);
 		ft_freematrix(shell->envp_mtx);
 		if (WEXITSTATUS(EXIT_FAILURE) != 1)
 		{
-			ft_putstr_fd(cmd, 2);
+			ft_putstr_fd(mtx[0], 2);
 			ft_putstr_fd(": command not found\n", 2);
 			ft_exit(shell, 127, 1);
 		}
-		perror(cmd);
+		perror(mtx[0]);
 		ft_exit(shell, EXIT_FAILURE, 1);
 	}
 	waitpid(pid, &status, 0);
