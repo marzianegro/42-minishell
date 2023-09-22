@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 17:56:23 by mnegro            #+#    #+#             */
-/*   Updated: 2023/09/11 21:09:48 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/09/22 16:29:24 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	ft_exec_toby(t_mini *shell, char **mtx)
 	else if (!ft_strncmp("env", cmd, 4))
 		ft_env(shell);
 	else if (!ft_strncmp("exit", cmd, 5))
-		ft_exit_cmd(shell, mtx[1]);	
+		ft_exit_cmd(shell, mtx[1]);
 	else
 		ft_exec_toby_continue(shell, cmd, mtx);
 	return (shell->exit_status);

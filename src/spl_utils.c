@@ -6,12 +6,11 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 16:14:13 by mnegro            #+#    #+#             */
-/*   Updated: 2023/08/22 17:11:26 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/09/22 16:30:59 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
 
 void	ft_check_quotes(char *str, char c, int *len)
 {

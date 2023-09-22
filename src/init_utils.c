@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:51:55 by mnegro            #+#    #+#             */
-/*   Updated: 2023/09/04 15:16:59 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/09/22 16:31:44 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,3 @@ void	ft_set_env(char **mtx, int y, t_env **envp)
 	}
 	ft_backnew_env(envp, key, value);
 }
-

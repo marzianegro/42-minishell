@@ -6,24 +6,12 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 15:22:07 by mnegro            #+#    #+#             */
-/*   Updated: 2023/09/11 17:50:27 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/09/22 16:32:19 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-/* OUTPUT REDIRECTION
-	>: Redirects standard output to a file. If the file doesn't exist,
-	it's created; if it exists, it's overwritten.
-	>>: Redirects standard output to a file, but appends to the file
-	instead of overwriting it. */
-/* INPUT REDIRECTION
-	<: Redirects standard input from a file.
-	<<: Allows you to provide multiple lines of input to a command. */
-
-/* If the fd is equal to -2, it means no file has been opened, otherwise
-	another file is about to be opened and the previous one needs to be closed.
-	If the fd is -1, it means there was an error */
 void	ft_file_input(t_mini *shell, char *file)
 {
 	if (shell->fd_in != -1 && shell->fd_in != -2)
@@ -55,5 +43,3 @@ int	ft_file_output(t_mini *shell, char *file, int a_or_c)
 	}
 	return (0);
 }
-
-

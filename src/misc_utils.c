@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 12:14:28 by mnegro            #+#    #+#             */
-/*   Updated: 2023/09/02 19:14:15 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/09/22 16:31:38 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	ft_putstr_fd_ms(char *s, int fd)
 	}
 	write(fd, "\n", 1);
 }
-
 
 int	ft_strfind(char *str, char c)
 {

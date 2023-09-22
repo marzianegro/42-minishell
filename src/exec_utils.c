@@ -6,16 +6,12 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 17:22:43 by mnegro            #+#    #+#             */
-/*   Updated: 2023/09/11 16:37:07 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/09/22 16:29:29 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-/* The dup2() function duplicates an open file descriptor to another file
-	descriptor; used for redirecting input and output streams, changing
-	the target of a file descriptor, or setting up communication
-	between processes */
 void	ft_dup_red(t_mini *shell, int fd_old, int fd_new)
 {
 	if (fd_old != -1)

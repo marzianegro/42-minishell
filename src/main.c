@@ -6,7 +6,7 @@
 /*   By: mnegro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:51:17 by mnegro            #+#    #+#             */
-/*   Updated: 2023/09/11 20:57:54 by mnegro           ###   ########.fr       */
+/*   Updated: 2023/09/22 16:29:57 by mnegro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,6 @@ void	ft_parse_line(t_mini *shell)
 		ft_backnew_tkn(&(shell->tkn), toby, red);
 	}
 	ft_parse_token(&shell->tkn, shell);
-	// t_token	*tmp = shell->tkn;
-	// while (tmp)
-	// {
-	// 	ft_print_tkn(tmp);
-	// 	tmp = tmp->next;
-	// }
-	// printf("----------\n");
 }
 
 void	ft_handle_line(t_mini *shell)
